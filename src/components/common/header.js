@@ -96,7 +96,7 @@ const Header = () => {
                 className="btn-download"
                 target="_blank"
                 rel="noopener noreferrer"
-                href="https://github.com/ayub6717/https://ayub6717.netlify.app//raw/master/src/data/file/MyResume.pdf"
+                href="https://github.com/ayub6717/https://ayub6717.netlify.app//tree/main/src/data/file/MyResume.pdf"
               >
                 Resume
               </a>
