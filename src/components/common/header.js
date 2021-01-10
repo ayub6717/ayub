@@ -96,7 +96,7 @@ const Header = () => {
                 className="btn-download"
                 target="_blank"
                 rel="noopener noreferrer"
-                href="https://drive.google.com/file/d/1y1SNfRQXMGAW-r0g-yiVEb1t93QRkvFj/view?usp=sharing"
+                href="https://drive.google.com/file/d/1xRvc3RkiZ_6FgWqYqK5pXM06q7b1JJYJ/view?usp=sharing"
               >
                 Resume
               </a>
