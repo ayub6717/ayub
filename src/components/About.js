@@ -22,7 +22,7 @@ return (
           interests.
         </p>
         <div className="about-action">
-          <Button link="https://drive.google.com/file/d/1y1SNfRQXMGAW-r0g-yiVEb1t93QRkvFj/view?usp=sharing" target="_blank"
+          <Button link="https://drive.google.com/file/d/1xRvc3RkiZ_6FgWqYqK5pXM06q7b1JJYJ/view?usp=sharing" target="_blank"
             bgColor="#00cf5d" title="Get Resume" />
           <Button clickEvent link="#skill" ml="15px" title="My Skills" />
         </div>
