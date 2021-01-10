@@ -22,7 +22,7 @@ return (
           interests.
         </p>
         <div className="about-action">
-          <Button link="https://github.com/ayub6717/ayub6717.netlify.app/raw/main/src/data/file/MyResume.pdf" target="_blank"
+          <Button link="https://github.com/ayub6717/ayub6717.netlify.app/tree/main/src/data/file/MyResume.pdf" target="_blank"
             bgColor="#00cf5d" title="Get Resume" />
           <Button clickEvent link="#skill" ml="15px" title="My Skills" />
         </div>
