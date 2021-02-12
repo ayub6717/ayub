@@ -12,6 +12,16 @@ export const portfolios = {
     },
     {
       type: "featured",
+      name: "Brikkhorongon",
+      image: require("./image/brikkho.jpg"),
+      description:
+        "A Collection of React Hooks, React-bootstrap, CSS module, JavaScript",
+      demo: "https://ayub6717.github.io/brikkhorongon/",
+      source: "https://github.com/ayub6717/brikkhorongon",
+      tools: [],
+    },
+    {
+      type: "featured",
       name: "School",
       image: require("./image/Edu.jpg"),
       description:
@@ -59,6 +69,26 @@ export const portfolios = {
         "A Collection of React.js, HTML, Bootstrap 4, CSS, JavaScript",
       demo: "https://ayub6717.github.io/covid-19-info",
       source: "https://github.com/ayub6717/covid-19-info",
+      tools: [],
+    },
+    {
+      type: "featured",
+      name: "Todo-react-hooks",
+      image: require("./image/todo.jpg"),
+      description:
+        "A Collection of React hooks",
+      demo: "https://daily-todo-hooks.netlify.app/",
+      source: "https://github.com/ayub6717/Todo-react-hooks",
+      tools: [],
+    },
+    {
+      type: "featured",
+      name: "Comming soon",
+      image: require("./image/comming_soon.jpg"),
+      description:
+        "A Collection will be useEfeect of React.js, React-bootstrap, CSS module, JavaScript",
+      demo: "https://github.com/ayub6717/",
+      source: "https://github.com/ayub6717/",
       tools: [],
     },
   
