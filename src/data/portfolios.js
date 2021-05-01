@@ -2,6 +2,16 @@ export const portfolios = {
   Web: [
     {
       type: "featured",
+      name: "Brikkhorongon",
+      image: require("./image/Home _ AmaderSer.png"),
+      description:
+        "A Collection of React Hooks, React-bootstrap, CSS module, JavaScript",
+      demo: "https://amaderservice.com/",
+      source: "https://github.com/ayub6717/",
+      tools: [],
+    },
+    {
+      type: "featured",
       name: "Hotel Searching",
       image: require("./image/Hotel.jpg"),
       description:
@@ -81,16 +91,16 @@ export const portfolios = {
       source: "https://github.com/ayub6717/Todo-react-hooks",
       tools: [],
     },
-    {
-      type: "featured",
-      name: "Comming soon",
-      image: require("./image/comming_soon.jpg"),
-      description:
-        "A Collection will be useEfeect of React.js, React-bootstrap, CSS module, JavaScript",
-      demo: "https://github.com/ayub6717/",
-      source: "https://github.com/ayub6717/",
-      tools: [],
-    },
+    // {
+    //   type: "featured",
+    //   name: "Comming soon",
+    //   image: require("./image/comming_soon.jpg"),
+    //   description:
+    //     "A Collection will be useEfeect of React.js, React-bootstrap, CSS module, JavaScript",
+    //   demo: "https://github.com/ayub6717/",
+    //   source: "https://github.com/ayub6717/",
+    //   tools: [],
+    // },
   
    
   ],
