@@ -2,7 +2,7 @@ export const portfolios = {
   Web: [
     {
       type: "featured",
-      name: "Brikkhorongon",
+      name: "AmaderService.com",
       image: require("./image/Home _ AmaderSer.png"),
       description:
         "A Collection of React Hooks, React-bootstrap, CSS module, JavaScript",
