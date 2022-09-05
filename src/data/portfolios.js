@@ -2,12 +2,32 @@ export const portfolios = {
   Web: [
     {
       type: "featured",
+      name: "AmaderService.com",
+      image: require("./image/Home _ AmaderSer.png"),
+      description:
+        "A Collection of React Hooks, React-bootstrap, CSS module, JavaScript",
+      demo: "https://amaderservice.com/",
+      source: "https://github.com/ayub6717/",
+      tools: [],
+    },
+    {
+      type: "featured",
       name: "Hotel Searching",
       image: require("./image/Hotel.jpg"),
       description:
         "A Collection of HTML, Bootstrap 4, CSS, JavaScript, jQuery",
       demo: "https://ayub6717.github.io/Bdhotels/",
       source: "https://github.com/ayub6717/Bdhotels",
+      tools: [],
+    },
+    {
+      type: "featured",
+      name: "Brikkhorongon",
+      image: require("./image/brikkho.jpg"),
+      description:
+        "A Collection of React Hooks, React-bootstrap, CSS module, JavaScript",
+      demo: "https://ayub6717.github.io/brikkhorongon/",
+      source: "https://github.com/ayub6717/brikkhorongon",
       tools: [],
     },
     {
@@ -61,6 +81,26 @@ export const portfolios = {
       source: "https://github.com/ayub6717/covid-19-info",
       tools: [],
     },
+    {
+      type: "featured",
+      name: "Todo-react-hooks",
+      image: require("./image/todo.jpg"),
+      description:
+        "A Collection of React hooks",
+      demo: "https://daily-todo-hooks.netlify.app/",
+      source: "https://github.com/ayub6717/Todo-react-hooks",
+      tools: [],
+    },
+    // {
+    //   type: "featured",
+    //   name: "Comming soon",
+    //   image: require("./image/comming_soon.jpg"),
+    //   description:
+    //     "A Collection will be useEfeect of React.js, React-bootstrap, CSS module, JavaScript",
+    //   demo: "https://github.com/ayub6717/",
+    //   source: "https://github.com/ayub6717/",
+    //   tools: [],
+    // },
   
    
   ],
