@@ -1,8 +1,8 @@
 var plugins = [{
-      plugin: require('D:/React/ayub.me/node_modules/gatsby-plugin-react-helmet/gatsby-ssr'),
+      plugin: require('E:/drive-download-20220617T132101Z-001/ayub.me/node_modules/gatsby-plugin-react-helmet/gatsby-ssr'),
       options: {"plugins":[]},
     },{
-      plugin: require('D:/React/ayub.me/node_modules/gatsby-plugin-manifest/gatsby-ssr'),
+      plugin: require('E:/drive-download-20220617T132101Z-001/ayub.me/node_modules/gatsby-plugin-manifest/gatsby-ssr'),
       options: {"plugins":[],"name":"ayub.me","short_name":"ayub.me","start_url":"/","background_color":"#111a28","theme_color":"#1d293a","display":"minimal-ui","icon":"src/assets/image/favicon.png","legacy":true,"theme_color_in_head":true,"cache_busting_mode":"query","crossOrigin":"anonymous","include_favicon":true,"cacheDigest":"16b9a8f47837b3964e4b9ff65e5396aa"},
     }]
 // During bootstrap, we write requires at top of this file which looks like:

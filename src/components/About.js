@@ -14,7 +14,7 @@ return (
     <div className="about">
       <div className="about-details">
         <p>
-          Hello! I'm Md. Ayub, a passionate Web developer. I develop websites, web applications. My core skill is
+          Hello! I'm Md. Ayub, a Web developer. I develop websites, web applications. My core skill is
           based on JavaScript and I love to do most things using JavaScript. I love to make the web more open to the
           world. I have familiar with a wide range of data structures, algorithms, Object-oriented programming, and
           databases. I have graduated with a bachelor's degree in Computer Science Engineering from Daffodil
