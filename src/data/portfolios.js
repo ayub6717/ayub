@@ -24,7 +24,35 @@ export const portfolios = {
             demo: "https://multivendor.homemaintaining.com/",
             source: "https://github.com/ayub6717/",
             tools: []
-        }, {
+        },
+        , {
+          type: "featured",
+          name: "Pay Money Modern Theme",
+          image: require("./image/Home.png"),
+          description: "A Collection of React Hooks, Tailwind CSS, CSS module, JavaScript",
+          demo: "https://multivendor.homemaintaining.com/",
+          source: "https://github.com/ayub6717/",
+          tools: []
+        },
+        {
+          type: "featured",
+          name: "Pay Money",
+          image: require("./image/paymoney.png"),
+          description: "A Collection of React Hooks, Tailwind CSS, CSS module, JavaScript",
+          demo: "https://multivendor.homemaintaining.com/",
+          source: "https://github.com/ayub6717/",
+          tools: []
+        },
+        {
+          type: "featured",
+          name: "Pay Cryptoexchange",
+          image: require("./image/paymoney.png"),
+          description: "A Collection of React Hooks, Tailwind CSS, CSS module, JavaScript",
+          demo: "https://multivendor.homemaintaining.com/",
+          source: "https://github.com/ayub6717/",
+          tools: []
+        },
+         {
             type: "featured",
             name: "Hotel Searching",
             image: require("./image/Hotel.jpg"),
