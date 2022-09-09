@@ -30,7 +30,7 @@ export const portfolios = {
           name: "Pay Money Modern Theme",
           image: require("./image/Home.png"),
           description: "A Collection of React Hooks, Tailwind CSS, CSS module, JavaScript",
-          demo: "https://multivendor.homemaintaining.com/",
+          demo: "https://paymoney.techvill.org/modern/",
           source: "https://github.com/ayub6717/",
           tools: []
         },
@@ -39,16 +39,43 @@ export const portfolios = {
           name: "Pay Money",
           image: require("./image/paymoney.png"),
           description: "A Collection of React Hooks, Tailwind CSS, CSS module, JavaScript",
-          demo: "https://multivendor.homemaintaining.com/",
+          demo: "https://paymoney.techvill.org/",
           source: "https://github.com/ayub6717/",
           tools: []
         },
         {
           type: "featured",
-          name: "Pay Cryptoexchange",
-          image: require("./image/paymoney.png"),
+          name: "Pay Money Cryptoexchange",
+          image: require("./image/CryptoLandingPage.png"),
           description: "A Collection of React Hooks, Tailwind CSS, CSS module, JavaScript",
-          demo: "https://multivendor.homemaintaining.com/",
+          demo: "",
+          source: "https://github.com/ayub6717/",
+          tools: []
+        },
+        {
+          type: "featured",
+          name: "Vrent",
+          image: require("./image/Vrent.png"),
+          description: "A Collection of React Hooks, Tailwind CSS, CSS module, JavaScript",
+          demo: "https://vrent.techvill.org/",
+          source: "https://github.com/ayub6717/",
+          tools: []
+        },
+        {
+          type: "featured",
+          name: "Ratool Sourcing",
+          image: require("./image/BuyingHouse.png"),
+          description: "A Collection of React Hooks, Tailwind CSS, CSS module, JavaScript",
+          demo: "https://ratoolsourcing.com/demo/",
+          source: "https://github.com/ayub6717/",
+          tools: []
+        },
+        {
+          type: "featured",
+          name: "RoverCRM",
+          image: require("./image/roverCRM.png"),
+          description: "A Collection of React Hooks, Tailwind CSS, CSS module, JavaScript",
+          demo: "https://rovercrm.net/",
           source: "https://github.com/ayub6717/",
           tools: []
         },
@@ -119,11 +146,13 @@ export const portfolios = {
             source: "https://github.com/ayub6717/Todo-react-hooks",
             tools: []
         },
-        // {   type: "featured",   name: "Comming soon",   image:
-        // require("./image/comming_soon.jpg"),   description:     "A Collection will be
-        // useEfeect of React.js, React-bootstrap, CSS module, JavaScript",   demo:
-        // "https://github.com/ayub6717/",   source: "https://github.com/ayub6717/",
-        // tools: [], },
+        {   type: "featured",   
+        name: "Comming soon",   
+        image: require("./image/comming_soon.jpg"),   
+        description:     "A Collection will beuseEfeect of React.js, React-bootstrap, CSS module, JavaScript",   
+        demo:"https://github.com/ayub6717/",   
+        source: "https://github.com/ayub6717/",
+        tools: [], },
 
     ],
     Others: [
