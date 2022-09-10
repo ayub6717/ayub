@@ -34,12 +34,12 @@ return (
       </div>
 
       <div className="mt-11">
-      <h3>front-end developer(React)</h3>
+      <h3>front-end developer</h3>
       <h4 className="mt-3">HRSOFTBD (Software Development company)</h4>
       <h6 className="mt-1">Address: 12/6, Solimullah Road, Mohammadpur, Dhaka.</h6>
       <h6 className="mt-1">Status: 4th January 2020 to 6th January 2021.</h6>
       <p className="mt-4">
-          I have worked as a Front End Developer(React). My 
+          I have worked as a Front End Developer. My 
           responsibilities there were to create front-end websites, 
           project mastering, made Invoices, Email templates, level 
           design independently. Gave and collaborate ideas to make 
