@@ -20,16 +20,16 @@ export const portfolios = {
             type: "featured",
             name: "Martvill",
             image: require("./image/Multivendor_Home.png"),
-            description: "A Collection of React Hooks, Tailwind CSS, CSS module, JavaScript",
-            demo: "https://multivendor.homemaintaining.com/",
+            description: "A Collection of PHP Scripts, Tailwind CSS, CSS module, JavaScript  / Project Management Tools Compatible Browsers: Firefox, Safari, Opera, Chrome, Edge, Software Version: PHP 7.x",
+            demo: "https://multivendor.homemaintaining.com/", 
             source: "https://github.com/ayub6717/",
             tools: []
         },
         , {
           type: "featured",
-          name: "Pay Money Modern Theme",
+          name: "Pay Money Modern",
           image: require("./image/Home.png"),
-          description: "A Collection of React Hooks, Tailwind CSS, CSS module, JavaScript",
+          description: "A Collection of PHP ScriptsPHP, Bootstrap, CSS module, JavaScript / High Resolution: Yes, Compatible Browsers: IE10, IE11, Firefox, Safari, Chrome, Software Version: PHP 7.x",
           demo: "https://paymoney.techvill.org/modern/",
           source: "https://github.com/ayub6717/",
           tools: []
@@ -38,7 +38,7 @@ export const portfolios = {
           type: "featured",
           name: "Pay Money",
           image: require("./image/paymoney.png"),
-          description: "A Collection of React Hooks, Tailwind CSS, CSS module, JavaScript",
+          description: "A Collection of PHP Scripts, Bootstap, CSS module, JavaScript / Compatible Browsers: IE10, IE11, Firefox, Safari, Chrome, Software Version: PHP 7.x",
           demo: "https://paymoney.techvill.org/",
           source: "https://github.com/ayub6717/",
           tools: []
@@ -47,7 +47,7 @@ export const portfolios = {
           type: "featured",
           name: "Pay Money Cryptoexchange",
           image: require("./image/CryptoLandingPage.png"),
-          description: "A Collection of React Hooks, Tailwind CSS, CSS module, JavaScript",
+          description: "A Collection of PHP Scripts, Bootstap, CSS module, JavaScript / Compatible Browsers: IE10, IE11, Firefox, Safari, Chrome, Software Version: PHP 7.x",
           demo: "",
           source: "https://github.com/ayub6717/",
           tools: []
@@ -56,7 +56,7 @@ export const portfolios = {
           type: "featured",
           name: "Vrent",
           image: require("./image/Vrent.png"),
-          description: "A Collection of React Hooks, Tailwind CSS, CSS module, JavaScript",
+          description: "A Collection of PHP Scripts, Bootstap, CSS module, JavaScript. Software Version: PHP 7.xA",
           demo: "https://vrent.techvill.org/",
           source: "https://github.com/ayub6717/",
           tools: []
@@ -65,7 +65,7 @@ export const portfolios = {
           type: "featured",
           name: "Ratool Sourcing",
           image: require("./image/BuyingHouse.png"),
-          description: "A Collection of React Hooks, Tailwind CSS, CSS module, JavaScript",
+          description: "A Collection of Tailwind CSS, CSS module, JavaScript",
           demo: "https://ratoolsourcing.com/demo/",
           source: "https://github.com/ayub6717/",
           tools: []
@@ -74,15 +74,24 @@ export const portfolios = {
           type: "featured",
           name: "RoverCRM",
           image: require("./image/roverCRM.png"),
-          description: "A Collection of React Hooks, Tailwind CSS, CSS module, JavaScript",
+          description: "A Collection of PHP Scripts, Bootstrap, CSS module, JavaScript",
           demo: "https://rovercrm.net/",
           source: "https://github.com/ayub6717/",
           tools: []
         },
+        {
+            type: "featured",
+            name: "PayMoney - Mobile App",
+            image: require("./image/mobileapp.png"),
+            description: "A Collection of Mobile / Native Web Software Version: jQuery, CSS3, HTML5",
+            demo: "https://rovercrm.net/",
+            source: "https://github.com/ayub6717/",
+            tools: []
+          },
          {
             type: "featured",
             name: "Hotel Searching",
-            image: require("./image/Hotel.jpg"),
+            image: require("./image/Hotel-2.jpg"),
             description: "A Collection of HTML, Bootstrap 4, CSS, JavaScript, jQuery",
             demo: "https://ayub6717.github.io/Bdhotels/",
             source: "https://github.com/ayub6717/Bdhotels",
@@ -90,7 +99,7 @@ export const portfolios = {
         }, {
             type: "featured",
             name: "Brikkhorongon",
-            image: require("./image/brikkho.jpg"),
+            image: require("./image/Brikkhorongon.jpg"),
             description: "A Collection of React Hooks, React-bootstrap, CSS module, JavaScript",
             demo: "https://ayub6717.github.io/brikkhorongon/",
             source: "https://github.com/ayub6717/brikkhorongon",
@@ -146,13 +155,13 @@ export const portfolios = {
             source: "https://github.com/ayub6717/Todo-react-hooks",
             tools: []
         },
-        {   type: "featured",   
-        name: "Comming soon",   
-        image: require("./image/comming_soon.jpg"),   
-        description:     "A Collection will beuseEfeect of React.js, React-bootstrap, CSS module, JavaScript",   
-        demo:"https://github.com/ayub6717/",   
-        source: "https://github.com/ayub6717/",
-        tools: [], },
+        // {   type: "featured",   
+        // name: "Comming soon",   
+        // image: require("./image/comming_soon.jpg"),   
+        // description:     "A Collection will beuseEfeect of React.js, React-bootstrap, CSS module, JavaScript",   
+        // demo:"https://github.com/ayub6717/",   
+        // source: "https://github.com/ayub6717/",
+        // tools: [], },
 
     ],
     Others: [
