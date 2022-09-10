@@ -5,6 +5,7 @@ import {
   LoveToDo,
   Portfolio,
   About,
+  Experience,
   Skill,
   Contact,
 } from "../components"
@@ -16,6 +17,7 @@ const IndexPage = () => (
       <SEO title="Ayub Shamim" />
       <Intro />
       <About />
+      <Experience />
       <Skill />
       <LoveToDo />
       <Portfolio />

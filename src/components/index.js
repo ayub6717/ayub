@@ -1,5 +1,6 @@
 export * from "./Intro"
 export * from "./About"
+export * from "./Experience"
 export * from "./Skill"
 export * from "./LoveToDo"
 export * from "./Portfolio"
