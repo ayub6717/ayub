@@ -7,6 +7,7 @@ import {
   About,
   Experience,
   Skill,
+  Education,
   Contact,
 } from "../components"
 import { Layout, SEO } from "../components/common"
@@ -19,8 +20,9 @@ const IndexPage = () => (
       <About />
       <Experience />
       <Skill />
-      <LoveToDo />
       <Portfolio />
+      <LoveToDo />
+      <Education />
       <Contact />
     </Layout>
   </>

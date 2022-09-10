@@ -6,7 +6,7 @@ return (
 <div>
   <Container>
     <Title title="Experience" />
-    <div className="pl-24">
+    <div className="md:pl-24">
       <h3>Software Engineer ( React JS)</h3>
       <h4 className="mt-3">Company Name: Techvillage (Software  Company)   </h4>
       <h6 className="mt-1">Address: House-19, Road-19,  Nikunja-2, Dhaka 1229</h6>
