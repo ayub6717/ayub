@@ -11,7 +11,7 @@ export const portfolios = {
         }, {
             type: "featured",
             name: "Martvill Landing Page",
-            image: require("./image/Martvill.png"),
+            image: require("./image/Martvill.jpg"),
             description: "A Collection of React Hooks, Tailwind CSS, CSS module, JavaScript",
             demo: "https://landing.multivendor.homemaintaining.com/",
             source: "https://github.com/ayub6717/",
@@ -19,7 +19,7 @@ export const portfolios = {
         }, {
             type: "featured",
             name: "Martvill",
-            image: require("./image/Multivendor_Home.png"),
+            image: require("./image/Multivendor_Home.jpg"),
             description: "A Collection of PHP Scripts, Tailwind CSS, CSS module, JavaScript  / Project Management Tools Compatible Browsers: Firefox, Safari, Opera, Chrome, Edge, Software Version: PHP 7.x",
             demo: "https://multivendor.homemaintaining.com/", 
             source: "https://github.com/ayub6717/",
@@ -28,7 +28,7 @@ export const portfolios = {
         , {
           type: "featured",
           name: "Pay Money Modern",
-          image: require("./image/Home.png"),
+          image: require("./image/Home.jpg"),
           description: "A Collection of PHP ScriptsPHP, Bootstrap, CSS module, JavaScript / High Resolution: Yes, Compatible Browsers: IE10, IE11, Firefox, Safari, Chrome, Software Version: PHP 7.x",
           demo: "https://paymoney.techvill.org/modern/",
           source: "https://github.com/ayub6717/",
@@ -37,7 +37,7 @@ export const portfolios = {
         {
           type: "featured",
           name: "Pay Money",
-          image: require("./image/paymoney.png"),
+          image: require("./image/paymoney.jpg"),
           description: "A Collection of PHP Scripts, Bootstap, CSS module, JavaScript / Compatible Browsers: IE10, IE11, Firefox, Safari, Chrome, Software Version: PHP 7.x",
           demo: "https://paymoney.techvill.org/",
           source: "https://github.com/ayub6717/",
@@ -55,7 +55,7 @@ export const portfolios = {
         {
           type: "featured",
           name: "Vrent",
-          image: require("./image/Vrent.png"),
+          image: require("./image/Vrent.jpg"),
           description: "A Collection of PHP Scripts, Bootstap, CSS module, JavaScript. Software Version: PHP 7.xA",
           demo: "https://vrent.techvill.org/",
           source: "https://github.com/ayub6717/",
@@ -73,7 +73,7 @@ export const portfolios = {
         {
           type: "featured",
           name: "RoverCRM",
-          image: require("./image/roverCRM.png"),
+          image: require("./image/roverCRM.jpg"),
           description: "A Collection of PHP Scripts, Bootstrap, CSS module, JavaScript",
           demo: "https://rovercrm.net/",
           source: "https://github.com/ayub6717/",
