@@ -48,7 +48,7 @@ const Contact = () => {
               </li>
               <li>
                 <h5>Address</h5>
-                <p>Nikunja-2, hilkhet, Dhaka, Bangladesh</p>
+                <p>Nikunja-2, Khilkhet, Dhaka, Bangladesh</p>
               </li>
             </ul>
           </div>
