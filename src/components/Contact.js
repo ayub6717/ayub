@@ -31,7 +31,7 @@ const Contact = () => {
               <li>
                 <h5>Email</h5>
                 <p>
-                ahmed1.ayub6717@gmail.com <span>(Recommended)</span>
+                   ayub.devs@gmail.com <span>(Recommended)</span>
                 </p>
               </li>
               <li>
@@ -48,7 +48,7 @@ const Contact = () => {
               </li>
               <li>
                 <h5>Address</h5>
-                <p>Shyamoli, Dhaka, Bangladesh</p>
+                <p>Nikunja-2, hilkhet, Dhaka, Bangladesh</p>
               </li>
             </ul>
           </div>
