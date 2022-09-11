@@ -25,7 +25,7 @@ return (
       <h3>React Front-End Developer</h3>
       <h4 className="mt-3">Amader Service Global Limited (IT & Commercial Conservatory Company)</h4> 
       <h6 className="mt-1">Address: House No: 18, Road #7, Ranavola, Uttara, Dhaka.</h6>
-      <h6 className="mt-1">Status:  7th January 2021 to 10th September.</h6>
+      <h6 className="mt-1">Status:  7th January 2021 to 10th September 2021.</h6>
 
       <p className="mt-4">
           Here I'm working with the front-end through React.js. 
