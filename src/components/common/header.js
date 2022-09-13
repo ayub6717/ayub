@@ -68,6 +68,11 @@ const Header = () => {
               </a>
             </li>
             <li>
+              <a onClick={handleScroll} href="#experience">
+                Experience
+              </a>
+            </li>
+            <li>
               <a onClick={handleScroll} href="#skill">
                 Skill
               </a>
@@ -75,6 +80,11 @@ const Header = () => {
             <li>
               <a onClick={handleScroll} href="#portfolio">
                 Portfolio
+              </a>
+            </li>
+            <li>
+              <a onClick={handleScroll} href="#education">
+                Education
               </a>
             </li>
             <li>

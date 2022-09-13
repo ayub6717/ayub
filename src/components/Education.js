@@ -5,7 +5,7 @@ import edu_1 from "../assets/image/edu_2.jpg"
 
 const Education = () => {
 return (
-<div>
+<div id="education">
   <Container>
     <Title title="Education" />
     <div className="md:pl-24 flex flex-wrap">

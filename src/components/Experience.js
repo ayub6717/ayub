@@ -3,7 +3,7 @@ import { Container, Title } from "./common"
 
 const Experience = () => {
 return (
-<div>
+<div id="experience">
   <Container>
     <Title title="Experience" />
     <div className="md:pl-24">
@@ -12,13 +12,13 @@ return (
       <h6 className="mt-1">Address: House-19, Road-19,  Nikunja-2, Dhaka 1229</h6>
       <h6 className="mt-1">Status:  15th July 2021 to Running.</h6>
       <p className="mt-4">
-        Here I'm working with the front-end through React.js. 
-        Working with API, User panel, Admin, and also working with HRM panel. Moreover, Supervised and lead a team of  Front end engineers during the development of a robust upgrade version of the company's software applications, resulting in improved user experience. <br />
-        - Proficiently troubleshot simple and complex 
-        Technological issues for different assigned projects <br />
-        - Enhanced the application's features to effectively
-          Fix the bugs and optimize the overall performance, and 
-        efficiency.
+        Here I'm working with the front-end through React.js, APIs, User, Admin, and also working with HRM panel. Moreover, Supervised and lead a team of Front end engineers during the development of a robust upgrade version of the company's software applications, resulting in improved user experience. <br />
+        - Fix the bugs and optimize the overall performance. <br />
+        - Back-End Data Display <br />
+        - Website Content Analysis <br />
+        - Collaborate with Back-End and Front-End Developers <br />
+        - Current Web Trends Dynamic Web Page Design & framework templates <br />
+        - Customer support ticket reply
       </p>
 
       <div className="mt-11">
