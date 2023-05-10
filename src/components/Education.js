@@ -13,7 +13,7 @@ return (
             <div className="lg:w-1/2 md:w-1/2">
                 <div className="flex relative pb-12">
                 <div className="h-full w-10 absolute inset-0 flex items-center justify-center">
-                    <div className="h-full w-1 bg-gray-200 pointer-events-none" />
+                    <div className="h-full w-1 bg-[#2c2c2c78] pointer-events-none" />
                 </div>
                 <div className="flex-shrink-0 w-10 h-10 rounded-full bg-[#1b7443] inline-flex items-center justify-center text-white relative z-10">
                     <svg
@@ -39,7 +39,7 @@ return (
                 </div>
                 <div className="flex relative pb-12">
                 <div className="h-full w-10 absolute inset-0 flex items-center justify-center">
-                    <div className="h-full w-1 bg-gray-200 pointer-events-none" />
+                    <div className="h-full w-1 bg-[#2c2c2c78] pointer-events-none" />
                 </div>
                 <div className="flex-shrink-0 w-10 h-10 rounded-full bg-[#1b7443] inline-flex items-center justify-center text-white relative z-10">
                     <svg

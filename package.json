@@ -6,6 +6,7 @@
   "version": "2.0.1",
   "author": "Md. Ayub Shamim <ahmed1.ayub6717@gmail.com>",
   "dependencies": {
+    "aos": "^2.3.4",
     "gatsby": "^2.15.28",
     "gatsby-image": "^2.2.23",
     "gatsby-plugin-manifest": "^2.2.20",
@@ -18,7 +19,7 @@
     "react": "^16.10.1",
     "react-dom": "^16.10.1",
     "react-helmet": "^5.2.1",
-    "react-icons": "^3.7.0"
+    "react-icons": "^4.6.0"
   },
   "devDependencies": {
     "autoprefixer": "^10.4.8",

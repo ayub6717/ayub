@@ -13,7 +13,7 @@ export const portfolios = {
             name: "Martvill Landing Page",
             image: require("./image/Martvill.jpg"),
             description: "A Collection of React Hooks, Tailwind CSS, CSS module, JavaScript",
-            demo: "https://landing.multivendor.homemaintaining.com/",
+            demo: "https://martvill.techvill.net/",
             source: "https://github.com/ayub6717/",
             tools: []
         }, {
@@ -21,7 +21,7 @@ export const portfolios = {
             name: "Martvill",
             image: require("./image/Multivendor_Home.jpg"),
             description: "A Collection of PHP Scripts, Tailwind CSS, CSS module, JavaScript  / Project Management Tools Compatible Browsers: Firefox, Safari, Opera, Chrome, Edge, Software Version: PHP 7.x",
-            demo: "https://multivendor.homemaintaining.com/", 
+            demo: "https://demo.martvill.techvill.net/", 
             source: "https://github.com/ayub6717/",
             tools: []
         },

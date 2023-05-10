@@ -60,7 +60,7 @@ Button.defaultProps = {
   marginBottom: 0,
   marginLeft: 0,
   marginRight: 0,
-  color: "rgba(255, 255, 255, 0.85)",
+  color: "#2c2c2c",
   bgColor: "transparent",
   borderColor: "#00cf5d",
 }

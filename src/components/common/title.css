@@ -27,7 +27,7 @@
   height: 100%;
   width: 2px;
   margin: 15px 0;
-  background: rgba(255, 255, 255, 0.85);
+  background: #2c2c2c;
   z-index: -1;
 }
 
