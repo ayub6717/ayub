@@ -2,7 +2,7 @@ import React from 'react'
 
 function Socials() {
   return (
-    <div className="titled flex items-center flex-col right-0 left social 7xl:h-[375px] h-[320px] absolute 7xl:top-[25%] top-[18%]" 
+    <div className="titled flex items-center flex-col right-0 left social 7xl:h-[375px] h-[320px] absolute z-50 7xl:top-[25%] top-[18%]" 
     data-aos="slide-left"
     data-aos-delay="1300"
     >
