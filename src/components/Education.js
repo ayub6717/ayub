@@ -9,13 +9,13 @@ return (
   <Container>
     <Title title="Education" />
     <div className="md:pl-24 flex flex-wrap">
-        <div className="flex flex-wrap w-full">
+        <div className="flex flex-wrap items-center w-full">
             <div className="lg:w-1/2 md:w-1/2">
                 <div className="flex relative pb-12">
                 <div className="h-full w-10 absolute inset-0 flex items-center justify-center">
                     <div className="h-full w-1 bg-[#2c2c2c78] pointer-events-none" />
                 </div>
-                <div className="flex-shrink-0 w-10 h-10 rounded-full bg-[#1b7443] inline-flex items-center justify-center text-white relative z-10">
+                <div className="flex-shrink-0 w-10 h-10 rounded-full bg-[#a16c8d] inline-flex items-center justify-center text-white relative z-10">
                     <svg
                         fill="none"
                         stroke="currentColor"
@@ -41,7 +41,7 @@ return (
                 <div className="h-full w-10 absolute inset-0 flex items-center justify-center">
                     <div className="h-full w-1 bg-[#2c2c2c78] pointer-events-none" />
                 </div>
-                <div className="flex-shrink-0 w-10 h-10 rounded-full bg-[#1b7443] inline-flex items-center justify-center text-white relative z-10">
+                <div className="flex-shrink-0 w-10 h-10 rounded-full bg-[#a16c8d] inline-flex items-center justify-center text-white relative z-10">
                     <svg
                         fill="none"
                         stroke="currentColor"
@@ -64,7 +64,7 @@ return (
                 </div>
                 </div>
                 <div className="flex relative pb-12">
-                    <div className="flex-shrink-0 w-10 h-10 rounded-full bg-[#1b7443] inline-flex items-center justify-center text-white relative z-10">
+                    <div className="flex-shrink-0 w-10 h-10 rounded-full bg-[#a16c8d] inline-flex items-center justify-center text-white relative z-10">
                         <svg
                             fill="none"
                             stroke="currentColor"
