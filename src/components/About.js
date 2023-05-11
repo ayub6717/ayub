@@ -21,8 +21,8 @@ return (
           interests.
         </p>
         <div className="about-action">
-          <Button link="https://drive.google.com/file/d/1xRvc3RkiZ_6FgWqYqK5pXM06q7b1JJYJ/view?usp=sharing" target="_blank"
-            bgColor="#00cf5d" title="Get Resume" />
+          <a className="bg-[#a16c8d] text-white px-4 py-3 rounded" href="https://drive.google.com/file/d/1xRvc3RkiZ_6FgWqYqK5pXM06q7b1JJYJ/view?usp=sharing" target="_blank"
+            > Get Resume</a>
           <Button clickEvent link="#skill" ml="15px" title="My Skills" />
         </div>
       </div>

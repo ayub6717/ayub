@@ -6,12 +6,12 @@ import SkillLogo from './SkillLogo';
 
 function Heros() {
   return(
-    <section id="home" className="overflow-hidden md:pl-[50px] 2xl:pl-[75px] 5xl:pl-[190px] 7xl:pl-[290px]">
-    <div className="md:min-h-screen relative flex md:flex-row flex-col-reverse">
+    <section id="home" className="bg-[#a16c8d0f] overflow-hidden md:pl-[50px] 2xl:pl-[75px] 5xl:pl-[190px] 7xl:pl-[290px]">
+    <div className="lg:min-h-screen relative flex md:flex-row flex-col-reverse">
         <Socials />
         <SkillLogo />
         {/* first col */}
-          <div className="md:px-6 intro mt-[100px] md:mt-[150px] lg:mt-[200px]" data-aos="fade-down">
+          <div className="md:px-6 intro mt-[100px] md:mt-[150px] lg:mt-[200px] mb-0 md:mb-[60px] lg:-mb-0 ml-0 md:ml-[58px] lg:ml-0" data-aos="fade-down">
             <div>
               <p className="7xl:text-[32px] lg:text-[22px] text-[16px] text-[#a16c8d]">Hello I'm</p>
               <h1 className="7xl:text-[100px] lg:text-[78px] text-[50px] font-extrabold color-[#2c2c2c]">AYUB</h1>

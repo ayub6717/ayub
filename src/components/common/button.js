@@ -62,7 +62,7 @@ Button.defaultProps = {
   marginRight: 0,
   color: "#2c2c2c",
   bgColor: "transparent",
-  borderColor: "#00cf5d",
+  borderColor: "#06223F",
 }
 
 export { Button }

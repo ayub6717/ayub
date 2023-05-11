@@ -15,7 +15,7 @@ function Navbar() {
         <HiMenuAlt2 size={34} />
       </div>
       <nav
-        className={`fixed  z-[999] flex items-center gap-5 bg-slate-200/60 px-6 py-3 backdrop-blur-md rounded-full text-dark_primary duration-300 ${
+        className={`fixed  z-[999] flex items-center sm:gap-5 bg-slate-200/60 px-2 sm:px-6 py-3 backdrop-blur-md rounded-full text-dark_primary duration-300 ${
           showMenu ? "bottom-10" : "bottom-[-100%]"
         }`}
       >
