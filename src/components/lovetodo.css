@@ -9,13 +9,14 @@
 }
 
 .love-to-do .stickpad {
-  background-color: #1d293a;
+  border: 1px solid #a16c8d;
   padding: 45px 25px;
   margin: 0 15px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   border-radius: 4px;
+  align-items: center;
 }
 
 .love-to-do > *:first-of-type {
@@ -34,8 +35,9 @@
 
 .love-to-do .stickpad h4 {
   font-weight: 900;
-  color: rgba(255, 255, 255, 0.85);
+  color: #2c2c2c;
   font-size: 22px;
+  text-align: center;
 }
 
 @media only screen and (max-width: 991px) {

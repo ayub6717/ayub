@@ -12,6 +12,7 @@ import "./title.css"
 export const Title = ({ title, social, side, height }) => {
   return (
     <div
+      data-aos="fade-in"
       style={{ height }}
       className={`title ${side} ${social ? "social" : ""}`}
     >

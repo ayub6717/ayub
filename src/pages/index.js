@@ -20,7 +20,6 @@ const IndexPage = () => {
     Aos.init({
       duration: 1800,
       offset: 100,
-      disable: "mobile",
     });
   }, []);
   return (

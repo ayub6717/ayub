@@ -11,7 +11,7 @@ return (
 <div id="about" className="about-area">
   <Container>
     <Title side="right" title="About Me" />
-    <div className="about">
+    <div data-aos="slide-right" className="about">
       <div className="about-details">
         <p>
           Hello! I'm Md. Ayub, a Web developer. I develop websites, web applications. My core skill is
