@@ -20,9 +20,10 @@ const Contact = () => {
               <Button
                 title="Contact Me"
                 mt="25px"
-                bgColor="#00cf5d"
+                bgColor="#a16c8d"
                 color="#fff"
-                link="mailto:ahmed1.ayub6717@gmail.com"
+                link="mailto:ayub.devs@gmail.com"
+                borderColor="#a16c8d"
               />
             </div>
           </div>
