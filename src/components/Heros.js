@@ -11,9 +11,6 @@ function Heros() {
         <Socials />
         <SkillLogo />
         {/* first col */}
-          <div className="intro-area">
-            <p title="Follow Me" social height="320px" />
-          </div>
           <div className="md:px-6 intro mt-[100px] md:mt-[150px] lg:mt-[200px]" data-aos="fade-down">
             <div>
               <p className="7xl:text-[32px] lg:text-[22px] text-[16px] text-[#a16c8d]">Hello I'm</p>
@@ -23,7 +20,7 @@ function Heros() {
                 <li>Web Developer</li>
                 <li>Programmer</li>
               </ul>
-              <a className="btn" target="_blank" href="https://drive.google.com/file/d/1xRvc3RkiZ_6FgWqYqK5pXM06q7b1JJYJ/view?usp=sharing">Get Resume</a>
+              <a className="btn" target="_blank" rel="noopener noreferrer" href="https://drive.google.com/file/d/1xRvc3RkiZ_6FgWqYqK5pXM06q7b1JJYJ/view?usp=sharing">Get Resume</a>
 
             </div>
             <div className="flex flex-col justify-center pt-5 lmd:pt-11 items-center md:items-start">

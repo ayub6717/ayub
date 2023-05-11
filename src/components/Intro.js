@@ -7,7 +7,7 @@ import "./intro.css"
 const Intro = () => {
   return (
     <div className="intro-area">
-      <Title title="Follow Me" social height="320px" />
+      <Title title="Follow Me"  height="320px" />
       <Container>
         <div className="intro">
           <div className="intro-text">

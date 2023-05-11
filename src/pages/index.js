@@ -1,10 +1,8 @@
-import React from "react"
-import { useEffect } from "react";
+import React, { useEffect } from "react";
 
 import Aos from "aos";
 import "aos/dist/aos.css";
 import {
-  // Intro,
   LoveToDo,
   Portfolio,
   About,
@@ -13,7 +11,7 @@ import {
   Education,
   Contact,
 } from "../components"
-import { Layout, SEO } from "../components/common"
+import { SEO } from "../components/common"
 import Heros from "../components/Heros"
 import Navbar from "../components/Navbar";
 
@@ -26,12 +24,10 @@ const IndexPage = () => {
     });
   }, []);
   return (
-    <div className="">
-    <Layout>
-      <Navbar />
+    <div>
+        <Navbar />
         <SEO title="Ayub Shamim" />
         <Heros />
-        {/* <Intro /> */}
         <About />
         <Experience />
         <Skill />
@@ -39,7 +35,6 @@ const IndexPage = () => {
         <LoveToDo />
         <Education />
         <Contact />
-    </Layout>
     </div>
   );
 };

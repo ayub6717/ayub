@@ -1,9 +1,6 @@
-// import ReactDOM from 'react-dom'
-import React from 'react'
-import { useState } from "react";
+import React, {useState, createElement} from "react";
 import { content } from "../Content";
 import { HiMenuAlt2 } from "react-icons/hi";
-import { createElement } from "react";
 
 function Navbar() {
     const { nav } = content;
@@ -23,7 +20,7 @@ function Navbar() {
         }`}
       >
         {nav.map((item, i) => (
-          <a
+          <a key={i}
             href={item.link}
             onClick={() => setActive(i)}
             className={`text-xl p-2.5 rounded-full sm:cursor-pointer 
