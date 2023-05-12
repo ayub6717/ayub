@@ -57,6 +57,36 @@ export const portfolios = {
         },
         {
           type: "featured",
+          name: "React Martvill POS",
+          image: require("./image/pos.jpg"),
+          description: "A Collection of React, Redux, Tailwind CSS / Compatible Browsers: IE10, IE11, Firefox, Safari, Chrome, Software Version: PHP 7.x",
+          soon: "Under development. Coming soon, please check preview option",
+          demo: "http://martvillpos.homemaintaining.com/pos/",
+          source: "",
+          tools: []
+        },
+        {
+          type: "featured",
+          name: "Artifism",
+          image: require("./image/artifism.jpg"),
+          description: "A Collection of PHP Scripts, Tailwind CSS, javascript / Compatible Browsers: IE10, IE11, Firefox, Safari, Chrome, Software Version: PHP 7.x",
+          soon: "Under development. Coming soon, please check preview option",
+          demo: "https://dashboard.homemaintaining.com/",
+          source: "",
+          tools: []
+        },
+        {
+          type: "featured",
+          name: "Pay Money New User Dashboard",
+          image: require("./image/paymoney-userdashboard.jpg"),
+          description: "A Collection of PHP Scripts, Bootstrap 5, javascript / Compatible Browsers: IE10, IE11, Firefox, Safari, Chrome, Software Version: PHP 7.x",
+          soon: "Under development. Coming soon, please check preview option",
+          demo: "",
+          source: "",
+          tools: []
+        },
+        {
+          type: "featured",
           name: "Vrent",
           image: require("./image/Vrent.jpg"),
           description: "A Collection of PHP Scripts, Bootstap, CSS module, JavaScript. Software Version: PHP 7.xA",

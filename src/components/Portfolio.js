@@ -52,6 +52,7 @@ const Portfolio = () => {
                     </a>
                   </h4>
                   <p>{portfolio.description}</p>
+                  <p className="text-[#A16C8D] mt-1.5">{portfolio.soon}</p>
                   <div className="links">
                     <ul>
                       {portfolio.source && (
