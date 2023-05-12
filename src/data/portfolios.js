@@ -2,13 +2,15 @@ export const portfolios = {
     Web: [
         {
             type: "featured",
-            name: "AmaderService.com",
-            image: require("./image/Home _ AmaderSer.png"),
-            description: "A Collection of React Hooks, React-bootstrap, CSS module, JavaScript",
-            demo: "https://amaderservice.com/",
+            name: "Martvill",
+            image: require("./image/Multivendor_Home.jpg"),
+            description: "A Collection of PHP Scripts, Tailwind CSS, CSS module, JavaScript  / Project Management Tools Compatible Browsers: Firefox, Safari, Opera, Chrome, Edge, Software Version: PHP 7.x",
+            demo: "https://demo.martvill.techvill.net/", 
+            demo2: "https://codecanyon.net/item/martvill-a-global-multivendor-ecommerce-platform-to-sell-anything/43288879",
             source: "https://github.com/ayub6717/",
             tools: []
-        }, {
+        },
+         {
             type: "featured",
             name: "Martvill Landing Page",
             image: require("./image/Martvill.jpg"),
@@ -16,12 +18,13 @@ export const portfolios = {
             demo: "https://martvill.techvill.net/",
             source: "https://github.com/ayub6717/",
             tools: []
-        }, {
+        },
+        {
             type: "featured",
-            name: "Martvill",
-            image: require("./image/Multivendor_Home.jpg"),
-            description: "A Collection of PHP Scripts, Tailwind CSS, CSS module, JavaScript  / Project Management Tools Compatible Browsers: Firefox, Safari, Opera, Chrome, Edge, Software Version: PHP 7.x",
-            demo: "https://demo.martvill.techvill.net/", 
+            name: "AmaderService.com",
+            image: require("./image/Home _ AmaderSer.png"),
+            description: "A Collection of React Hooks, React-bootstrap, CSS module, JavaScript",
+            demo: "https://amaderservice.com/",
             source: "https://github.com/ayub6717/",
             tools: []
         },
