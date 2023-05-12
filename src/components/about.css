@@ -31,13 +31,14 @@
   width: 320px;
   border-radius: 10px;
   transform: scale(0.95);
-  filter: grayscale(1);
+  filter: grayscale(0);
   transition: 1s all;
 }
 
 .about-image:hover img {
   transform: scale(1);
-  filter: grayscale(0);
+  filter: grayscale(1);
+
 }
 
 @media only screen and (max-width: 768px) {
