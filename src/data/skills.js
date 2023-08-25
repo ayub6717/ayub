@@ -1,13 +1,14 @@
 export const skills = {
   Web: [
-    { name: "React", percent: 80 },
-    { name: "Tailwind CSS", percent: 95 },
-    { name: "Bootstrap", percent: 95 },
     { name: "HTML", percent: 95 },
     { name: "CSS", percent: 95 },
+    { name: "Tailwind CSS", percent: 95 },
+    { name: "Bootstrap", percent: 95 },
+    { name: "React", percent: 80 },
+    { name: "React Native", percent: 60 },
+    { name: "Redux", percent: 60 },
     { name: "Alpine Js", percent: 20 },
     { name: "Node JS", percent: 20 },
-    { name: "Express JS", percent: 10 },
     { name: "MySQL", percent: 50 },
   ],
   Others: [
@@ -15,7 +16,6 @@ export const skills = {
     { name: "Algorithms", percent: 60 },
     { name: "OOP", percent: 80 },
     { name: "Git, Github", percent: 80 },
-    { name: "Redux", percent: 60 },
     { name: "Sass/Scss", percent: 50 },
     { name: "jQuery", percent: 65 },
     { name: "Ajax", percent: 50 },

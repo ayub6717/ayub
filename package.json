@@ -1,10 +1,10 @@
 {
   "name": "ayub.me",
   "private": true,
-  "homepage": "https://ayub6717.netlify.app/",
+  "homepage": "https://ayubdevs.netlify.app/",
   "description": "My personal portfolio website",
   "version": "2.0.1",
-  "author": "Md. Ayub Shamim <ahmed1.ayub6717@gmail.com>",
+  "author": "Md. Ayub Shamim <ayub.devs@gmail.com>",
   "dependencies": {
     "aos": "^2.3.4",
     "gatsby": "^2.15.28",

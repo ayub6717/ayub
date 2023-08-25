@@ -14,14 +14,29 @@ const About = () => {
         <div data-aos="slide-right" className="about">
           <div className="about-details">
             <p>
-              Hello! I'm Md. Ayub, a Web developer. I develop websites, web applications. My core skill is
-              based on JavaScript and I love to do most things using JavaScript. As a front-end team leader, I play the role in the technical design of new systems, assist with difficult code solutions and maintain the workflow. I have familiar with a wide range of data structures, algorithms, Object-oriented programming, and
-              databases. I am available for any kind of job opportunity that suits my
-              interests.
+              Greetings! I'm Md. Ayub, a proficient Web developer
+              with a passion for crafting dynamic websites and innovative web
+              applications. My expertise revolves around the realm of
+              JavaScript. In my capacity as a front-end team leader, I actively
+              contribute technical design of new systems, provide
+              innovative solutions for intricate code challenges, and ensure the
+              smooth progression of workflow. My proficiency spans across
+              diverse domains such as, I have a deep understanding of modern web
+              development practices, including component-based architecture,
+              state management with tools like Redux, and integrating APIs to
+              deliver seamless user experiences. I am readily open to engaging
+              with captivating job opportunities that align with my fervor and
+              skill set.
             </p>
             <div className="about-action">
-              <a className="bg-[#a16c8d] text-white px-4 py-3 rounded" href="https://drive.google.com/file/d/1xRvc3RkiZ_6FgWqYqK5pXM06q7b1JJYJ/view?usp=sharing" target="_blank"
-              > Get Resume</a>
+              <a
+                className="bg-[#a16c8d] text-white px-4 py-3 rounded"
+                href="https://drive.google.com/drive/folders/1OXDkB2GGvtu4LVwYkzBB8JsWRnAgqx8P?usp=sharing"
+                target="_blank"
+              >
+                {" "}
+                Get Resume
+              </a>
               <Button clickEvent link="#skill" ml="15px" title="My Skills" />
             </div>
           </div>

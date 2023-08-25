@@ -33,11 +33,10 @@
 .portfolio-items {
   display: flex;
   flex-wrap: wrap;
+  gap: 20px;
 }
 
 .portfolio-items > * {
-  margin: 15px;
-  flex: 1 1 calc(100% / 3 - 30px);
   background-color: #1d293a;
   color: rgba(255, 255, 255, 0.85);
   border-radius: 4px;
