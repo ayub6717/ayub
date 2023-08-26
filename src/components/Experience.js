@@ -12,16 +12,18 @@ return (
       <p className="mt-1 text-[#1b1b1bee] text-[16px]">Address: House-19, Road-19,  Nikunja-2, Dhaka 1229</p>
       <p className="text-[#1b1b1bc7] text-[15px]">Status:  15th July 2021 to Running.</p>
       <p className="mt-4 text-[17px]">
-        Here I'm working with the front-end through React.js, APIs, User, Admin, and also working with HRM panel. Moreover, Supervised and lead a team of Front end engineers during the development of a robust upgrade version of the company's software applications, resulting in improved user experience. <br /> <br />
-        - Fix the bugs and optimize the overall performance. <br />
-        - Collaborate with Back-End and Front-End Developers <br />
-        - Assist with difficult code solutions and ensure proper code quality and documentation <br />
-        - Create standards such as file/folder structures and ensure that the part of the product is technically sound<br />
-        - Introduce new concepts and business logic 
-        - Mentoring developers with ensure proper git workflow, and resolve code conflict <br />
-        - Weekly tasks create for the developer, review test in progress tasks and daily reports also submit to the boss. <br />
+      In my current role, I'm focused on front-end development using React.js and APIs, catering to both User and Admin functionalities. I've also taken on the responsibility of guiding a skilled team of front-end engineers to enhance our company's software applications, resulting in a better user experience. <br /> <br />
+        My tasks include: <br /> <br />
+        - Fixing issues and improving overall system performance. <br />
+        - Collaborating with Back-End and Front-End Developers to ensure smooth teamwork. <br />
+        - Solving complex code challenges while maintaining high-quality, well-documented code. <br />
+        - Setting coding standards and ensuring the technical strength of product segments.<br />
+        - Introducing new concepts and mentoring developers in best Git practices. <br />
+        - Managing developer tasks, reviewing progress, and providing reports. <br />
+        - Analyzing website content and staying updated with current web trends for dynamic designs.<br />
         - Website content analysis, current web trends dynamic web Page design & framework templates <br />
-        - Customer support ticket reply <br />
+        - Providing timely customer support. <br />
+        In summary, I blend technical skills with leadership to drive innovation and enhance user satisfaction.
       </p>
 
       <div className="mt-11">
@@ -31,8 +33,7 @@ return (
       <p className="text-[#1b1b1bc7] text-[15px]">Status:  7th January 2021 to 10th September 2021.</p>
 
       <p className="mt-4 text-[17px]">
-          Here I'm working with the front-end through React.js. 
-          Working with API, User panel, Admin, and also working with HRM panel. I'm the team leader of the front-end team. In Addition to being a React Front-End developer, I also give ideas on system analysis and design for various sites.
+        In the past, I worked extensively on front-end tasks using React.js. My duties involved collaborating on API utilization, refining user panels, implementing administrative features, and contributing to the development of HRM panels. Additionally, I played a role in providing ideas for system analysis and design across various websites, showcasing my versatility beyond the realm of a React Front-End developer.
       </p>
       </div>
 
