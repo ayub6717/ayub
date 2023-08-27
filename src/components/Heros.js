@@ -20,7 +20,7 @@ function Heros() {
                 <li>Web Developer</li>
                 <li>Programmer</li>
               </ul>
-              <a className="btn" target="_blank" rel="noopener noreferrer" href="https://drive.google.com/file/d/1xRvc3RkiZ_6FgWqYqK5pXM06q7b1JJYJ/view?usp=sharing">Get Resume</a>
+              <a className="btn" target="_blank" rel="noopener noreferrer" href="https://drive.google.com/file/d/1OdO54e0Sw6D1ZST6d8J_3GppF99M9ntI/view?usp=sharing">Get Resume</a>
 
             </div>
             <div className="flex flex-col justify-center pt-5 lmd:pt-11 items-center md:items-start">

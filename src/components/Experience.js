@@ -21,7 +21,6 @@ return (
         - Introducing new concepts and mentoring developers in best Git practices. <br />
         - Managing developer tasks, reviewing progress, and providing reports. <br />
         - Analyzing website content and staying updated with current web trends for dynamic designs.<br />
-        - Website content analysis, current web trends dynamic web Page design & framework templates <br />
         - Providing timely customer support. <br />
         In summary, I blend technical skills with leadership to drive innovation and enhance user satisfaction.
       </p>

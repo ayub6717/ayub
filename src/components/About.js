@@ -31,7 +31,7 @@ const About = () => {
             <div className="about-action">
               <a
                 className="bg-[#a16c8d] text-white px-4 py-3 rounded"
-                href="https://drive.google.com/drive/folders/1OXDkB2GGvtu4LVwYkzBB8JsWRnAgqx8P?usp=sharing"
+                href="https://drive.google.com/file/d/1OdO54e0Sw6D1ZST6d8J_3GppF99M9ntI/view?usp=sharing"
                 target="_blank"
               >
                 {" "}
