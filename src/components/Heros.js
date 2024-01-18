@@ -27,7 +27,7 @@ function Heros() {
                 <div
                   data-aos="fade-down"
                   className="flex items-center w-48 lg:w-[12rem] xl:w-80 gap-5 md:mt-9">
-                  <h3 className="7xl:text-[55px] text-[40px]">3.5+</h3>
+                  <h3 className="7xl:text-[55px] text-[40px]">4+</h3>
                   <p className="7xl:text-[22px] text-[16px]">Years of Experinse in Web development</p>
                 </div>
                 <div
