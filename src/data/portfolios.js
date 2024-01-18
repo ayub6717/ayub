@@ -2,6 +2,33 @@ export const portfolios = {
   Web: [
     {
       type: "featured",
+      name: "React Martvill POS Addon",
+      image: require("./image/pos-updated.jpg"),
+      description:
+        "A Collection of React, Redux, Tailwind CSS / Compatible Browsers: IE10, IE11, Firefox, Safari, Chrome, Software Version: PHP 7.x",
+      adminLog: "Admin Login: admin@techvill.net",
+      userLog: "User Login: user@techvill.net",
+      pass: "Password: 123456",
+      demo: "https://www.demo.martvill.techvill.net/pos",
+      demo2: "https://codecanyon.net/item/martvill-point-of-sale-pos-addon/48726500",
+      source: "",
+      tools: [],
+    },
+    {
+      type: "featured",
+      name: "React AI Chat SDK",
+      image: require("./image/AI_Chat_sdk.jpg"),
+      description:
+        "A Collection of React, Redux, Tailwind CSS / Compatible Browsers: IE10, IE11, Firefox, Safari, Chrome",
+      adminLog: "Admin Login: admin@techvill.net",
+      userLog: "User Login: user@techvill.net",
+      pass: "Password: 123456",
+      demo: "https://staging.artifism.techvill.net/design/chat-sdk/chat",
+      soon: "Under development. Coming soon, please check preview option",
+      tools: [],
+    },
+    {
+      type: "featured",
       name: "Martvill",
       image: require("./image/Multivendor_Home.jpg"),
       description:
@@ -37,20 +64,7 @@ export const portfolios = {
         "A Collection of React Hooks, Tailwind CSS, CSS module, JavaScript",
       demo: "https://martvill.techvill.net/",
       demo2: "https://preview.codecanyon.net/item/martvill-a-global-multivendor-ecommerce-platform-to-sell-anything/full_screen_preview/43288879?_ga=2.177227745.534654353.1692972236-368829799.1676297521",
-      tools: [],
-    },
-    {
-      type: "featured",
-      name: "React Martvill POS Addon",
-      image: require("./image/pos.jpg"),
-      description:
-        "A Collection of React, Redux, Tailwind CSS / Compatible Browsers: IE10, IE11, Firefox, Safari, Chrome, Software Version: PHP 7.x",
-      adminLog: "Admin Login: admin@techvill.net",
-      userLog: "User Login: user@techvill.net",
-      pass: "Password: 123456",
-      soon: "Under development. Coming soon, please check preview option",
-      demo: "https://staging.martvill.techvill.net/design/pos/pos",
-      source: "",
+      SOON: "Under development. Coming soon, please check preview option",
       tools: [],
     },
     {
@@ -64,6 +78,16 @@ export const portfolios = {
     },
     {
       type: "featured",
+      name: "React Crypto User Dashboard",
+      image: require("./image/Crypto_userdashboard.jpg"),
+      description:
+        "A Collection of React Hooks, Tailwind CSS, CSS module, JavaScript",
+      demo: "https://react-crypto-userdashboard.netlify.app/",
+      source: "https://github.com/ayub6717/react-crypto-dashboard",
+      tools: [],
+    },
+    {
+      type: "featured",
       name: "Pay Money New User Dashboard",
       image: require("./image/paymoney-userdashboard.jpg"),
       description:
@@ -71,7 +95,6 @@ export const portfolios = {
       adminLog: "Admin Login: admin@techvill.net",
       userLog: "User Login: irish@gmail.com",
       pass: "Password: 123456",
-      soon: "Under development. Coming soon, please check preview option",
       demo: "https://demo.paymoney.techvill.net/dashboard",
       source: "",
       tools: [],
