@@ -23,8 +23,7 @@ export const portfolios = {
       adminLog: "Admin Login: admin@techvill.net",
       userLog: "User Login: user@techvill.net",
       pass: "Password: 123456",
-      demo: "https://staging.artifism.techvill.net/design/chat-sdk/chat",
-      soon: "Under development. Coming soon, please check preview option",
+      demo: "https://demo.artifism.techvill.net/chat",
       tools: [],
     },
     {
