@@ -4,6 +4,11 @@ export const portfolios = {
       type: "featured",
       name: "React Martvill POS Addon",
       image: require("./image/pos-updated.jpg"),
+      images: [
+        require("./image/pos-updated.jpg"),
+        require("./image/pos.jpg"),
+        require("./image/pos-update.jpg")
+      ],
       description:
         "A Collection of React, Redux, Tailwind CSS / Compatible Browsers: IE10, IE11, Firefox, Safari, Chrome, Software Version: PHP 7.x",
       adminLog: "Admin Login: admin@techvill.net",
@@ -13,6 +18,12 @@ export const portfolios = {
       demo2: "https://codecanyon.net/item/martvill-point-of-sale-pos-addon/48726500",
       source: "",
       tools: [],
+      features: [
+        "Real-time Synchronized POS Terminal",
+        "Comprehensive Inventory & Stock Alert System",
+        "Multi-payment Gateway & Invoice Generator",
+        "Detailed Analytics Dashboard for Sales Report"
+      ],
     },
     {
       type: "featured",
