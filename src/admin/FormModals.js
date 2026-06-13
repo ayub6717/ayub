@@ -67,8 +67,18 @@ export function EducationFormModal({ initial = {}, onSave, onClose }) {
     degree: initial.degree || "",
     institute: initial.institute || "",
     session: initial.session || "",
+    image: initial.image || "",
   })
   const set = (key, val) => setForm(f => ({ ...f, [key]: val }))
+
+  const handleFileChange = (e) => {
+    const file = e.target.files[0]
+    if (file) {
+      const reader = new FileReader()
+      reader.onloadend = () => set("image", reader.result)
+      reader.readAsDataURL(file)
+    }
+  }
 
   return (
     <AdminModal title={initial.id ? "Edit Education" : "Add Education"} onClose={onClose}>
@@ -83,6 +93,17 @@ export function EducationFormModal({ initial = {}, onSave, onClose }) {
       <div className="admin-form-group">
         <label className="admin-form-label">Session / Year</label>
         <input className="admin-form-input" value={form.session} onChange={e => set("session", e.target.value)} placeholder="2016-2020" />
+      </div>
+      <div className="admin-form-group" style={{ borderTop: "1px dashed #e2e8f0", paddingTop: "12px" }}>
+        <label className="admin-form-label">Section Image (optional — replaces the education side image)</label>
+        <div style={{ display: "flex", gap: "10px", alignItems: "center", marginBottom: "8px" }}>
+          <input type="file" accept="image/*" onChange={handleFileChange} style={{ fontSize: "12px" }} />
+        </div>
+        {form.image && (
+          <div style={{ width: "100px", height: "70px", borderRadius: "6px", overflow: "hidden", border: "1px solid #cbd5e1" }}>
+            <img src={form.image} alt="Preview" style={{ width: "100%", height: "100%", objectFit: "cover" }} />
+          </div>
+        )}
       </div>
       <div className="admin-form-actions">
         <button className="admin-form-cancel" onClick={onClose}>Cancel</button>
@@ -118,6 +139,38 @@ export function SkillFormModal({ initial = {}, onSave, onClose }) {
   )
 }
 
+// ─── Tech Stack picker data ───────────────────────────────────────────────────
+const TECH_OPTIONS = [
+  { icon: "⚛️", name: "React", type: "UI Library" },
+  { icon: "📱", name: "React Native", type: "Mobile Framework" },
+  { icon: "🔲", name: "Next.js", type: "Framework" },
+  { icon: "🔄", name: "Redux", type: "State Management" },
+  { icon: "🟡", name: "JavaScript", type: "Language" },
+  { icon: "🔷", name: "TypeScript", type: "Language" },
+  { icon: "🌐", name: "HTML", type: "Markup" },
+  { icon: "🎨", name: "CSS", type: "Styling" },
+  { icon: "💨", name: "Tailwind CSS", type: "CSS Framework" },
+  { icon: "🅱️", name: "Bootstrap", type: "CSS Framework" },
+  { icon: "📦", name: "Sass/SCSS", type: "Styling" },
+  { icon: "🐘", name: "PHP", type: "Backend" },
+  { icon: "🟢", name: "Node.js", type: "Runtime" },
+  { icon: "🗄️", name: "MySQL", type: "Database" },
+  { icon: "🍃", name: "MongoDB", type: "Database" },
+  { icon: "🔗", name: "REST API", type: "Integration" },
+  { icon: "⚡", name: "GraphQL", type: "API" },
+  { icon: "💫", name: "jQuery", type: "DOM Library" },
+  { icon: "🔁", name: "Ajax", type: "Integration" },
+  { icon: "☕", name: "Java", type: "Language" },
+  { icon: "🔡", name: "C++", type: "Language" },
+  { icon: "🧪", name: "Jest", type: "Testing" },
+  { icon: "🗂️", name: "Git", type: "Version Control" },
+  { icon: "🐳", name: "Docker", type: "DevOps" },
+  { icon: "☁️", name: "Azure", type: "Cloud" },
+  { icon: "🦅", name: "Material UI", type: "UI Library" },
+  { icon: "⚙️", name: "Express.js", type: "Backend" },
+  { icon: "🗃️", name: "SQLite", type: "Database" },
+]
+
 // ─── Project Form ─────────────────────────────────────────────────────────────
 export function ProjectFormModal({ initial = {}, categories, onSave, onClose }) {
   const [activeTab, setActiveTab] = useState("basic")
@@ -140,9 +193,50 @@ export function ProjectFormModal({ initial = {}, categories, onSave, onClose }) 
     
     // Dynamic detail fields
     featuresText: (initial.features || []).join("\n"),
-    techStackText: (initial.techStack || []).map(t => `${t.icon || "⚙️"} | ${t.name || ""} | ${t.type || ""}`).join("\n"),
-    lessonsText: (initial.lessons || []).map(l => typeof l === "string" ? l : l.text || "").join("\n"),
   })
+
+  // Tech stack as a list of { icon, name, type } objects
+  const [techStack, setTechStack] = useState(
+    (initial.techStack || []).length > 0
+      ? initial.techStack
+      : []
+  )
+  const [techDropdownVal, setTechDropdownVal] = useState("")
+  const [customTech, setCustomTech] = useState({ icon: "⚙️", name: "", type: "" })
+  const [showCustomTech, setShowCustomTech] = useState(false)
+
+  const addTechFromDropdown = () => {
+    if (!techDropdownVal) return
+    const found = TECH_OPTIONS.find(t => t.name === techDropdownVal)
+    if (found && !techStack.find(t => t.name === found.name)) {
+      setTechStack(prev => [...prev, found])
+    }
+    setTechDropdownVal("")
+  }
+
+  const addCustomTech = () => {
+    if (!customTech.name.trim()) return
+    if (!techStack.find(t => t.name === customTech.name)) {
+      setTechStack(prev => [...prev, { ...customTech }])
+    }
+    setCustomTech({ icon: "⚙️", name: "", type: "" })
+    setShowCustomTech(false)
+  }
+
+  const removeTech = (name) => setTechStack(prev => prev.filter(t => t.name !== name))
+
+  // Lessons as a list of strings
+  const [lessons, setLessons] = useState(
+    (initial.lessons || []).map(l => typeof l === "string" ? l : (l.text || "")).filter(Boolean)
+  )
+  const [lessonInput, setLessonInput] = useState("")
+  const addLesson = () => {
+    if (lessonInput.trim()) {
+      setLessons(prev => [...prev, lessonInput.trim()])
+      setLessonInput("")
+    }
+  }
+  const removeLesson = (i) => setLessons(prev => prev.filter((_, idx) => idx !== i))
 
   const [challenges, setChallenges] = useState([
     { problem: initial.challenges?.[0]?.problem || "", solution: initial.challenges?.[0]?.solution || "" },
@@ -195,22 +289,7 @@ export function ProjectFormModal({ initial = {}, categories, onSave, onClose }) 
       .map(line => line.trim())
       .filter(Boolean)
 
-    const parsedTechStack = form.techStackText
-      .split("\n")
-      .map(line => {
-        const parts = line.split("|").map(p => p.trim())
-        if (parts[1]) {
-          return { icon: parts[0] || "⚙️", name: parts[1], type: parts[2] || "" }
-        }
-        return null
-      })
-      .filter(Boolean)
-
-    const parsedLessons = form.lessonsText
-      .split("\n")
-      .map(line => line.trim())
-      .filter(Boolean)
-      .map(text => ({ text }))
+    const parsedLessons = lessons.map(text => ({ text }))
 
     // Clean up empty challenges, roles, arch cards
     const cleanChallenges = challenges.filter(c => c.problem || c.solution)
@@ -218,12 +297,12 @@ export function ProjectFormModal({ initial = {}, categories, onSave, onClose }) 
     const cleanArchCards = archCards.filter(a => a.title || a.body)
 
     // Omit internal UI helper keys from result
-    const { featuresText, techStackText, lessonsText, ...cleanForm } = form
+    const { featuresText, ...cleanForm } = form
 
     onSave({
       ...cleanForm,
       features: parsedFeatures,
-      techStack: parsedTechStack,
+      techStack,
       lessons: parsedLessons,
       challenges: cleanChallenges.length > 0 ? cleanChallenges : undefined,
       roleCards: cleanRoleCards.length > 0 ? cleanRoleCards : undefined,
@@ -332,15 +411,78 @@ export function ProjectFormModal({ initial = {}, categories, onSave, onClose }) 
           <>
             <div className="admin-form-group">
               <label className="admin-form-label">Features (one item per line)</label>
-              <textarea className="admin-form-textarea" rows={6} value={form.featuresText} onChange={e => set("featuresText", e.target.value)} placeholder="Real-time Synchronized POS Terminal&#10;Comprehensive Inventory System" />
+              <textarea className="admin-form-textarea" rows={5} value={form.featuresText} onChange={e => set("featuresText", e.target.value)} placeholder="Real-time Synchronized POS Terminal&#10;Comprehensive Inventory System" />
             </div>
+
+            {/* ── Tech Stack Picker ── */}
             <div className="admin-form-group">
-              <label className="admin-form-label">Tech Stack (format: Icon | Name | Category per line)</label>
-              <textarea className="admin-form-textarea" rows={6} value={form.techStackText} onChange={e => set("techStackText", e.target.value)} placeholder="⚛️ | React | UI Library&#10;🔄 | Redux | State Management" />
+              <label className="admin-form-label">Tech Stack</label>
+
+              {/* Existing tags */}
+              <div style={{ display: "flex", flexWrap: "wrap", gap: "6px", marginBottom: "10px", minHeight: "28px" }}>
+                {techStack.map((t, i) => (
+                  <span key={i} style={{ display: "inline-flex", alignItems: "center", gap: "4px", background: "linear-gradient(135deg,#ede9fe,#fce7f3)", border: "1px solid #d8b4fe", borderRadius: "20px", padding: "3px 10px", fontSize: "12px", fontWeight: 600, color: "#6d28d9" }}>
+                    {t.icon} {t.name}
+                    <button type="button" onClick={() => removeTech(t.name)} style={{ background: "none", border: "none", cursor: "pointer", color: "#9ca3af", fontSize: "11px", padding: "0 0 0 2px", lineHeight: 1 }}>✕</button>
+                  </span>
+                ))}
+              </div>
+
+              {/* Dropdown picker */}
+              <div style={{ display: "flex", gap: "8px", alignItems: "center", marginBottom: "8px" }}>
+                <select
+                  className="admin-form-select"
+                  value={techDropdownVal}
+                  onChange={e => setTechDropdownVal(e.target.value)}
+                  style={{ flex: 1 }}
+                >
+                  <option value="">— Select a technology —</option>
+                  {TECH_OPTIONS.filter(t => !techStack.find(s => s.name === t.name)).map(t => (
+                    <option key={t.name} value={t.name}>{t.icon} {t.name} ({t.type})</option>
+                  ))}
+                </select>
+                <button type="button" className="admin-form-save" style={{ padding: "6px 14px", fontSize: "12px" }} onClick={addTechFromDropdown}>Add</button>
+              </div>
+
+              {/* Custom tech toggle */}
+              {!showCustomTech ? (
+                <button type="button" onClick={() => setShowCustomTech(true)} style={{ fontSize: "11px", color: "#6d28d9", background: "none", border: "1px dashed #a78bfa", borderRadius: "6px", padding: "4px 10px", cursor: "pointer" }}>
+                  + Add custom technology
+                </button>
+              ) : (
+                <div style={{ display: "flex", gap: "6px", alignItems: "center", flexWrap: "wrap", border: "1px dashed #a78bfa", borderRadius: "8px", padding: "8px" }}>
+                  <input placeholder="Icon (emoji)" className="admin-form-input" style={{ width: "60px", padding: "5px" }} value={customTech.icon} onChange={e => setCustomTech(p => ({...p, icon: e.target.value}))} />
+                  <input placeholder="Name" className="admin-form-input" style={{ flex: 1, padding: "5px" }} value={customTech.name} onChange={e => setCustomTech(p => ({...p, name: e.target.value}))} />
+                  <input placeholder="Type/Category" className="admin-form-input" style={{ flex: 1, padding: "5px" }} value={customTech.type} onChange={e => setCustomTech(p => ({...p, type: e.target.value}))} />
+                  <button type="button" className="admin-form-save" style={{ padding: "5px 10px", fontSize: "12px" }} onClick={addCustomTech}>Add</button>
+                  <button type="button" onClick={() => setShowCustomTech(false)} style={{ background: "none", border: "none", color: "#9ca3af", cursor: "pointer" }}>Cancel</button>
+                </div>
+              )}
             </div>
+
+            {/* ── Lessons Learned ── */}
             <div className="admin-form-group">
-              <label className="admin-form-label">Lessons Learned (one item per line)</label>
-              <textarea className="admin-form-textarea" rows={4} value={form.lessonsText} onChange={e => set("lessonsText", e.target.value)} placeholder="Plan component structure early.&#10;Design systems pay dividends." />
+              <label className="admin-form-label">Lessons Learned</label>
+              <div style={{ display: "flex", flexDirection: "column", gap: "6px", marginBottom: "8px" }}>
+                {lessons.map((lesson, i) => (
+                  <div key={i} style={{ display: "flex", gap: "8px", alignItems: "flex-start", background: "#f8fafc", borderRadius: "6px", padding: "6px 10px", border: "1px solid #e2e8f0" }}>
+                    <span style={{ color: "#6d28d9", fontWeight: 700, minWidth: "18px" }}>{i+1}.</span>
+                    <p style={{ flex: 1, margin: 0, fontSize: "12px", color: "#334155" }}>{lesson}</p>
+                    <button type="button" onClick={() => removeLesson(i)} style={{ background: "none", border: "none", color: "#f87171", cursor: "pointer", fontSize: "13px", padding: 0 }}>✕</button>
+                  </div>
+                ))}
+              </div>
+              <div style={{ display: "flex", gap: "8px" }}>
+                <input
+                  className="admin-form-input"
+                  value={lessonInput}
+                  onChange={e => setLessonInput(e.target.value)}
+                  onKeyDown={e => { if (e.key === "Enter") { e.preventDefault(); addLesson() } }}
+                  placeholder="Type a lesson and press Enter or Add…"
+                  style={{ flex: 1 }}
+                />
+                <button type="button" className="admin-form-save" style={{ padding: "6px 14px", fontSize: "12px" }} onClick={addLesson}>Add</button>
+              </div>
             </div>
           </>
         )}

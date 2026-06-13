@@ -225,6 +225,9 @@ export function DataProvider({ children }) {
   const deleteEducation = (id) => {
     persist({ ...data, education: data.education.filter(e => e.id !== id) })
   }
+  const updateEducationImage = (image) => {
+    persist({ ...data, educationImage: image })
+  }
 
   // ── Skills ────────────────────────────────────────────────────────────────
   const addSkill = (category, skill) => {
@@ -305,7 +308,7 @@ export function DataProvider({ children }) {
       // Experience
       addExperience, updateExperience, deleteExperience,
       // Education
-      addEducation, updateEducation, deleteEducation,
+      addEducation, updateEducation, deleteEducation, updateEducationImage,
       // Skills
       addSkill, updateSkill, deleteSkill, addSkillCategory,
       // Portfolios

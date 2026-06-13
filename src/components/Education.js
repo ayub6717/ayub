@@ -4,10 +4,12 @@ import edu_1 from "../assets/image/edu_2.jpg"
 import { useAuth } from "../context/AuthContext"
 import { useData } from "../context/DataContext"
 import { EducationFormModal } from "../admin/FormModals"
+import { resolveImage } from "../data/imageMap"
 
 const Education = () => {
   const { isLoggedIn } = useAuth()
-  const { data, addEducation, updateEducation, deleteEducation } = useData()
+  const { data, addEducation, updateEducation, deleteEducation, updateEducationImage } = useData()
+  const sideImage = data?.educationImage ? resolveImage(data.educationImage) : edu_1
 
   const [editingEdu, setEditingEdu] = useState(null)
   const [showAddModal, setShowAddModal] = useState(false)
@@ -77,10 +79,26 @@ const Education = () => {
                 )
               })}
             </div>
-            <img className="lg:w-1/2 md:w-1/2 object-contain object-center rounded-lg"
-              src={edu_1}
-              alt="step"
-            />
+            <div className="lg:w-1/2 md:w-1/2" style={{ position: "relative", aspectRatio: "4/3", minHeight: "200px" }}>
+              <img
+                src={sideImage}
+                alt="Education"
+                style={{ width: "100%", height: "100%", objectFit: "cover", borderRadius: "10px", display: "block" }}
+              />
+              {isLoggedIn && (
+                <label style={{ position: "absolute", bottom: "8px", right: "8px", cursor: "pointer", background: "rgba(109,40,217,0.85)", color: "#fff", borderRadius: "6px", padding: "5px 10px", fontSize: "11px", fontWeight: 600 }}>
+                  📷 Change Image
+                  <input type="file" accept="image/*" style={{ display: "none" }} onChange={e => {
+                    const file = e.target.files[0]
+                    if (file) {
+                      const reader = new FileReader()
+                      reader.onloadend = () => updateEducationImage(reader.result)
+                      reader.readAsDataURL(file)
+                    }
+                  }} />
+                </label>
+              )}
+            </div>
           </div>
         </div>
       </Container>
