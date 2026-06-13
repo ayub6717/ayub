@@ -6,9 +6,12 @@ import {
 } from "react-icons/fa"
 
 import { Container } from "./common"
-import { portfolios } from "../data"
 import "./portfolio.css"
 import PortfolioAction from "./PortfolioAction"
+import { useAuth } from "../context/AuthContext"
+import { useData } from "../context/DataContext"
+import { ProjectFormModal } from "../admin/FormModals"
+import { resolveImage } from "../data/imageMap"
 
 const CodecanyonIcon = () => (
   <svg
@@ -25,10 +28,17 @@ const CodecanyonIcon = () => (
 )
 
 const Portfolio = () => {
-  const portfoliosName = Object.keys(portfolios)
-  const [selectedCategory, setSelectedCategory] = useState(portfoliosName[0])
+  const { isLoggedIn } = useAuth()
+  const { data, addProject, updateProject, deleteProject } = useData()
 
-  const currentList = portfolios[selectedCategory].filter(Boolean)
+  const portfolios = data?.portfolios || {}
+  const portfoliosName = Object.keys(portfolios)
+  const [selectedCategory, setSelectedCategory] = useState(portfoliosName[0] || "Web")
+
+  const [editingProject, setEditingProject] = useState(null)
+  const [showAddProject, setShowAddProject] = useState(false)
+
+  const currentList = (portfolios[selectedCategory] || []).filter(Boolean)
 
   const handleCategoryChange = (name) => {
     setSelectedCategory(name)
@@ -36,6 +46,12 @@ const Portfolio = () => {
 
   const handleCardClick = (name) => {
     navigate(`/project?name=${encodeURIComponent(name)}`)
+  }
+
+  const handleDeleteProject = (id, name) => {
+    if (window.confirm(`Are you sure you want to delete the project "${name}"?`)) {
+      deleteProject(selectedCategory, id)
+    }
   }
 
   return (
@@ -59,90 +75,143 @@ const Portfolio = () => {
             ))}
           </ul>
 
+          {isLoggedIn && (
+            <button className="admin-add-floating" onClick={() => setShowAddProject(true)} style={{ marginBottom: "20px" }}>
+              ➕ Add Project to {selectedCategory}
+            </button>
+          )}
+
           {/* ── Card Grid ── */}
           <div className="portfolio-grid">
-            {currentList.map((portfolio, index) => (
-              <div
-                key={index}
-                className="pf-card"
-                onClick={() => handleCardClick(portfolio.name)}
-              >
-                <div className="pf-card-img">
-                  {portfolio.image ? (
-                    <img alt={portfolio.name} src={portfolio.image} />
-                  ) : (
-                    <div
-                      style={{
-                        height: "100%",
-                        display: "flex",
-                        alignItems: "center",
-                        justifyContent: "center",
-                        fontSize: 32,
-                        color: "#ccc",
-                        background: "#f5f5f5",
-                      }}
-                    >
-                      📁
+            {currentList.map((portfolio, index) => {
+              const imageSrc = resolveImage(portfolio.image)
+              return (
+                <div
+                  key={portfolio.id || index}
+                  className="pf-card"
+                  onClick={() => handleCardClick(portfolio.name)}
+                >
+                  <div className="pf-card-img">
+                    {imageSrc ? (
+                      <img alt={portfolio.name} src={imageSrc} />
+                    ) : (
+                      <div
+                        style={{
+                          height: "100%",
+                          display: "flex",
+                          alignItems: "center",
+                          justifyContent: "center",
+                          fontSize: 32,
+                          color: "#ccc",
+                          background: "#f5f5f5",
+                        }}
+                      >
+                        📁
+                      </div>
+                    )}
+                    {/* View Details Overlay */}
+                    <div className="pf-card-overlay">
+                      <span className="pf-overlay-btn">
+                        <FaExternalLinkAlt size={11} /> View Details
+                      </span>
+                    </div>
+                  </div>
+
+                  <div className="pf-card-body">
+                    <span className="pf-card-category">{selectedCategory} Project</span>
+                    <h4 className="pf-card-name">{portfolio.name}</h4>
+                    <p className="pf-card-desc">{portfolio.description}</p>
+
+                    <div className="pf-card-links" onClick={(e) => e.stopPropagation()}>
+                      {portfolio.demo && (
+                        <a
+                          href={portfolio.demo}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="pf-icon-link"
+                          title="Live Demo"
+                        >
+                          <FaExternalLinkAlt />
+                        </a>
+                      )}
+                      {portfolio.demo2 && (
+                        <a
+                          href={portfolio.demo2}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="pf-icon-link"
+                          title="Codecanyon"
+                        >
+                          <CodecanyonIcon />
+                        </a>
+                      )}
+                      {portfolio.source && (
+                        <a
+                          href={portfolio.source}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="pf-icon-link"
+                          title="Source Code"
+                        >
+                          <FaGithub />
+                        </a>
+                      )}
+                    </div>
+                  </div>
+
+                  {isLoggedIn && (
+                    <div className="pf-card-admin" onClick={e => e.stopPropagation()}>
+                      <button className="admin-edit-btn sm" onClick={() => setEditingProject(portfolio)}>
+                        ✏️ Edit
+                      </button>
+                      <button className="admin-edit-btn sm red" onClick={() => handleDeleteProject(portfolio.id, portfolio.name)}>
+                        🗑️ Delete
+                      </button>
                     </div>
                   )}
-                  {/* View Details Overlay */}
-                  <div className="pf-card-overlay">
-                    <span className="pf-overlay-btn">
-                      <FaExternalLinkAlt size={11} /> View Details
-                    </span>
-                  </div>
                 </div>
-
-                <div className="pf-card-body">
-                  <span className="pf-card-category">{selectedCategory} Project</span>
-                  <h4 className="pf-card-name">{portfolio.name}</h4>
-                  <p className="pf-card-desc">{portfolio.description}</p>
-
-                  <div className="pf-card-links" onClick={(e) => e.stopPropagation()}>
-                    {portfolio.demo && (
-                      <a
-                        href={portfolio.demo}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="pf-icon-link"
-                        title="Live Demo"
-                      >
-                        <FaExternalLinkAlt />
-                      </a>
-                    )}
-                    {portfolio.demo2 && (
-                      <a
-                        href={portfolio.demo2}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="pf-icon-link"
-                        title="Codecanyon"
-                      >
-                        <CodecanyonIcon />
-                      </a>
-                    )}
-                    {portfolio.source && (
-                      <a
-                        href={portfolio.source}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="pf-icon-link"
-                        title="Source Code"
-                      >
-                        <FaGithub />
-                      </a>
-                    )}
-                  </div>
-                </div>
-              </div>
-            ))}
+              )
+            })}
           </div>
 
           <PortfolioAction />
         </div>
       </Container>
+
+      {/* Add Project Modal */}
+      {showAddProject && (
+        <ProjectFormModal
+          categories={portfoliosName}
+          onSave={(newProj) => {
+            // newProj already contains the category selected in modal
+            addProject(newProj.category, newProj)
+            setShowAddProject(false)
+          }}
+          onClose={() => setShowAddProject(false)}
+        />
+      )}
+
+      {/* Edit Project Modal */}
+      {editingProject && (
+        <ProjectFormModal
+          initial={editingProject}
+          categories={portfoliosName}
+          onSave={(updatedProj) => {
+            // If the category changed, delete from old and add to new
+            if (updatedProj.category !== selectedCategory) {
+              deleteProject(selectedCategory, editingProject.id)
+              addProject(updatedProj.category, updatedProj)
+            } else {
+              updateProject(selectedCategory, editingProject.id, updatedProj)
+            }
+            setEditingProject(null)
+          }}
+          onClose={() => setEditingProject(null)}
+        />
+      )}
     </div>
   )
 }
 
 export { Portfolio }
+

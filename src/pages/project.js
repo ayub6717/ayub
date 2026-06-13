@@ -14,10 +14,14 @@ import {
   FaBuilding,
   FaFolderOpen,
 } from "react-icons/fa"
-import { portfolios } from "../data"
 import { SEO, Layout } from "../components/common"
 import Navbar from "../components/Navbar"
 import "../components/project-page.css"
+import { useAuth } from "../context/AuthContext"
+import { useData } from "../context/DataContext"
+import { resolveImage } from "../data/imageMap"
+import AdminBar from "../admin/AdminBar"
+
 
 /* ─── Copy Button Component ───────────────────────────────────── */
 const CopyButton = ({ text }) => {
@@ -70,7 +74,7 @@ function getProjectSections(project, category) {
     "Cross-browser compatible — Chrome, Firefox, Safari, Edge",
   ]
 
-  const techStack = (() => {
+  const techStack = project.techStack || (() => {
     const map = {
       "React":      { icon: "⚛️", type: "UI Library" },
       "Redux":      { icon: "🔄", type: "State Management" },
@@ -101,7 +105,7 @@ function getProjectSections(project, category) {
     return found
   })()
 
-  const challenges = [
+  const challenges = project.challenges || [
     {
       problem: "Complex state management across deeply nested component trees caused prop-drilling issues and unexpected re-renders.",
       solution: "Introduced Redux Toolkit with selectors to centralize data flow and memoize expensive computations efficiently.",
@@ -116,7 +120,7 @@ function getProjectSections(project, category) {
     },
   ]
 
-  const archCards = [
+  const archCards = project.archCards || [
     {
       title: "Frontend Layer",
       body: `Built with ${techStack[0]?.name || "React"}, organized into feature-based modules. Each feature owns its own components, hooks, and styles for clean separation of concerns.`,
@@ -131,7 +135,7 @@ function getProjectSections(project, category) {
     },
   ]
 
-  const roleCards = [
+  const roleCards = project.roleCards || [
     {
       title: "UI Development",
       body: `Led the complete frontend implementation of ${name} from scratch — component design, layout system, and pixel-perfect conversion from Figma mockups.`,
@@ -153,11 +157,11 @@ function getProjectSections(project, category) {
     { value: "5★", label: "Client Rating" },
   ]
 
-  const lessons = [
-    { text: <><strong>Plan component structure early.</strong> Spending extra time on architecture upfront saved weeks of refactoring down the line.</> },
-    { text: <><strong>Accessibility matters from day one.</strong> Retrofitting ARIA roles and keyboard navigation after the fact is far more expensive than building it in.</> },
-    { text: <><strong>Design systems pay dividends.</strong> Building reusable tokens and components early made every feature sprint faster and more consistent.</> },
-    { text: <><strong>Test in real browsers.</strong> Emulators and automated tests don't catch everything — real device testing revealed UI bugs that would have reached production.</> },
+  const lessons = project.lessons || [
+    { text: "Plan component structure early. Spending extra time on architecture upfront saved weeks of refactoring down the line." },
+    { text: "Accessibility matters from day one. Retrofitting ARIA roles and keyboard navigation after the fact is far more expensive than building it in." },
+    { text: "Design systems pay dividends. Building reusable tokens and components early made every feature sprint faster and more consistent." },
+    { text: "Test in real browsers. Emulators and automated tests don't catch everything — real device testing revealed UI bugs that would have reached production." },
   ]
 
   return { defaultFeatures, techStack, challenges, archCards, roleCards, impact, lessons }
@@ -165,13 +169,17 @@ function getProjectSections(project, category) {
 
 /* ─── Main Page Component ─────────────────────────────────────── */
 export default function ProjectPage({ location }) {
+  const { isLoggedIn } = useAuth()
+  const { data } = useData()
   const [project, setProject] = useState(null)
   const [category, setCategory] = useState("")
   const [loading, setLoading] = useState(true)
   const [activeImgIndex, setActiveImgIndex] = useState(0)
 
+  const portfolios = data?.portfolios || {}
+
   useEffect(() => {
-    if (typeof window !== "undefined") {
+    if (typeof window !== "undefined" && data) {
       const params = new URLSearchParams(window.location.search)
       const nameParam = params.get("name")
       if (nameParam) {
@@ -185,10 +193,10 @@ export default function ProjectPage({ location }) {
       }
       setLoading(false)
     }
-  }, [location])
+  }, [location, data, portfolios])
 
   if (loading) return (
-    <Layout><Navbar />
+    <Layout noFooter><Navbar />
       <div style={{ minHeight: "60vh", display: "flex", alignItems: "center", justifyContent: "center" }}>
         <h3>Loading…</h3>
       </div>
@@ -196,7 +204,7 @@ export default function ProjectPage({ location }) {
   )
 
   if (!project) return (
-    <Layout><Navbar />
+    <Layout noFooter><Navbar />
       <SEO title="Not Found" />
       <div style={{ minHeight: "60vh", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", gap: 20 }}>
         <h2>Project Not Found</h2>
@@ -207,7 +215,10 @@ export default function ProjectPage({ location }) {
 
   const { defaultFeatures, techStack, challenges, archCards, roleCards, impact, lessons } = getProjectSections(project, category)
   const hasCredentials = project.adminLog || project.userLog || project.pass
-  const projectImages = project.images?.length > 0 ? project.images : [project.image]
+  
+  // Resolve image list using resolveImage helper
+  const rawImages = project.images?.length > 0 ? project.images : [project.image]
+  const projectImages = rawImages.map(img => resolveImage(img)).filter(Boolean)
 
   // Construct exactly 4 thumbnails
   const thumbs = []
@@ -229,15 +240,18 @@ export default function ProjectPage({ location }) {
 
   // Metadata
   const metaItems = [
-    { label: "Role", value: "Front-End Developer", icon: <FaBriefcase /> },
+    { label: "Role", value: project.role || "Front-End Developer", icon: <FaBriefcase /> },
     { label: "Category", value: `${category} Project`, icon: <FaFolderOpen /> },
-    { label: "Timeline", value: "2–4 Weeks", icon: <FaCalendarAlt /> },
-    { label: "Client", value: "Techvill", icon: <FaBuilding /> },
+    { label: "Timeline", value: project.timeline || "2–4 Weeks", icon: <FaCalendarAlt /> },
+    { label: "Client", value: project.client || "Techvill", icon: <FaBuilding /> },
   ]
 
+
   return (
-    <Layout>
+    <Layout noFooter>
+      {isLoggedIn && <AdminBar />}
       <Navbar />
+
       <SEO title={`${project.name} | Project Details`} />
       <div className="project-detail-wrapper">
 
@@ -505,6 +519,14 @@ export default function ProjectPage({ location }) {
           </div>
         </div>
       </div>
+      {!isLoggedIn && (
+        <div className="admin-login-hint">
+          <Link to="/admin" className="admin-login-trigger" title="Admin Login">
+            🔐
+          </Link>
+        </div>
+      )}
     </Layout>
   )
 }
+

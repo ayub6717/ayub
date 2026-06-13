@@ -1,8 +1,12 @@
-/**
- * Implement Gatsby's Browser APIs in this file.
- *
- * See: https://www.gatsbyjs.org/docs/browser-apis/
- */
+import React from "react"
+import { AuthProvider } from "./src/context/AuthContext"
+import { DataProvider } from "./src/context/DataContext"
+import "./src/styles/global.css"
 
-// You can delete this file if you're not using it
-import './src/styles/global.css'
+export const wrapRootElement = ({ element }) => (
+  <AuthProvider>
+    <DataProvider>
+      {element}
+    </DataProvider>
+  </AuthProvider>
+)

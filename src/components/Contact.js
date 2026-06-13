@@ -1,20 +1,38 @@
-import React from "react"
-
+import React, { useState } from "react"
 import { Container, Title, Button } from "./common"
-
 import "./contact.css"
+import { useAuth } from "../context/AuthContext"
+import { useData } from "../context/DataContext"
+import { ContactFormModal } from "../admin/FormModals"
 
 const Contact = () => {
+  const { isLoggedIn } = useAuth()
+  const { data, updateContact } = useData()
+  const [showEdit, setShowEdit] = useState(false)
+
+  const contact = data?.contact || {
+    text: "I am interested in working with any company that thinks my skill will be helpful for them. If you are looking for someone like me, please let me know. Or you can just 'say hi' to me.",
+    email: "ayub.devs@gmail.com",
+    skype: "https://join.skype.com/invite/YMlpuNDTBf2g",
+    twitter: "@ayub6717",
+    address: "Nikunja-2, Khilkhet, Dhaka, Bangladesh"
+  }
+
   return (
     <div id="contact" className="contact-area">
       <Container>
         <Title side="right" title="Contact" />
+        {isLoggedIn && (
+          <div className="admin-section-toolbar" style={{ justifyContent: "flex-end", marginBottom: "20px" }}>
+            <button className="admin-edit-btn" onClick={() => setShowEdit(true)}>
+              ✏️ Edit Contact Section
+            </button>
+          </div>
+        )}
         <div className="contact">
           <div className="contact-status">
             <p>
-              I am interested in working with any company that thinks my skill
-              will be helpful for them. If you are looking for someone like me,
-              please let me know. Or you can just 'say hi' to me.
+              {contact.text}
             </p>
             <div>
               <Button
@@ -22,7 +40,7 @@ const Contact = () => {
                 mt="25px"
                 bgColor="#a16c8d"
                 color="#fff"
-                link="mailto:ayub.devs@gmail.com"
+                link={`mailto:${contact.email}`}
                 borderColor="#a16c8d"
               />
             </div>
@@ -32,31 +50,43 @@ const Contact = () => {
               <li>
                 <h5>Email</h5>
                 <p>
-                   ayub.devs@gmail.com <span>(Recommended)</span>
+                  {contact.email} <span>(Recommended)</span>
                 </p>
               </li>
               <li>
                 <h5>Skype</h5>
                 <p>
-                https://join.skype.com/invite/YMlpuNDTBf2g <span>(Always Available)</span>
+                  {contact.skype} <span>(Always Available)</span>
                 </p>
               </li>
               <li>
                 <h5>Social</h5>
                 <p>
-                  Twitter - @ayub6717 <span>(Slow response)</span>
+                  Twitter - {contact.twitter} <span>(Slow response)</span>
                 </p>
               </li>
               <li>
                 <h5>Address</h5>
-                <p>Nikunja-2, Khilkhet, Dhaka, Bangladesh</p>
+                <p>{contact.address}</p>
               </li>
             </ul>
           </div>
         </div>
       </Container>
+
+      {showEdit && (
+        <ContactFormModal
+          initial={contact}
+          onSave={(updated) => {
+            updateContact(updated)
+            setShowEdit(false)
+          }}
+          onClose={() => setShowEdit(false)}
+        />
+      )}
     </div>
   )
 }
 
 export { Contact }
+

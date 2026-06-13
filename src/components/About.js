@@ -1,38 +1,41 @@
-import React from "react"
-
+import React, { useState } from "react"
 import { Container, Title, Button } from "./common"
-
 import profile from "../assets/image/profile.jpg"
-
 import "./about.css"
+import { useAuth } from "../context/AuthContext"
+import { useData } from "../context/DataContext"
+import { AboutFormModal } from "../admin/FormModals"
+import { resolveImage } from "../data/imageMap"
 
 const About = () => {
+  const { isLoggedIn } = useAuth()
+  const { data, updateAbout } = useData()
+  const [showEdit, setShowEdit] = useState(false)
+
+  const about = data?.about || {}
+
   return (
     <div id="about" className="about-area">
       <Container>
         <Title side="right" title="About Me" />
+        {isLoggedIn && (
+          <div className="admin-section-toolbar" style={{ justifyContent: "flex-end" }}>
+            <button className="admin-edit-btn" onClick={() => setShowEdit(true)}>
+              ✏️ Edit About Section
+            </button>
+          </div>
+        )}
         <div data-aos="slide-right" className="about">
           <div className="about-details">
-            <p>
-              Greetings! I'm Md. Ayub, a proficient Web developer
-              with a passion for crafting dynamic websites and innovative web
-              applications. My expertise revolves around the realm of
-              JavaScript. In my capacity as a front-end team leader, I actively
-              contribute technical design of new systems, provide
-              innovative solutions for intricate code challenges, and ensure the
-              smooth progression of workflow. My proficiency spans across
-              diverse domains such as, I have a deep understanding of modern web
-              development practices, including component-based architecture,
-              state management with tools like Redux, and integrating APIs to
-              deliver seamless user experiences. I am readily open to engaging
-              with captivating job opportunities that align with my fervor and
-              skill set.
+            <p style={{ whiteSpace: "pre-line" }}>
+              {about.bio}
             </p>
             <div className="about-action">
               <a
                 className="bg-[#a16c8d] text-white px-4 py-3 rounded"
-                href="https://drive.google.com/file/d/1eKdPP2tcZ-yxeT0aPRvGZ-Qd8y8FVshU/view?usp=sharing"
+                href={about.resumeUrl}
                 target="_blank"
+                rel="noopener noreferrer"
               >
                 {" "}
                 Get Resume
@@ -42,13 +45,25 @@ const About = () => {
           </div>
           <div className="about-image">
             <div className="image">
-              <img alt="profile" src={profile} />
+              <img alt="profile" src={resolveImage(about.image) || profile} />
             </div>
           </div>
         </div>
       </Container>
+
+      {showEdit && (
+        <AboutFormModal
+          initial={about}
+          onSave={(updated) => {
+            updateAbout(updated)
+            setShowEdit(false)
+          }}
+          onClose={() => setShowEdit(false)}
+        />
+      )}
     </div>
   )
 }
 
 export { About }
+
