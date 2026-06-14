@@ -117,6 +117,7 @@ const Education = () => {
       {/* Edit Modal */}
       {editingEdu && (
         <EducationFormModal
+          key={editingEdu.id}
           initial={editingEdu}
           onSave={(updatedEdu) => {
             updateEducation(editingEdu.id, updatedEdu)

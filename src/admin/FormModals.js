@@ -27,9 +27,19 @@ export function ExperienceFormModal({ initial = {}, onSave, onClose }) {
     address: initial.address || "",
     period: initial.period || "",
     description: initial.description || "",
+    responsibilitiesText: (initial.responsibilities || []).join("\n"),
   })
 
   const set = (key, val) => setForm(f => ({ ...f, [key]: val }))
+
+  const handleSave = () => {
+    const { responsibilitiesText, ...rest } = form
+    const responsibilities = responsibilitiesText
+      .split("\n")
+      .map(line => line.trim())
+      .filter(Boolean)
+    onSave({ ...rest, responsibilities })
+  }
 
   return (
     <AdminModal title={initial.id ? "Edit Experience" : "Add Experience"} onClose={onClose} size="lg">
@@ -51,11 +61,15 @@ export function ExperienceFormModal({ initial = {}, onSave, onClose }) {
       </div>
       <div className="admin-form-group">
         <label className="admin-form-label">Description</label>
-        <textarea className="admin-form-textarea" rows={7} value={form.description} onChange={e => set("description", e.target.value)} placeholder="Describe your role and responsibilities..." />
+        <textarea className="admin-form-textarea" rows={4} value={form.description} onChange={e => set("description", e.target.value)} placeholder="Describe your role and responsibilities..." />
+      </div>
+      <div className="admin-form-group">
+        <label className="admin-form-label">Responsibilities (one item per line)</label>
+        <textarea className="admin-form-textarea" rows={6} value={form.responsibilitiesText} onChange={e => set("responsibilitiesText", e.target.value)} placeholder="Conduct front-end development...&#10;Utilizing Redux..." />
       </div>
       <div className="admin-form-actions">
         <button className="admin-form-cancel" onClick={onClose}>Cancel</button>
-        <button className="admin-form-save" onClick={() => onSave(form)}>Save</button>
+        <button className="admin-form-save" onClick={handleSave}>Save</button>
       </div>
     </AdminModal>
   )
@@ -174,7 +188,137 @@ const TECH_OPTIONS = [
 // ─── Project Form ─────────────────────────────────────────────────────────────
 export function ProjectFormModal({ initial = {}, categories, onSave, onClose }) {
   const [activeTab, setActiveTab] = useState("basic")
-  
+
+  // Fallback calculations matching project.js
+  const fallbackFeatures = initial.features || [
+    "Fully responsive layout across all devices and screen sizes",
+    "Modular component architecture for high maintainability",
+    "Optimized asset loading and lazy image rendering",
+    "Role-based access control for Admin and User panels",
+    "Real-time data sync with API integration",
+    "Cross-browser compatible — Chrome, Firefox, Safari, Edge",
+  ]
+
+  const fallbackTechStack = (() => {
+    if (initial.techStack && initial.techStack.length > 0) {
+      return initial.techStack
+    }
+    const map = {
+      "React":      { icon: "⚛️", type: "UI Library" },
+      "Redux":      { icon: "🔄", type: "State Management" },
+      "Tailwind CSS": { icon: "🎨", type: "Styling" },
+      "Bootstrap":  { icon: "🅱️", type: "CSS Framework" },
+      "JavaScript": { icon: "🟡", type: "Language" },
+      "PHP":        { icon: "🐘", type: "Backend" },
+      "jQuery":     { icon: "💫", type: "DOM Library" },
+      "CSS":        { icon: "🎨", type: "Styling" },
+      "HTML":       { icon: "🌐", type: "Markup" },
+      "Node.js":    { icon: "🟢", type: "Runtime" },
+      "React Native": { icon: "📱", type: "Mobile Framework" },
+    }
+    const found = []
+    for (const [tech, meta] of Object.entries(map)) {
+      if (initial.description && initial.description.toLowerCase().includes(tech.toLowerCase())) {
+        found.push({ name: tech, ...meta })
+      }
+    }
+    if (found.length === 0) {
+      return [
+        { name: "React", icon: "⚛️", type: "UI Library" },
+        { name: "JavaScript", icon: "🟡", type: "Language" },
+        { name: "CSS Modules", icon: "🎨", type: "Styling" },
+        { name: "REST API", icon: "🔗", type: "Integration" },
+      ]
+    }
+    return found
+  })()
+
+  const fallbackLessons = (() => {
+    if (initial.lessons && initial.lessons.length > 0) {
+      return initial.lessons.map(l => typeof l === "string" ? l : (l.text || "")).filter(Boolean)
+    }
+    return [
+      "Plan component structure early. Spending extra time on architecture upfront saved weeks of refactoring down the line.",
+      "Accessibility matters from day one. Retrofitting ARIA roles and keyboard navigation after the fact is far more expensive than building it in.",
+      "Design systems pay dividends. Building reusable tokens and components early made every feature sprint faster and more consistent.",
+      "Test in real browsers. Emulators and automated tests don't catch everything — real device testing revealed UI bugs that would have reached production.",
+    ]
+  })()
+
+  const fallbackChallenges = (() => {
+    if (initial.challenges && initial.challenges.length > 0) {
+      return [
+        { problem: initial.challenges[0]?.problem || "", solution: initial.challenges[0]?.solution || "" },
+        { problem: initial.challenges[1]?.problem || "", solution: initial.challenges[1]?.solution || "" },
+        { problem: initial.challenges[2]?.problem || "", solution: initial.challenges[2]?.solution || "" },
+      ]
+    }
+    return [
+      {
+        problem: "Complex state management across deeply nested component trees caused prop-drilling issues and unexpected re-renders.",
+        solution: "Introduced Redux Toolkit with selectors to centralize data flow and memoize expensive computations efficiently.",
+      },
+      {
+        problem: "Performance degraded on large datasets with hundreds of items rendered simultaneously in the product list views.",
+        solution: "Implemented virtualized list rendering and pagination to limit visible DOM nodes and keep scroll buttery-smooth.",
+      },
+      {
+        problem: "Consistent cross-browser UI inconsistencies, especially in older Firefox and Edge versions.",
+        solution: "Adopted a CSS reset layer, tested on BrowserStack, and added targeted browser-specific polyfills where needed.",
+      },
+    ]
+  })()
+
+  const fallbackRoleCards = (() => {
+    if (initial.roleCards && initial.roleCards.length > 0) {
+      return [
+        { title: initial.roleCards[0]?.title || "", body: initial.roleCards[0]?.body || "" },
+        { title: initial.roleCards[1]?.title || "", body: initial.roleCards[1]?.body || "" },
+        { title: initial.roleCards[2]?.title || "", body: initial.roleCards[2]?.body || "" },
+      ]
+    }
+    const name = initial.name || "the project"
+    return [
+      {
+        title: "UI Development",
+        body: `Led the complete frontend implementation of ${name} from scratch — component design, layout system, and pixel-perfect conversion from Figma mockups.`,
+      },
+      {
+        title: "Integration",
+        body: "Integrated all backend APIs for authentication, data fetching, and CRUD operations. Wrote reusable API hooks consumed across the entire application.",
+      },
+      {
+        title: "Performance",
+        body: "Profiled the app using React DevTools and Chrome Lighthouse. Reduced initial load time by 40% through code splitting and lazy loading.",
+      },
+    ]
+  })()
+
+  const fallbackArchCards = (() => {
+    if (initial.archCards && initial.archCards.length > 0) {
+      return [
+        { title: initial.archCards[0]?.title || "", body: initial.archCards[0]?.body || "" },
+        { title: initial.archCards[1]?.title || "", body: initial.archCards[1]?.body || "" },
+        { title: initial.archCards[2]?.title || "", body: initial.archCards[2]?.body || "" },
+      ]
+    }
+    const firstTech = fallbackTechStack[0]?.name || "React"
+    return [
+      {
+        title: "Frontend Layer",
+        body: `Built with ${firstTech}, organized into feature-based modules. Each feature owns its own components, hooks, and styles for clean separation of concerns.`,
+      },
+      {
+        title: "State Management",
+        body: "Global state handled via Redux with a normalized store shape. Server state cached using custom hooks for efficient API reuse without redundant calls.",
+      },
+      {
+        title: "Backend Integration",
+        body: "RESTful API consumption through a centralized Axios instance with request interceptors for auth headers, error handling, and loading state automation.",
+      },
+    ]
+  })()
+
   const [form, setForm] = useState({
     name: initial.name || "",
     category: initial.category || (categories?.[0] || "Web"),
@@ -192,15 +336,11 @@ export function ProjectFormModal({ initial = {}, categories, onSave, onClose }) 
     timeline: initial.timeline || "",
     
     // Dynamic detail fields
-    featuresText: (initial.features || []).join("\n"),
+    featuresText: fallbackFeatures.join("\n"),
   })
 
   // Tech stack as a list of { icon, name, type } objects
-  const [techStack, setTechStack] = useState(
-    (initial.techStack || []).length > 0
-      ? initial.techStack
-      : []
-  )
+  const [techStack, setTechStack] = useState(fallbackTechStack)
   const [techDropdownVal, setTechDropdownVal] = useState("")
   const [customTech, setCustomTech] = useState({ icon: "⚙️", name: "", type: "" })
   const [showCustomTech, setShowCustomTech] = useState(false)
@@ -226,9 +366,7 @@ export function ProjectFormModal({ initial = {}, categories, onSave, onClose }) 
   const removeTech = (name) => setTechStack(prev => prev.filter(t => t.name !== name))
 
   // Lessons as a list of strings
-  const [lessons, setLessons] = useState(
-    (initial.lessons || []).map(l => typeof l === "string" ? l : (l.text || "")).filter(Boolean)
-  )
+  const [lessons, setLessons] = useState(fallbackLessons)
   const [lessonInput, setLessonInput] = useState("")
   const addLesson = () => {
     if (lessonInput.trim()) {
@@ -238,23 +376,11 @@ export function ProjectFormModal({ initial = {}, categories, onSave, onClose }) 
   }
   const removeLesson = (i) => setLessons(prev => prev.filter((_, idx) => idx !== i))
 
-  const [challenges, setChallenges] = useState([
-    { problem: initial.challenges?.[0]?.problem || "", solution: initial.challenges?.[0]?.solution || "" },
-    { problem: initial.challenges?.[1]?.problem || "", solution: initial.challenges?.[1]?.solution || "" },
-    { problem: initial.challenges?.[2]?.problem || "", solution: initial.challenges?.[2]?.solution || "" },
-  ])
+  const [challenges, setChallenges] = useState(fallbackChallenges)
 
-  const [roleCards, setRoleCards] = useState([
-    { title: initial.roleCards?.[0]?.title || "", body: initial.roleCards?.[0]?.body || "" },
-    { title: initial.roleCards?.[1]?.title || "", body: initial.roleCards?.[1]?.body || "" },
-    { title: initial.roleCards?.[2]?.title || "", body: initial.roleCards?.[2]?.body || "" },
-  ])
+  const [roleCards, setRoleCards] = useState(fallbackRoleCards)
 
-  const [archCards, setArchCards] = useState([
-    { title: initial.archCards?.[0]?.title || "", body: initial.archCards?.[0]?.body || "" },
-    { title: initial.archCards?.[1]?.title || "", body: initial.archCards?.[1]?.body || "" },
-    { title: initial.archCards?.[2]?.title || "", body: initial.archCards?.[2]?.body || "" },
-  ])
+  const [archCards, setArchCards] = useState(fallbackArchCards)
 
   const set = (key, val) => setForm(f => ({ ...f, [key]: val }))
 

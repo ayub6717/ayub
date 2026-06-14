@@ -53,7 +53,7 @@ const Contact = () => {
                   {contact.email} <span>(Recommended)</span>
                 </p>
               </li>
-              <li>
+              {/* <li>
                 <h5>Skype</h5>
                 <p>
                   {contact.skype} <span>(Always Available)</span>
@@ -64,7 +64,7 @@ const Contact = () => {
                 <p>
                   Twitter - {contact.twitter} <span>(Slow response)</span>
                 </p>
-              </li>
+              </li> */}
               <li>
                 <h5>Address</h5>
                 <p>{contact.address}</p>

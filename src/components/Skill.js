@@ -96,6 +96,7 @@ const Skill = () => {
       {/* Edit Skill Modal */}
       {editingSkill && (
         <SkillFormModal
+          key={`${editingSkill.category}-${editingSkill.name}`}
           initial={editingSkill}
           onSave={(updatedSkill) => {
             // Since we use name as key, if name changed we might delete and add, or update in-place.

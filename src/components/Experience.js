@@ -56,6 +56,20 @@ const Experience = () => {
               <p className="mt-4 text-[17px]" style={{ whiteSpace: "pre-line" }}>
                 {exp.description}
               </p>
+
+              {exp.responsibilities && exp.responsibilities.length > 0 && (
+                <div className="mt-6">
+                  <p className="text-[17px] font-medium mb-3">My tasks include:</p>
+                  <ul className="list-none pl-0 text-[17px]">
+                    {exp.responsibilities.map((resp, index) => (
+                      <li key={index} className="mt-2 flex items-start">
+                        <span className="mr-2" style={{ flexShrink: 0 }}>-</span>
+                        <span>{resp}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              )}
             </div>
           ))}
         </div>
@@ -75,6 +89,7 @@ const Experience = () => {
       {/* Edit Modal */}
       {editingExp && (
         <ExperienceFormModal
+          key={editingExp.id}
           initial={editingExp}
           onSave={(updatedExp) => {
             updateExperience(editingExp.id, updatedExp)

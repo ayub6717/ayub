@@ -194,6 +194,7 @@ const Portfolio = () => {
       {/* Edit Project Modal */}
       {editingProject && (
         <ProjectFormModal
+          key={editingProject.id}
           initial={editingProject}
           categories={portfoliosName}
           onSave={(updatedProj) => {
