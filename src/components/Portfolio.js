@@ -29,7 +29,7 @@ const CodecanyonIcon = () => (
 
 const Portfolio = () => {
   const { isLoggedIn } = useAuth()
-  const { data, addProject, updateProject, deleteProject } = useData()
+  const { data, addProject, updateProject, moveProject, deleteProject } = useData()
 
   const portfolios = data?.portfolios || {}
   const portfoliosName = Object.keys(portfolios)
@@ -198,10 +198,9 @@ const Portfolio = () => {
           initial={editingProject}
           categories={portfoliosName}
           onSave={(updatedProj) => {
-            // If the category changed, delete from old and add to new
+            // If the category changed, atomically move from old to new category
             if (updatedProj.category !== selectedCategory) {
-              deleteProject(selectedCategory, editingProject.id)
-              addProject(updatedProj.category, updatedProj)
+              moveProject(selectedCategory, updatedProj.category, editingProject.id, updatedProj)
             } else {
               updateProject(selectedCategory, editingProject.id, updatedProj)
             }

@@ -112,6 +112,20 @@ export function DataProvider({ children }) {
     const catProjects = data.portfolios[category].map(p => p.id === id ? { ...p, ...updates } : p)
     persist({ ...data, portfolios: { ...data.portfolios, [category]: catProjects } })
   }
+  const moveProject = (fromCategory, toCategory, id, updatedProject) => {
+    // Remove from old category
+    const fromList = (data.portfolios[fromCategory] || []).filter(p => p.id !== id)
+    // Add to new category (at beginning), keep same id
+    const toList = [{ ...updatedProject, id }, ...(data.portfolios[toCategory] || [])]
+    persist({
+      ...data,
+      portfolios: {
+        ...data.portfolios,
+        [fromCategory]: fromList,
+        [toCategory]: toList,
+      },
+    })
+  }
   const deleteProject = (category, id) => {
     const catProjects = data.portfolios[category].filter(p => p.id !== id)
     persist({ ...data, portfolios: { ...data.portfolios, [category]: catProjects } })
@@ -167,7 +181,7 @@ export function DataProvider({ children }) {
       // Skills
       addSkill, updateSkill, deleteSkill, addSkillCategory,
       // Portfolios
-      addProject, updateProject, deleteProject,
+      addProject, updateProject, moveProject, deleteProject,
       // Languages
       updateLanguage, addLanguage, deleteLanguage,
       // Contact
