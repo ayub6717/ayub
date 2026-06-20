@@ -347,18 +347,20 @@ export default function ProjectPage({ location }) {
           </div>
 
           {/* Right: 2×2 Thumbnail Grid — equal height as left */}
-          <div className="project-thumbnails-grid">
-            {thumbs.map((thumb, idx) => (
-              <button
-                key={idx}
-                className={`project-thumbnail-item ${activeImgIndex === thumb.index ? "active" : ""}`}
-                onClick={() => setActiveImgIndex(thumb.index)}
-                aria-label={`View slide ${thumb.index + 1}`}
-              >
-                <img src={thumb.src} alt={`${project.name} view ${idx + 1}`} />
-              </button>
-            ))}
-          </div>
+          {!project.hideThumbs && (
+            <div className="project-thumbnails-grid">
+              {thumbs.map((thumb, idx) => (
+                <button
+                  key={idx}
+                  className={`project-thumbnail-item ${activeImgIndex === thumb.index ? "active" : ""}`}
+                  onClick={() => setActiveImgIndex(thumb.index)}
+                  aria-label={`View slide ${thumb.index + 1}`}
+                >
+                  <img src={thumb.src} alt={`${project.name} view ${idx + 1}`} />
+                </button>
+              ))}
+            </div>
+          )}
         </div>
 
         {/* ── DESCRIPTION SECTION (full-width) ──────────────────────────── */}

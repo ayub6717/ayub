@@ -334,6 +334,7 @@ export function ProjectFormModal({ initial = {}, categories, onSave, onClose }) 
     role: initial.role || "Front-End Developer",
     client: initial.client || "",
     timeline: initial.timeline || "",
+    hideThumbs: !!initial.hideThumbs,
     
     // Dynamic detail fields
     featuresText: fallbackFeatures.join("\n"),
@@ -684,6 +685,21 @@ export function ProjectFormModal({ initial = {}, categories, onSave, onClose }) 
 
         {activeTab === "images" && (
           <>
+            <div className="admin-form-group" style={{ paddingBottom: "12px", borderBottom: "1px dashed #e2e8f0" }}>
+              <label className="admin-form-label" style={{ display: "flex", alignItems: "center", gap: "8px", cursor: "pointer", fontWeight: 600, color: "#1e293b" }}>
+                <input 
+                  type="checkbox" 
+                  checked={!!form.hideThumbs} 
+                  onChange={e => set("hideThumbs", e.target.checked)} 
+                  style={{ cursor: "pointer" }}
+                />
+                Hide Project Thumbnail Grid
+              </label>
+              <p style={{ fontSize: "11px", color: "#64748b", margin: "4px 0 0" }}>
+                Check this to hide the 2x2 grid of thumbnail images on the project detail page.
+              </p>
+            </div>
+
             <div className="admin-form-group" style={{ paddingBottom: "12px", borderBottom: "1px dashed #e2e8f0" }}>
               <label className="admin-form-label">Main Image</label>
               <div style={{ display: "flex", gap: "12px", alignItems: "center", marginBottom: "8px" }}>
