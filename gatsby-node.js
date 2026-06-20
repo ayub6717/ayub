@@ -3,7 +3,7 @@ const path = require("path")
 const express = require("express")
 
 exports.onCreateDevServer = ({ app }) => {
-  app.use(express.json({ limit: "50mb" }))
+  app.use(express.json({ limit: "200mb" }))
 
   app.post("/api/save-data", (req, res) => {
     try {
