@@ -178,6 +178,41 @@ export default function ProjectPage({ location }) {
 
   const portfolios = data?.portfolios || {}
 
+  const [isLightboxOpen, setIsLightboxOpen] = useState(false)
+
+  // Resolve image list using resolveImage helper
+  const rawImages = project?.images?.length > 0 ? project.images : (project?.image ? [project.image] : [])
+  const projectImages = rawImages.map(img => resolveImage(img)).filter(Boolean)
+
+  const prevImg = () => setActiveImgIndex(i => (projectImages.length ? (i - 1 + projectImages.length) % projectImages.length : 0))
+  const nextImg = () => setActiveImgIndex(i => (projectImages.length ? (i + 1) % projectImages.length : 0))
+
+  useEffect(() => {
+    if (!isLightboxOpen) return
+    const handleKeyDown = (e) => {
+      if (e.key === "Escape") {
+        setIsLightboxOpen(false)
+      } else if (e.key === "ArrowLeft") {
+        prevImg()
+      } else if (e.key === "ArrowRight") {
+        nextImg()
+      }
+    }
+    window.addEventListener("keydown", handleKeyDown)
+    return () => window.removeEventListener("keydown", handleKeyDown)
+  }, [isLightboxOpen, projectImages.length])
+
+  useEffect(() => {
+    if (isLightboxOpen) {
+      document.body.style.overflow = "hidden"
+    } else {
+      document.body.style.overflow = ""
+    }
+    return () => {
+      document.body.style.overflow = ""
+    }
+  }, [isLightboxOpen])
+
   useEffect(() => {
     if (typeof window !== "undefined" && data) {
       const params = new URLSearchParams(window.location.search)
@@ -215,11 +250,6 @@ export default function ProjectPage({ location }) {
 
   const { defaultFeatures, techStack, challenges, archCards, roleCards, impact, lessons } = getProjectSections(project, category)
   const hasCredentials = project.adminLog || project.userLog || project.pass
-  
-  // Resolve image list using resolveImage helper
-  const rawImages = project.images?.length > 0 ? project.images : [project.image]
-  const projectImages = rawImages.map(img => resolveImage(img)).filter(Boolean)
-
   // Construct exactly 4 thumbnails
   const thumbs = []
   if (projectImages.length > 0) {
@@ -231,9 +261,6 @@ export default function ProjectPage({ location }) {
       })
     }
   }
-
-  const prevImg = () => setActiveImgIndex(i => (i - 1 + projectImages.length) % projectImages.length)
-  const nextImg = () => setActiveImgIndex(i => (i + 1) % projectImages.length)
 
   // Parse tech chips from description
   const techChips = techStack.map(t => t.name)
@@ -280,10 +307,23 @@ export default function ProjectPage({ location }) {
                 {project.demo || project.source || "https://example.com"}
               </span>
             </div>
-            <div className="project-browser-content">
+            <div 
+              className="project-browser-content browser-clickable"
+              onClick={() => setIsLightboxOpen(true)}
+              style={{ cursor: "zoom-in", position: "relative" }}
+              title="Click to zoom image"
+            >
               {projectImages[activeImgIndex] && (
                 <img alt={project.name} src={projectImages[activeImgIndex]} />
               )}
+              <div className="browser-zoom-overlay">
+                <svg viewBox="0 0 24 24" width="22" height="22" stroke="currentColor" strokeWidth="2.5" fill="none" strokeLinecap="round" strokeLinejoin="round">
+                  <circle cx="11" cy="11" r="8"></circle>
+                  <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                  <line x1="11" y1="8" x2="11" y2="14"></line>
+                  <line x1="8" y1="11" x2="14" y2="11"></line>
+                </svg>
+              </div>
             </div>
             {projectImages.length > 1 && (
               <div className="project-slider-controls">
@@ -524,6 +564,32 @@ export default function ProjectPage({ location }) {
           <Link to="/admin" className="admin-login-trigger" title="Admin Login">
             🔐
           </Link>
+        </div>
+      )}
+
+      {isLightboxOpen && projectImages[activeImgIndex] && (
+        <div className="project-lightbox" onClick={() => setIsLightboxOpen(false)}>
+          <div className="lightbox-content" onClick={(e) => e.stopPropagation()}>
+            <button className="lightbox-close" onClick={() => setIsLightboxOpen(false)} aria-label="Close Preview">
+              &times;
+            </button>
+            <img src={projectImages[activeImgIndex]} alt={project.name} />
+            {projectImages.length > 1 && (
+              <div className="lightbox-nav">
+                <button className="lightbox-arrow prev" onClick={(e) => { e.stopPropagation(); prevImg(); }} aria-label="Previous">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                    <polyline points="15 18 9 12 15 6" />
+                  </svg>
+                </button>
+                <span className="lightbox-counter">{activeImgIndex + 1} / {projectImages.length}</span>
+                <button className="lightbox-arrow next" onClick={(e) => { e.stopPropagation(); nextImg(); }} aria-label="Next">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                    <polyline points="9 18 15 12 9 6" />
+                  </svg>
+                </button>
+              </div>
+            )}
+          </div>
         </div>
       )}
     </Layout>
