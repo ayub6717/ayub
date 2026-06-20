@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { useState, useEffect } from "react"
 import { navigate } from "gatsby"
 import {
   FaGithub,
@@ -27,13 +27,24 @@ const CodecanyonIcon = () => (
   </svg>
 )
 
-const Portfolio = () => {
+const Portfolio = ({ location }) => {
   const { isLoggedIn } = useAuth()
   const { data, addProject, updateProject, moveProject, deleteProject } = useData()
 
   const portfolios = data?.portfolios || {}
   const portfoliosName = Object.keys(portfolios)
   const [selectedCategory, setSelectedCategory] = useState(portfoliosName[0] || "Web")
+
+  // Read category from URL when coming back from project page
+  useEffect(() => {
+    const search = (location && location.search) ||
+      (typeof window !== "undefined" ? window.location.search : "")
+    const params = new URLSearchParams(search)
+    const catParam = params.get("category")
+    if (catParam && portfoliosName.includes(catParam)) {
+      setSelectedCategory(catParam)
+    }
+  }, [location && location.search])
 
   const [editingProject, setEditingProject] = useState(null)
   const [showAddProject, setShowAddProject] = useState(false)
@@ -45,7 +56,7 @@ const Portfolio = () => {
   }
 
   const handleCardClick = (name) => {
-    navigate(`/project?name=${encodeURIComponent(name)}`)
+    navigate(`/project?name=${encodeURIComponent(name)}&category=${encodeURIComponent(selectedCategory)}`)
   }
 
   const handleDeleteProject = (id, name) => {
@@ -161,7 +172,7 @@ const Portfolio = () => {
 
                   {isLoggedIn && (
                     <div className="pf-card-admin" onClick={e => e.stopPropagation()}>
-                      <button className="admin-edit-btn sm" onClick={() => setEditingProject(portfolio)}>
+                      <button className="admin-edit-btn sm" onClick={() => setEditingProject({ ...portfolio, category: selectedCategory })}>
                         ✏️ Edit
                       </button>
                       <button className="admin-edit-btn sm red" onClick={() => handleDeleteProject(portfolio.id, portfolio.name)}>

@@ -217,11 +217,20 @@ export default function ProjectPage({ location }) {
     if (typeof window !== "undefined" && data) {
       const params = new URLSearchParams(window.location.search)
       const nameParam = params.get("name")
+      const categoryParam = params.get("category")
       if (nameParam) {
         let foundProj = null, foundCat = ""
-        for (const [catName, list] of Object.entries(portfolios)) {
-          const match = list.filter(Boolean).find(p => p.name === nameParam)
-          if (match) { foundProj = match; foundCat = catName; break }
+        // Prefer category from URL param if provided
+        if (categoryParam && portfolios[categoryParam]) {
+          const match = portfolios[categoryParam].filter(Boolean).find(p => p.name === nameParam)
+          if (match) { foundProj = match; foundCat = categoryParam }
+        }
+        // Fallback: search all categories
+        if (!foundProj) {
+          for (const [catName, list] of Object.entries(portfolios)) {
+            const match = list.filter(Boolean).find(p => p.name === nameParam)
+            if (match) { foundProj = match; foundCat = catName; break }
+          }
         }
         setProject(foundProj)
         setCategory(foundCat)
@@ -284,7 +293,7 @@ export default function ProjectPage({ location }) {
 
         {/* Back Button */}
         <div className="project-detail-nav">
-          <Link to="/#portfolio" className="project-back-btn">
+          <Link to={`/?category=${encodeURIComponent(category)}#portfolio`} className="project-back-btn">
             <FaArrowLeft size={11} /> Back to Portfolio
           </Link>
         </div>

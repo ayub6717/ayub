@@ -17,7 +17,7 @@ import Navbar from "../components/Navbar";
 import { useAuth } from "../context/AuthContext";
 import AdminBar from "../admin/AdminBar";
 
-const IndexPage = () => {
+const IndexPage = ({ location }) => {
   const { isLoggedIn } = useAuth();
 
   useEffect(() => {
@@ -36,7 +36,7 @@ const IndexPage = () => {
         <About />
         <Experience />
         <Skill />
-        <Portfolio />
+        <Portfolio location={location} />
         <LoveToDo />
         <Education />
         <Contact />
