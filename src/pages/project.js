@@ -76,16 +76,16 @@ function getProjectSections(project, category) {
 
   const techStack = project.techStack || (() => {
     const map = {
-      "React":      { icon: "⚛️", type: "UI Library" },
-      "Redux":      { icon: "🔄", type: "State Management" },
+      "React": { icon: "⚛️", type: "UI Library" },
+      "Redux": { icon: "🔄", type: "State Management" },
       "Tailwind CSS": { icon: "🎨", type: "Styling" },
-      "Bootstrap":  { icon: "🅱️", type: "CSS Framework" },
+      "Bootstrap": { icon: "🅱️", type: "CSS Framework" },
       "JavaScript": { icon: "🟡", type: "Language" },
-      "PHP":        { icon: "🐘", type: "Backend" },
-      "jQuery":     { icon: "💫", type: "DOM Library" },
-      "CSS":        { icon: "🎨", type: "Styling" },
-      "HTML":       { icon: "🌐", type: "Markup" },
-      "Node.js":    { icon: "🟢", type: "Runtime" },
+      "PHP": { icon: "🐘", type: "Backend" },
+      "jQuery": { icon: "💫", type: "DOM Library" },
+      "CSS": { icon: "🎨", type: "Styling" },
+      "HTML": { icon: "🌐", type: "Markup" },
+      "Node.js": { icon: "🟢", type: "Runtime" },
       "React Native": { icon: "📱", type: "Mobile Framework" },
     }
     const found = []
@@ -279,7 +279,7 @@ export default function ProjectPage({ location }) {
     { label: "Role", value: project.role || "Front-End Developer", icon: <FaBriefcase /> },
     { label: "Category", value: `${category} Project`, icon: <FaFolderOpen /> },
     { label: "Timeline", value: project.timeline || "2–4 Weeks", icon: <FaCalendarAlt /> },
-    { label: "Client", value: project.client || "Techvill", icon: <FaBuilding /> },
+    { label: "Company", value: project.client, icon: <FaBuilding /> },
   ]
 
 
@@ -316,7 +316,7 @@ export default function ProjectPage({ location }) {
                 {project.demo || project.source || "https://example.com"}
               </span>
             </div>
-            <div 
+            <div
               className="project-browser-content browser-clickable"
               onClick={() => setIsLightboxOpen(true)}
               style={{ cursor: "zoom-in", position: "relative" }}

@@ -161,7 +161,7 @@ export function SkillFormModal({ initial = {}, onSave, onClose }) {
     <AdminModal title={initial.name ? "Edit Skill" : "Add Skill"} onClose={onClose}>
       <div className="admin-form-group" style={{ position: "relative" }}>
         <label className="admin-form-label">Select Skill or Tool</label>
-        
+
         <div className="skill-dropdown-container">
           <button
             type="button"
@@ -226,7 +226,7 @@ export function SkillFormModal({ initial = {}, onSave, onClose }) {
                     </button>
                   )
                 })}
-                
+
                 {/* Custom selection option */}
                 <button
                   type="button"
@@ -244,8 +244,8 @@ export function SkillFormModal({ initial = {}, onSave, onClose }) {
                 >
                   <div className="skill-dropdown-item-icon">✍️</div>
                   <span>
-                    {searchQuery.trim() 
-                      ? `Use custom: "${searchQuery.trim()}"` 
+                    {searchQuery.trim()
+                      ? `Use custom: "${searchQuery.trim()}"`
                       : "Custom Skill..."}
                   </span>
                 </button>
@@ -338,16 +338,16 @@ export function ProjectFormModal({ initial = {}, categories, onSave, onClose }) 
       return initial.techStack
     }
     const map = {
-      "React":      { icon: "⚛️", type: "UI Library" },
-      "Redux":      { icon: "🔄", type: "State Management" },
+      "React": { icon: "⚛️", type: "UI Library" },
+      "Redux": { icon: "🔄", type: "State Management" },
       "Tailwind CSS": { icon: "🎨", type: "Styling" },
-      "Bootstrap":  { icon: "🅱️", type: "CSS Framework" },
+      "Bootstrap": { icon: "🅱️", type: "CSS Framework" },
       "JavaScript": { icon: "🟡", type: "Language" },
-      "PHP":        { icon: "🐘", type: "Backend" },
-      "jQuery":     { icon: "💫", type: "DOM Library" },
-      "CSS":        { icon: "🎨", type: "Styling" },
-      "HTML":       { icon: "🌐", type: "Markup" },
-      "Node.js":    { icon: "🟢", type: "Runtime" },
+      "PHP": { icon: "🐘", type: "Backend" },
+      "jQuery": { icon: "💫", type: "DOM Library" },
+      "CSS": { icon: "🎨", type: "Styling" },
+      "HTML": { icon: "🌐", type: "Markup" },
+      "Node.js": { icon: "🟢", type: "Runtime" },
       "React Native": { icon: "📱", type: "Mobile Framework" },
     }
     const found = []
@@ -469,7 +469,7 @@ export function ProjectFormModal({ initial = {}, categories, onSave, onClose }) 
     client: initial.client || "",
     timeline: initial.timeline || "",
     hideThumbs: !!initial.hideThumbs,
-    
+
     // Dynamic detail fields
     featuresText: fallbackFeatures.join("\n"),
   })
@@ -614,7 +614,7 @@ export function ProjectFormModal({ initial = {}, categories, onSave, onClose }) 
               <div className="admin-form-group">
                 <label className="admin-form-label">Category</label>
                 <select className="admin-form-select" value={form.category} onChange={e => set("category", e.target.value)}>
-                  {(categories || ["Web","App","Others"]).map(c => <option key={c} value={c}>{c}</option>)}
+                  {(categories || ["Web", "App", "Others"]).map(c => <option key={c} value={c}>{c}</option>)}
                 </select>
               </div>
             </div>
@@ -642,8 +642,8 @@ export function ProjectFormModal({ initial = {}, categories, onSave, onClose }) 
                 <input className="admin-form-input" value={form.role} onChange={e => set("role", e.target.value)} placeholder="Front-End Developer" />
               </div>
               <div className="admin-form-group">
-                <label className="admin-form-label">Client</label>
-                <input className="admin-form-input" value={form.client} onChange={e => set("client", e.target.value)} placeholder="Techvill" />
+                <label className="admin-form-label">Company</label>
+                <input className="admin-form-input" value={form.client} onChange={e => set("client", e.target.value)} placeholder="Company Name" />
               </div>
             </div>
             <div className="admin-form-group">
@@ -712,9 +712,9 @@ export function ProjectFormModal({ initial = {}, categories, onSave, onClose }) 
                 </button>
               ) : (
                 <div style={{ display: "flex", gap: "6px", alignItems: "center", flexWrap: "wrap", border: "1px dashed #a78bfa", borderRadius: "8px", padding: "8px" }}>
-                  <input placeholder="Icon (emoji)" className="admin-form-input" style={{ width: "60px", padding: "5px" }} value={customTech.icon} onChange={e => setCustomTech(p => ({...p, icon: e.target.value}))} />
-                  <input placeholder="Name" className="admin-form-input" style={{ flex: 1, padding: "5px" }} value={customTech.name} onChange={e => setCustomTech(p => ({...p, name: e.target.value}))} />
-                  <input placeholder="Type/Category" className="admin-form-input" style={{ flex: 1, padding: "5px" }} value={customTech.type} onChange={e => setCustomTech(p => ({...p, type: e.target.value}))} />
+                  <input placeholder="Icon (emoji)" className="admin-form-input" style={{ width: "60px", padding: "5px" }} value={customTech.icon} onChange={e => setCustomTech(p => ({ ...p, icon: e.target.value }))} />
+                  <input placeholder="Name" className="admin-form-input" style={{ flex: 1, padding: "5px" }} value={customTech.name} onChange={e => setCustomTech(p => ({ ...p, name: e.target.value }))} />
+                  <input placeholder="Type/Category" className="admin-form-input" style={{ flex: 1, padding: "5px" }} value={customTech.type} onChange={e => setCustomTech(p => ({ ...p, type: e.target.value }))} />
                   <button type="button" className="admin-form-save" style={{ padding: "5px 10px", fontSize: "12px" }} onClick={addCustomTech}>Add</button>
                   <button type="button" onClick={() => setShowCustomTech(false)} style={{ background: "none", border: "none", color: "#9ca3af", cursor: "pointer" }}>Cancel</button>
                 </div>
@@ -727,7 +727,7 @@ export function ProjectFormModal({ initial = {}, categories, onSave, onClose }) 
               <div style={{ display: "flex", flexDirection: "column", gap: "6px", marginBottom: "8px" }}>
                 {lessons.map((lesson, i) => (
                   <div key={i} style={{ display: "flex", gap: "8px", alignItems: "flex-start", background: "#f8fafc", borderRadius: "6px", padding: "6px 10px", border: "1px solid #e2e8f0" }}>
-                    <span style={{ color: "#6d28d9", fontWeight: 700, minWidth: "18px" }}>{i+1}.</span>
+                    <span style={{ color: "#6d28d9", fontWeight: 700, minWidth: "18px" }}>{i + 1}.</span>
                     <p style={{ flex: 1, margin: 0, fontSize: "12px", color: "#334155" }}>{lesson}</p>
                     <button type="button" onClick={() => removeLesson(i)} style={{ background: "none", border: "none", color: "#f87171", cursor: "pointer", fontSize: "13px", padding: 0 }}>✕</button>
                   </div>
@@ -821,10 +821,10 @@ export function ProjectFormModal({ initial = {}, categories, onSave, onClose }) 
           <>
             <div className="admin-form-group" style={{ paddingBottom: "12px", borderBottom: "1px dashed #e2e8f0" }}>
               <label className="admin-form-label" style={{ display: "flex", alignItems: "center", gap: "8px", cursor: "pointer", fontWeight: 600, color: "#1e293b" }}>
-                <input 
-                  type="checkbox" 
-                  checked={!!form.hideThumbs} 
-                  onChange={e => set("hideThumbs", e.target.checked)} 
+                <input
+                  type="checkbox"
+                  checked={!!form.hideThumbs}
+                  onChange={e => set("hideThumbs", e.target.checked)}
                   style={{ cursor: "pointer" }}
                 />
                 Hide Project Thumbnail Grid
@@ -965,7 +965,7 @@ export function HeroFormModal({ initial = {}, onSave, onClose }) {
         <label className="admin-form-label">Resume URL</label>
         <input className="admin-form-input" value={form.resumeUrl} onChange={e => set("resumeUrl", e.target.value)} placeholder="https://drive.google.com/..." />
       </div>
-      
+
       <div className="admin-form-group" style={{ borderTop: "1px dashed #e2e8f0", paddingTop: "12px" }}>
         <label className="admin-form-label">Hero Profile Image (optional)</label>
         <div style={{ display: "flex", gap: "12px", alignItems: "center", marginBottom: "8px" }}>
