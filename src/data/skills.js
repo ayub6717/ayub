@@ -5,13 +5,15 @@ export const skills = {
     { name: "Tailwind CSS", percent: 95 },
     { name: "Bootstrap", percent: 95 },
     { name: "React Js", percent: 90 },
-    { name: "Next Js", percent: 50 },
-    { name: "React Native", percent: 60 },
     { name: "Redux", percent: 60 },
+    { name: "React Native", percent: 60 },
+    { name: "Next Js", percent: 50 },
+    { name: "MySQL", percent: 50 },
     { name: "TypeScript", percent: 40 },
     { name: "Alpine Js", percent: 20 },
     { name: "Node JS", percent: 20 },
-    { name: "MySQL", percent: 50 },
+
+
   ],
   Others: [
     { name: "Data Structure", percent: 70 },

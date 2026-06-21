@@ -1,6 +1,7 @@
 import React, { useState } from "react"
 import "./admin.css"
 import { resolveImage } from "../data/imageMap"
+import { SKILL_ICONS, PRESET_SKILLS } from "../data/skillIcons"
 
 /**
  * Generic modal wrapper with title, close button, and scrollable body.
@@ -135,19 +136,152 @@ export function SkillFormModal({ initial = {}, onSave, onClose }) {
   })
   const set = (key, val) => setForm(f => ({ ...f, [key]: val }))
 
+  const isPreset = PRESET_SKILLS.some(p => p.name === initial.name)
+  const initialPreset = initial.name ? (isPreset ? initial.name : "custom") : ""
+  const [selectedPreset, setSelectedPreset] = useState(initialPreset)
+  const [searchQuery, setSearchQuery] = useState("")
+  const [isOpen, setIsOpen] = useState(false)
+  const [error, setError] = useState("")
+
+  const filteredPresets = PRESET_SKILLS.filter(p =>
+    p.name.toLowerCase().includes(searchQuery.toLowerCase())
+  )
+
+  const handleSave = () => {
+    const name = form.name.trim()
+    if (!name) {
+      setError("Please select a skill or enter a custom skill name.")
+      return
+    }
+    setError("")
+    onSave({ name, percent: form.percent })
+  }
+
   return (
     <AdminModal title={initial.name ? "Edit Skill" : "Add Skill"} onClose={onClose}>
-      <div className="admin-form-group">
-        <label className="admin-form-label">Skill Name</label>
-        <input className="admin-form-input" value={form.name} onChange={e => set("name", e.target.value)} placeholder="React Js" />
+      <div className="admin-form-group" style={{ position: "relative" }}>
+        <label className="admin-form-label">Select Skill or Tool</label>
+        
+        <div className="skill-dropdown-container">
+          <button
+            type="button"
+            className="skill-dropdown-trigger"
+            onClick={() => setIsOpen(!isOpen)}
+          >
+            <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
+              {selectedPreset && selectedPreset !== "custom" ? (
+                <>
+                  <div className="skill-dropdown-selected-icon">
+                    {SKILL_ICONS[selectedPreset] ? (
+                      <div className="skill-dropdown-svg-wrap">{SKILL_ICONS[selectedPreset]}</div>
+                    ) : (
+                      <span>{PRESET_SKILLS.find(p => p.name === selectedPreset)?.emoji || "✨"}</span>
+                    )}
+                  </div>
+                  <span>{selectedPreset}</span>
+                </>
+              ) : selectedPreset === "custom" ? (
+                <span>✍️ Custom Skill (Enter name below)</span>
+              ) : (
+                <span style={{ color: "#94a3b8" }}>— Select a skill or tool —</span>
+              )}
+            </div>
+            <span style={{ fontSize: "10px", color: "#64748b" }}>{isOpen ? "▲" : "▼"}</span>
+          </button>
+
+          {isOpen && (
+            <div className="skill-dropdown-menu">
+              <input
+                type="text"
+                className="skill-dropdown-search"
+                placeholder="Search skills/tools..."
+                value={searchQuery}
+                onChange={e => setSearchQuery(e.target.value)}
+                autoFocus
+              />
+              <div className="skill-dropdown-list">
+                {filteredPresets.map(p => {
+                  const hasSvg = !!SKILL_ICONS[p.name]
+                  return (
+                    <button
+                      key={p.name}
+                      type="button"
+                      className={`skill-dropdown-item ${selectedPreset === p.name ? "active" : ""}`}
+                      onClick={() => {
+                        setSelectedPreset(p.name)
+                        set("name", p.name)
+                        setError("")
+                        setIsOpen(false)
+                        setSearchQuery("")
+                      }}
+                    >
+                      <div className="skill-dropdown-item-icon">
+                        {hasSvg ? (
+                          <div className="skill-dropdown-svg-wrap">{SKILL_ICONS[p.name]}</div>
+                        ) : (
+                          <span>{p.emoji}</span>
+                        )}
+                      </div>
+                      <span>{p.name}</span>
+                    </button>
+                  )
+                })}
+                
+                {/* Custom selection option */}
+                <button
+                  type="button"
+                  className={`skill-dropdown-item ${selectedPreset === "custom" ? "active" : ""}`}
+                  onClick={() => {
+                    setSelectedPreset("custom")
+                    if (searchQuery.trim()) {
+                      set("name", searchQuery.trim())
+                    } else {
+                      set("name", "")
+                    }
+                    setIsOpen(false)
+                    setSearchQuery("")
+                  }}
+                >
+                  <div className="skill-dropdown-item-icon">✍️</div>
+                  <span>
+                    {searchQuery.trim() 
+                      ? `Use custom: "${searchQuery.trim()}"` 
+                      : "Custom Skill..."}
+                  </span>
+                </button>
+              </div>
+            </div>
+          )}
+        </div>
       </div>
+
+      {/* Only show free-text input when user explicitly chose "Custom Skill…" */}
+      {selectedPreset === "custom" && (
+        <div className="admin-form-group">
+          <label className="admin-form-label">Custom Skill Name</label>
+          <input
+            className="admin-form-input"
+            value={form.name}
+            onChange={e => { set("name", e.target.value); setError("") }}
+            placeholder="e.g. Kotlin, Rust, Photoshop"
+            required
+          />
+        </div>
+      )}
+
+      {error && (
+        <p style={{ color: "#ef4444", fontSize: "12px", margin: "-4px 0 8px", fontWeight: 500 }}>
+          ⚠️ {error}
+        </p>
+      )}
+
       <div className="admin-form-group">
         <label className="admin-form-label">Proficiency: <span className="admin-percent-badge">{form.percent}%</span></label>
         <input type="range" className="admin-range" min="5" max="100" step="5" value={form.percent} onChange={e => set("percent", Number(e.target.value))} />
       </div>
       <div className="admin-form-actions">
         <button className="admin-form-cancel" onClick={onClose}>Cancel</button>
-        <button className="admin-form-save" onClick={() => onSave(form)}>Save</button>
+        <button className="admin-form-save" onClick={handleSave}>Save</button>
       </div>
     </AdminModal>
   )

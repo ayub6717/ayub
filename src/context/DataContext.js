@@ -39,6 +39,30 @@ export function DataProvider({ children }) {
       })
   }
 
+  // Functional updater-based persist — avoids stale closure issues
+  const persistFn = (updaterFn) => {
+    setData(prev => {
+      const newData = updaterFn(prev)
+      fetch("/api/save-data", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(newData),
+      })
+        .then(res => res.json())
+        .then(resData => {
+          if (resData.success) {
+            console.log("[DataContext] Saved to src/data/data.json ✓")
+          } else {
+            console.warn("[DataContext] Save failed:", resData.error)
+          }
+        })
+        .catch(err => {
+          console.warn("[DataContext] Could not reach /api/save-data:", err.message)
+        })
+      return newData
+    })
+  }
+
 
   // ── Hero ──────────────────────────────────────────────────────────────────
   const updateHero = (updates) => {
@@ -85,20 +109,35 @@ export function DataProvider({ children }) {
 
   // ── Skills ────────────────────────────────────────────────────────────────
   const addSkill = (category, skill) => {
-    const catSkills = [...(data.skills[category] || []), { name: skill.name, percent: skill.percent }]
-    persist({ ...data, skills: { ...data.skills, [category]: catSkills } })
+    if (!skill.name || !skill.name.trim()) return
+    persistFn(prev => {
+      const existing = prev.skills[category] || []
+      // Prevent duplicates
+      if (existing.some(s => s.name === skill.name)) return prev
+      const catSkills = [...existing, { name: skill.name.trim(), percent: skill.percent }]
+      return { ...prev, skills: { ...prev.skills, [category]: catSkills } }
+    })
   }
-  const updateSkill = (category, name, updates) => {
-    const catSkills = data.skills[category].map(s => s.name === name ? { ...s, ...updates } : s)
-    persist({ ...data, skills: { ...data.skills, [category]: catSkills } })
+  const updateSkill = (category, oldName, updates) => {
+    if (!updates.name || !updates.name.trim()) return
+    persistFn(prev => {
+      const catSkills = (prev.skills[category] || []).map(s =>
+        s.name === oldName ? { ...s, name: updates.name.trim(), percent: updates.percent } : s
+      )
+      return { ...prev, skills: { ...prev.skills, [category]: catSkills } }
+    })
   }
   const deleteSkill = (category, name) => {
-    const catSkills = data.skills[category].filter(s => s.name !== name)
-    persist({ ...data, skills: { ...data.skills, [category]: catSkills } })
+    persistFn(prev => {
+      const catSkills = (prev.skills[category] || []).filter(s => s.name !== name)
+      return { ...prev, skills: { ...prev.skills, [category]: catSkills } }
+    })
   }
   const addSkillCategory = (categoryName) => {
-    if (data.skills[categoryName]) return
-    persist({ ...data, skills: { ...data.skills, [categoryName]: [] } })
+    persistFn(prev => {
+      if (prev.skills[categoryName]) return prev
+      return { ...prev, skills: { ...prev.skills, [categoryName]: [] } }
+    })
   }
 
   // ── Portfolios ────────────────────────────────────────────────────────────
