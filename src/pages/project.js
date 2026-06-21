@@ -385,6 +385,11 @@ export default function ProjectPage({ location }) {
                 <FaExternalLinkAlt size={11} /> Live Demo
               </a>
             )}
+            {project.demo3 && (
+              <a href={project.demo3} target="_blank" rel="noopener noreferrer" className="project-btn outline">
+                <FaExternalLinkAlt size={11} /> Live Demo 2
+              </a>
+            )}
             {project.demo2 && (
               <a href={project.demo2} target="_blank" rel="noopener noreferrer" className="project-btn outline">
                 <CodecanyonIcon /> Codecanyon

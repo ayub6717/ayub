@@ -461,6 +461,7 @@ export function ProjectFormModal({ initial = {}, categories, onSave, onClose }) 
     images: initial.images || [],
     demo: initial.demo || "",
     demo2: initial.demo2 || "",
+    demo3: initial.demo3 || "",
     source: initial.source || "",
     adminLog: initial.adminLog || "",
     userLog: initial.userLog || "",
@@ -628,13 +629,19 @@ export function ProjectFormModal({ initial = {}, categories, onSave, onClose }) 
                 <input className="admin-form-input" value={form.demo} onChange={e => set("demo", e.target.value)} placeholder="https://..." />
               </div>
               <div className="admin-form-group">
-                <label className="admin-form-label">Codecanyon / Demo2 URL</label>
-                <input className="admin-form-input" value={form.demo2} onChange={e => set("demo2", e.target.value)} placeholder="https://codecanyon.net/..." />
+                <label className="admin-form-label">Live Demo 2 URL</label>
+                <input className="admin-form-input" value={form.demo3} onChange={e => set("demo3", e.target.value)} placeholder="https://..." />
               </div>
             </div>
-            <div className="admin-form-group">
-              <label className="admin-form-label">GitHub Source URL</label>
-              <input className="admin-form-input" value={form.source} onChange={e => set("source", e.target.value)} placeholder="https://github.com/..." />
+            <div className="admin-form-row">
+              <div className="admin-form-group">
+                <label className="admin-form-label">Codecanyon URL</label>
+                <input className="admin-form-input" value={form.demo2} onChange={e => set("demo2", e.target.value)} placeholder="https://codecanyon.net/..." />
+              </div>
+              <div className="admin-form-group">
+                <label className="admin-form-label">GitHub Source URL</label>
+                <input className="admin-form-input" value={form.source} onChange={e => set("source", e.target.value)} placeholder="https://github.com/..." />
+              </div>
             </div>
             <div className="admin-form-row">
               <div className="admin-form-group">

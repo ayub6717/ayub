@@ -145,6 +145,17 @@ const Portfolio = ({ location }) => {
                           <FaExternalLinkAlt />
                         </a>
                       )}
+                      {portfolio.demo3 && (
+                        <a
+                          href={portfolio.demo3}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="pf-icon-link"
+                          title="Live Demo 2"
+                        >
+                          <FaExternalLinkAlt />
+                        </a>
+                      )}
                       {portfolio.demo2 && (
                         <a
                           href={portfolio.demo2}
