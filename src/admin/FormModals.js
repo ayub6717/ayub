@@ -472,10 +472,22 @@ export function ProjectFormModal({ initial = {}, categories, onSave, onClose }) 
   const [customTech, setCustomTech] = useState({ icon: "⚙️", name: "", type: "" })
   const [showCustomTech, setShowCustomTech] = useState(false)
 
+  const getTechName = (t) => {
+    if (!t) return ""
+    if (typeof t === "string") return t
+    return t.name || ""
+  }
+
+  const getTechIconString = (t) => {
+    if (!t) return ""
+    if (typeof t === "string") return ""
+    return t.icon || ""
+  }
+
   const addTechFromDropdown = () => {
     if (!techDropdownVal) return
     const found = TECH_OPTIONS.find(t => t.name === techDropdownVal)
-    if (found && !techStack.find(t => t.name === found.name)) {
+    if (found && !techStack.find(t => getTechName(t) === found.name)) {
       // icon left blank — resolved from SKILL_ICONS at render time
       setTechStack(prev => [...prev, { icon: "", name: found.name, type: found.type }])
     }
@@ -484,14 +496,14 @@ export function ProjectFormModal({ initial = {}, categories, onSave, onClose }) 
 
   const addCustomTech = () => {
     if (!customTech.name.trim()) return
-    if (!techStack.find(t => t.name === customTech.name)) {
+    if (!techStack.find(t => getTechName(t) === customTech.name)) {
       setTechStack(prev => [...prev, { ...customTech }])
     }
     setCustomTech({ icon: "⚙️", name: "", type: "" })
     setShowCustomTech(false)
   }
 
-  const removeTech = (name) => setTechStack(prev => prev.filter(t => t.name !== name))
+  const removeTech = (name) => setTechStack(prev => prev.filter(t => getTechName(t) !== name))
 
   // Lessons as a list of strings
   const [lessons, setLessons] = useState(fallbackLessons)
@@ -680,24 +692,26 @@ export function ProjectFormModal({ initial = {}, categories, onSave, onClose }) 
 
               {/* Existing tags */}
               <div style={{ display: "flex", flexWrap: "wrap", gap: "6px", marginBottom: "10px", minHeight: "28px" }}>
-                {techStack.map((t, i) => {
-                  // Look up SVG icon: try t.name directly, then common aliases
+                {(techStack || []).map((t, i) => {
+                  const name = getTechName(t)
+                  if (!name) return null
+                  // Look up SVG icon: try name directly, then common aliases
                   const aliasMap = {
                     "React": "React Js", "Next.js": "Next Js", "Node.js": "Node JS",
                     "React Query (TanStack)": "React Js", "TanStack Query": "TanStack Query",
                     "Azure DevOps": "Azure", "Material UI": "Material UI",
                     "Redux Toolkit": "Redux", ".NET": "TypeScript",
                   }
-                  const iconKey = aliasMap[t.name] || t.name
+                  const iconKey = aliasMap[name] || name
                   const svgIcon = SKILL_ICONS[iconKey]
                   return (
                     <span key={i} style={{ display: "inline-flex", alignItems: "center", gap: "5px", background: "linear-gradient(135deg,#ede9fe,#fce7f3)", border: "1px solid #d8b4fe", borderRadius: "20px", padding: "3px 10px 3px 6px", fontSize: "12px", fontWeight: 600, color: "#6d28d9" }}>
                       {svgIcon
                         ? <span style={{ width: 16, height: 16, display: "inline-flex", alignItems: "center", flexShrink: 0 }}>{svgIcon}</span>
-                        : <span style={{ fontSize: 13 }}>{t.icon}</span>
+                        : <span style={{ fontSize: 13 }}>{getTechIconString(t)}</span>
                       }
-                      {t.name}
-                      <button type="button" onClick={() => removeTech(t.name)} style={{ background: "none", border: "none", cursor: "pointer", color: "#9ca3af", fontSize: "11px", padding: "0 0 0 2px", lineHeight: 1 }}>✕</button>
+                      {name}
+                      <button type="button" onClick={() => removeTech(name)} style={{ background: "none", border: "none", cursor: "pointer", color: "#9ca3af", fontSize: "11px", padding: "0 0 0 2px", lineHeight: 1 }}>✕</button>
                     </span>
                   )
                 })}
@@ -712,7 +726,7 @@ export function ProjectFormModal({ initial = {}, categories, onSave, onClose }) 
                   style={{ flex: 1 }}
                 >
                   <option value="">— Select a technology —</option>
-                  {TECH_OPTIONS.filter(t => !techStack.find(s => s.name === t.name)).map(t => (
+                  {(TECH_OPTIONS || []).filter(t => t && !techStack.find(s => getTechName(s) === t.name)).map(t => (
                     <option key={t.name} value={t.name}>{t.name} ({t.type})</option>
                   ))}
                 </select>
@@ -726,9 +740,9 @@ export function ProjectFormModal({ initial = {}, categories, onSave, onClose }) 
                 </button>
               ) : (
                 <div style={{ display: "flex", gap: "6px", alignItems: "center", flexWrap: "wrap", border: "1px dashed #a78bfa", borderRadius: "8px", padding: "8px" }}>
-                  <input placeholder="Icon (emoji)" className="admin-form-input" style={{ width: "60px", padding: "5px" }} value={customTech.icon} onChange={e => setCustomTech(p => ({ ...p, icon: e.target.value }))} />
-                  <input placeholder="Name" className="admin-form-input" style={{ flex: 1, padding: "5px" }} value={customTech.name} onChange={e => setCustomTech(p => ({ ...p, name: e.target.value }))} />
-                  <input placeholder="Type/Category" className="admin-form-input" style={{ flex: 1, padding: "5px" }} value={customTech.type} onChange={e => setCustomTech(p => ({ ...p, type: e.target.value }))} />
+                  <input placeholder="Icon (emoji)" className="admin-form-input" style={{ width: "60px", padding: "5px" }} value={customTech.icon} onChange={e => { const val = e.target.value; setCustomTech(p => ({ ...p, icon: val })); }} />
+                  <input placeholder="Name" className="admin-form-input" style={{ flex: 1, padding: "5px" }} value={customTech.name} onChange={e => { const val = e.target.value; setCustomTech(p => ({ ...p, name: val })); }} />
+                  <input placeholder="Type/Category" className="admin-form-input" style={{ flex: 1, padding: "5px" }} value={customTech.type} onChange={e => { const val = e.target.value; setCustomTech(p => ({ ...p, type: val })); }} />
                   <button type="button" className="admin-form-save" style={{ padding: "5px 10px", fontSize: "12px" }} onClick={addCustomTech}>Add</button>
                   <button type="button" onClick={() => setShowCustomTech(false)} style={{ background: "none", border: "none", color: "#9ca3af", cursor: "pointer" }}>Cancel</button>
                 </div>
