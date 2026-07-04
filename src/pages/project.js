@@ -21,6 +21,72 @@ import { useAuth } from "../context/AuthContext"
 import { useData } from "../context/DataContext"
 import { resolveImage } from "../data/imageMap"
 import AdminBar from "../admin/AdminBar"
+import { SKILL_ICONS } from "../data/skillIcons"
+
+/* ─── Tech Icon Lookup ────────────────────────────────────────── */
+// Maps data.json techStack names → SKILL_ICONS keys
+// Alias check runs FIRST so "React" → "React Js" (same icon as Skills section)
+const TECH_NAME_ALIAS = {
+  // React — force to "React Js" to match Skills section icon
+  "react": "React Js",
+  "react js": "React Js",
+  "reactjs": "React Js",
+  "tanstack query": "TanStack Query",
+  "react bootstrap": "React Bootstrap",
+  "react native": "React Native",
+  // Next.js variants
+  "next.js": "Next Js",
+  "nextjs": "Next Js",
+  "next js": "Next Js",
+  // Node
+  "node.js": "Node JS",
+  "nodejs": "Node JS",
+  // CSS / styling
+  "tailwindcss": "Tailwind CSS",
+  "tailwind": "Tailwind CSS",
+  "sass": "Sass/SCSS",
+  "scss": "Sass/SCSS",
+  "sass/scss": "Sass/SCSS",
+  "css modules": "CSS",
+  "css3": "CSS",
+  "html5": "HTML",
+  // Alpine
+  "alpine js": "Alpine Js",
+  "alpine.js": "Alpine Js",
+  "alpinejs": "Alpine Js",
+  // Git
+  "git, github": "Git, Github",
+  "github": "Git, Github",
+  // jQuery
+  "jquery": "jQuery",
+  "jquery mobile": "jQuery",
+  // Tools
+  "vs code": "Visual Studio Code",
+  "vscode": "Visual Studio Code",
+  // Cloud / DevOps
+  "azure devops": "Azure",
+  // UI libs
+  "material ui": "Material UI",
+  "mui": "Material UI",
+  // Bootstrap
+  "bootstrap 5": "Bootstrap",
+  // Others
+  "redux toolkit": "Redux",
+  ".net": ".NET",
+  "c#": "C++",
+  "rest api": "Postman",
+}
+
+function getTechIcon(techName) {
+  if (!techName) return null
+  const lower = techName.toLowerCase()
+  // Alias check FIRST — ensures e.g. "React" uses "React Js" icon, not the other React SVG
+  const aliasKey = TECH_NAME_ALIAS[lower]
+  if (aliasKey && SKILL_ICONS[aliasKey]) return SKILL_ICONS[aliasKey]
+  // Direct match fallback
+  if (SKILL_ICONS[techName]) return SKILL_ICONS[techName]
+  return null
+}
 
 
 /* ─── Copy Button Component ───────────────────────────────────── */
@@ -486,13 +552,25 @@ export default function ProjectPage({ location }) {
               <h2 className="section-title">Tech Stack</h2>
             </div>
             <div className="tech-stack-grid">
-              {techStack.map((t, i) => (
-                <div key={i} className="tech-stack-card">
-                  <span className="tech-stack-icon">{t.icon}</span>
-                  <span className="tech-stack-name">{t.name}</span>
-                  <span className="tech-stack-type">{t.type}</span>
-                </div>
-              ))}
+              {techStack.map((t, i) => {
+                const svgIcon = getTechIcon(t.name)
+                return (
+                  <div key={i} className="tech-stack-card">
+                    <span className="tech-stack-icon">
+                      {svgIcon
+                        ? <span style={{ width: 36, height: 36, display: "inline-flex", alignItems: "center", justifyContent: "center", overflow: "hidden", flexShrink: 0 }}>
+                          <span style={{ width: "100%", height: "100%", display: "flex", alignItems: "center", justifyContent: "center" }}>
+                            {svgIcon}
+                          </span>
+                        </span>
+                        : t.icon
+                      }
+                    </span>
+                    <span className="tech-stack-name">{t.name}</span>
+                    <span className="tech-stack-type">{t.type}</span>
+                  </div>
+                )
+              })}
             </div>
           </div>
 

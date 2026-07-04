@@ -542,6 +542,18 @@
   font-size: 28px;
   display: block;
   margin-bottom: 10px;
+  /* Contain any SVG to exactly 36×36 regardless of viewBox/intrinsic size */
+  line-height: 0;
+}
+
+.tech-stack-icon svg,
+.tech-stack-icon span svg {
+  width: 36px !important;
+  height: 36px !important;
+  max-width: 36px;
+  max-height: 36px;
+  display: block;
+  flex-shrink: 0;
 }
 
 .tech-stack-name {

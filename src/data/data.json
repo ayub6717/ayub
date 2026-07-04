@@ -1,7 +1,7 @@
 {
   "hero": {
     "greeting": "Hi There! I am",
-    "name": "Rohan",
+    "name": "Ayub",
     "title": "Front End Developer",
     "tags": [
       "Web Developer",
@@ -127,11 +127,11 @@
         "percent": 90
       },
       {
-        "name": "Tailwind CSS",
+        "name": "Material UI",
         "percent": 95
       },
       {
-        "name": "Material UI",
+        "name": "Tailwind CSS",
         "percent": 95
       },
       {
@@ -157,6 +157,10 @@
       {
         "name": "Azure",
         "percent": 50
+      },
+      {
+        "name": "TanStack Query",
+        "percent": 100
       }
     ],
     "Others": [
@@ -285,8 +289,8 @@
             "type": "State Management"
           },
           {
-            "name": "React Query (TanStack)",
-            "icon": "📡",
+            "icon": "",
+            "name": "TanStack Query",
             "type": "Data Fetching"
           },
           {
@@ -371,7 +375,8 @@
             "body": "Connected to a .NET backend through secure, well-tested API layers, with Azure DevOps managing CI/CD pipelines and Jest ensuring reliability across deployments for this large-scale, actively evolving financial platform."
           }
         ],
-        "hideThumbs": false
+        "hideThumbs": false,
+        "demo3": ""
       },
       {
         "id": "web13",

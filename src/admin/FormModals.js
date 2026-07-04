@@ -288,36 +288,27 @@ export function SkillFormModal({ initial = {}, onSave, onClose }) {
 }
 
 // ─── Tech Stack picker data ───────────────────────────────────────────────────
-const TECH_OPTIONS = [
-  { icon: "⚛️", name: "React", type: "UI Library" },
-  { icon: "📱", name: "React Native", type: "Mobile Framework" },
-  { icon: "🔲", name: "Next.js", type: "Framework" },
-  { icon: "🔄", name: "Redux", type: "State Management" },
-  { icon: "🟡", name: "JavaScript", type: "Language" },
-  { icon: "🔷", name: "TypeScript", type: "Language" },
-  { icon: "🌐", name: "HTML", type: "Markup" },
-  { icon: "🎨", name: "CSS", type: "Styling" },
-  { icon: "💨", name: "Tailwind CSS", type: "CSS Framework" },
-  { icon: "🅱️", name: "Bootstrap", type: "CSS Framework" },
-  { icon: "📦", name: "Sass/SCSS", type: "Styling" },
-  { icon: "🐘", name: "PHP", type: "Backend" },
-  { icon: "🟢", name: "Node.js", type: "Runtime" },
-  { icon: "🗄️", name: "MySQL", type: "Database" },
-  { icon: "🍃", name: "MongoDB", type: "Database" },
-  { icon: "🔗", name: "REST API", type: "Integration" },
-  { icon: "⚡", name: "GraphQL", type: "API" },
-  { icon: "💫", name: "jQuery", type: "DOM Library" },
-  { icon: "🔁", name: "Ajax", type: "Integration" },
-  { icon: "☕", name: "Java", type: "Language" },
-  { icon: "🔡", name: "C++", type: "Language" },
-  { icon: "🧪", name: "Jest", type: "Testing" },
-  { icon: "🗂️", name: "Git", type: "Version Control" },
-  { icon: "🐳", name: "Docker", type: "DevOps" },
-  { icon: "☁️", name: "Azure", type: "Cloud" },
-  { icon: "🦅", name: "Material UI", type: "UI Library" },
-  { icon: "⚙️", name: "Express.js", type: "Backend" },
-  { icon: "🗃️", name: "SQLite", type: "Database" },
-]
+// Type metadata for known techs — used in dropdown display
+const TECH_TYPE_MAP = {
+  "HTML": "Markup", "CSS": "Styling", "JavaScript": "Language", "TypeScript": "Language",
+  "React": "UI Library", "React Js": "UI Library", "React Native": "Mobile Framework",
+  "React Bootstrap": "CSS Framework", "Next Js": "Framework", "Next JS": "Framework",
+  "Tailwind CSS": "CSS Framework", "Bootstrap": "CSS Framework", "Redux": "State Management",
+  "Node JS": "Runtime", "MySQL": "Database", "Git": "Version Control",
+  "Git, Github": "Version Control", "PHP": "Backend", "Alpine Js": "UI Library",
+  "Figma": "Design", "Docker": "DevOps", "Material UI": "UI Library",
+  "jQuery": "DOM Library", "Sass/SCSS": "Styling", "Jest": "Testing",
+  "Azure": "Cloud", "Algorithms": "CS", "Data Structure": "CS",
+  "OOP": "Concept", "C": "Language", "C++": "Language",
+  "Visual Studio Code": "Tool", "Atom": "Tool", "Postman": "Tool",
+  "ESLint": "Tool", "Yarn": "Tool", "NPM": "Tool",
+  "TanStack Query": "Data Fetching",
+}
+// Build TECH_OPTIONS from every key in SKILL_ICONS so dropdown = skills section
+const TECH_OPTIONS = Object.keys(SKILL_ICONS).map(name => ({
+  name,
+  type: TECH_TYPE_MAP[name] || "Technology",
+}))
 
 // ─── Project Form ─────────────────────────────────────────────────────────────
 export function ProjectFormModal({ initial = {}, categories, onSave, onClose }) {
@@ -485,7 +476,8 @@ export function ProjectFormModal({ initial = {}, categories, onSave, onClose }) 
     if (!techDropdownVal) return
     const found = TECH_OPTIONS.find(t => t.name === techDropdownVal)
     if (found && !techStack.find(t => t.name === found.name)) {
-      setTechStack(prev => [...prev, found])
+      // icon left blank — resolved from SKILL_ICONS at render time
+      setTechStack(prev => [...prev, { icon: "", name: found.name, type: found.type }])
     }
     setTechDropdownVal("")
   }
@@ -688,12 +680,27 @@ export function ProjectFormModal({ initial = {}, categories, onSave, onClose }) 
 
               {/* Existing tags */}
               <div style={{ display: "flex", flexWrap: "wrap", gap: "6px", marginBottom: "10px", minHeight: "28px" }}>
-                {techStack.map((t, i) => (
-                  <span key={i} style={{ display: "inline-flex", alignItems: "center", gap: "4px", background: "linear-gradient(135deg,#ede9fe,#fce7f3)", border: "1px solid #d8b4fe", borderRadius: "20px", padding: "3px 10px", fontSize: "12px", fontWeight: 600, color: "#6d28d9" }}>
-                    {t.icon} {t.name}
-                    <button type="button" onClick={() => removeTech(t.name)} style={{ background: "none", border: "none", cursor: "pointer", color: "#9ca3af", fontSize: "11px", padding: "0 0 0 2px", lineHeight: 1 }}>✕</button>
-                  </span>
-                ))}
+                {techStack.map((t, i) => {
+                  // Look up SVG icon: try t.name directly, then common aliases
+                  const aliasMap = {
+                    "React": "React Js", "Next.js": "Next Js", "Node.js": "Node JS",
+                    "React Query (TanStack)": "React Js", "TanStack Query": "TanStack Query",
+                    "Azure DevOps": "Azure", "Material UI": "Material UI",
+                    "Redux Toolkit": "Redux", ".NET": "TypeScript",
+                  }
+                  const iconKey = aliasMap[t.name] || t.name
+                  const svgIcon = SKILL_ICONS[iconKey]
+                  return (
+                    <span key={i} style={{ display: "inline-flex", alignItems: "center", gap: "5px", background: "linear-gradient(135deg,#ede9fe,#fce7f3)", border: "1px solid #d8b4fe", borderRadius: "20px", padding: "3px 10px 3px 6px", fontSize: "12px", fontWeight: 600, color: "#6d28d9" }}>
+                      {svgIcon
+                        ? <span style={{ width: 16, height: 16, display: "inline-flex", alignItems: "center", flexShrink: 0 }}>{svgIcon}</span>
+                        : <span style={{ fontSize: 13 }}>{t.icon}</span>
+                      }
+                      {t.name}
+                      <button type="button" onClick={() => removeTech(t.name)} style={{ background: "none", border: "none", cursor: "pointer", color: "#9ca3af", fontSize: "11px", padding: "0 0 0 2px", lineHeight: 1 }}>✕</button>
+                    </span>
+                  )
+                })}
               </div>
 
               {/* Dropdown picker */}
@@ -706,7 +713,7 @@ export function ProjectFormModal({ initial = {}, categories, onSave, onClose }) 
                 >
                   <option value="">— Select a technology —</option>
                   {TECH_OPTIONS.filter(t => !techStack.find(s => s.name === t.name)).map(t => (
-                    <option key={t.name} value={t.name}>{t.icon} {t.name} ({t.type})</option>
+                    <option key={t.name} value={t.name}>{t.name} ({t.type})</option>
                   ))}
                 </select>
                 <button type="button" className="admin-form-save" style={{ padding: "6px 14px", fontSize: "12px" }} onClick={addTechFromDropdown}>Add</button>
