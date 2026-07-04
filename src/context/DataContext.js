@@ -169,6 +169,10 @@ export function DataProvider({ children }) {
     const catProjects = data.portfolios[category].filter(p => p.id !== id)
     persist({ ...data, portfolios: { ...data.portfolios, [category]: catProjects } })
   }
+  const reorderProjects = (category, newList) => {
+    persist({ ...data, portfolios: { ...data.portfolios, [category]: newList } })
+  }
+
 
   // ── Languages ─────────────────────────────────────────────────────────────
   const updateLanguage = (id, updates) => {
@@ -220,7 +224,7 @@ export function DataProvider({ children }) {
       // Skills
       addSkill, updateSkill, deleteSkill, addSkillCategory,
       // Portfolios
-      addProject, updateProject, moveProject, deleteProject,
+      addProject, updateProject, moveProject, deleteProject, reorderProjects,
       // Languages
       updateLanguage, addLanguage, deleteLanguage,
       // Contact

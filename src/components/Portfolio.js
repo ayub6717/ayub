@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react"
+import React, { useState, useEffect, useRef } from "react"
 import { navigate } from "gatsby"
 import {
   FaGithub,
@@ -29,7 +29,7 @@ const CodecanyonIcon = () => (
 
 const Portfolio = ({ location }) => {
   const { isLoggedIn } = useAuth()
-  const { data, addProject, updateProject, moveProject, deleteProject } = useData()
+  const { data, addProject, updateProject, moveProject, deleteProject, reorderProjects } = useData()
 
   const portfolios = data?.portfolios || {}
   const portfoliosName = Object.keys(portfolios)
@@ -48,6 +48,52 @@ const Portfolio = ({ location }) => {
 
   const [editingProject, setEditingProject] = useState(null)
   const [showAddProject, setShowAddProject] = useState(false)
+
+  // ── Drag state ─────────────────────────────────────────────────────────────
+  const dragSrcIndex = useRef(null)
+  const [dragOverIndex, setDragOverIndex] = useState(null)
+  const [draggingIndex, setDraggingIndex] = useState(null)
+
+  const handleDragStart = (e, index) => {
+    dragSrcIndex.current = index
+    setDraggingIndex(index)
+    e.dataTransfer.effectAllowed = "move"
+    e.dataTransfer.setData("text/plain", String(index))
+  }
+
+  const handleDragOver = (e, index) => {
+    e.preventDefault()
+    e.dataTransfer.dropEffect = "move"
+    if (index !== dragOverIndex) setDragOverIndex(index)
+  }
+
+  const handleDragLeave = () => {
+    setDragOverIndex(null)
+  }
+
+  const handleDrop = (e, dropIndex) => {
+    e.preventDefault()
+    const srcIndex = dragSrcIndex.current
+    if (srcIndex === null || srcIndex === dropIndex) {
+      setDragOverIndex(null)
+      setDraggingIndex(null)
+      return
+    }
+    const list = [...(portfolios[selectedCategory] || []).filter(Boolean)]
+    const [moved] = list.splice(srcIndex, 1)
+    list.splice(dropIndex, 0, moved)
+    reorderProjects(selectedCategory, list)
+    setDragOverIndex(null)
+    setDraggingIndex(null)
+    dragSrcIndex.current = null
+  }
+
+  const handleDragEnd = () => {
+    setDragOverIndex(null)
+    setDraggingIndex(null)
+    dragSrcIndex.current = null
+  }
+  // ──────────────────────────────────────────────────────────────────────────
 
   const currentList = (portfolios[selectedCategory] || []).filter(Boolean)
 
@@ -87,21 +133,60 @@ const Portfolio = ({ location }) => {
           </ul>
 
           {isLoggedIn && (
-            <button className="admin-add-floating" onClick={() => setShowAddProject(true)} style={{ marginBottom: "20px" }}>
-              ➕ Add Project to {selectedCategory}
-            </button>
+            <div style={{ display: "flex", alignItems: "center", gap: "12px", marginBottom: "20px", flexWrap: "wrap" }}>
+              <button className="admin-add-floating" onClick={() => setShowAddProject(true)}>
+                ➕ Add Project to {selectedCategory}
+              </button>
+              <span style={{
+                fontSize: "12px",
+                color: "#9ca3af",
+                display: "flex",
+                alignItems: "center",
+                gap: "4px",
+                background: "#f9fafb",
+                border: "1px dashed #d1d5db",
+                borderRadius: "6px",
+                padding: "4px 10px",
+              }}>
+                ⠿ Drag cards to reorder
+              </span>
+            </div>
           )}
 
           {/* ── Card Grid ── */}
           <div className="portfolio-grid">
             {currentList.map((portfolio, index) => {
               const imageSrc = resolveImage(portfolio.image)
+              const isDragging = draggingIndex === index
+              const isOver = dragOverIndex === index && draggingIndex !== index
+
               return (
                 <div
                   key={portfolio.id || index}
-                  className="pf-card"
-                  onClick={() => handleCardClick(portfolio.name)}
+                  className={[
+                    "pf-card",
+                    isDragging ? "pf-card--dragging" : "",
+                    isOver ? "pf-card--drag-over" : "",
+                  ].filter(Boolean).join(" ")}
+                  draggable={isLoggedIn}
+                  onDragStart={isLoggedIn ? (e) => handleDragStart(e, index) : undefined}
+                  onDragOver={isLoggedIn ? (e) => handleDragOver(e, index) : undefined}
+                  onDragLeave={isLoggedIn ? handleDragLeave : undefined}
+                  onDrop={isLoggedIn ? (e) => handleDrop(e, index) : undefined}
+                  onDragEnd={isLoggedIn ? handleDragEnd : undefined}
+                  onClick={() => !isDragging && handleCardClick(portfolio.name)}
                 >
+                  {/* Drag handle — admin only */}
+                  {isLoggedIn && (
+                    <div
+                      className="pf-card-drag-handle"
+                      title="Drag to reorder"
+                      onClick={e => e.stopPropagation()}
+                    >
+                      ⠿
+                    </div>
+                  )}
+
                   <div className="pf-card-img">
                     {imageSrc ? (
                       <img alt={portfolio.name} src={imageSrc} />
@@ -205,7 +290,6 @@ const Portfolio = ({ location }) => {
         <ProjectFormModal
           categories={portfoliosName}
           onSave={(newProj) => {
-            // newProj already contains the category selected in modal
             addProject(newProj.category, newProj)
             setShowAddProject(false)
           }}
@@ -220,7 +304,6 @@ const Portfolio = ({ location }) => {
           initial={editingProject}
           categories={portfoliosName}
           onSave={(updatedProj) => {
-            // If the category changed, atomically move from old to new category
             if (updatedProj.category !== selectedCategory) {
               moveProject(selectedCategory, updatedProj.category, editingProject.id, updatedProj)
             } else {
@@ -236,4 +319,3 @@ const Portfolio = ({ location }) => {
 }
 
 export { Portfolio }
-

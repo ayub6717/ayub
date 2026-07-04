@@ -199,3 +199,71 @@
 @media (max-width: 580px) {
   .portfolio-grid { grid-template-columns: 1fr; }
 }
+
+/* ─── Drag & Drop (admin mode) ──────────────────────────────────── */
+.pf-card-drag-handle {
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  z-index: 10;
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.92);
+  border: 1px solid #e2e8f0;
+  border-radius: 6px;
+  font-size: 16px;
+  color: #9ca3af;
+  cursor: grab;
+  opacity: 0;
+  transition: opacity 0.2s ease, color 0.2s ease, box-shadow 0.2s ease;
+  line-height: 1;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+}
+
+.pf-card:hover .pf-card-drag-handle {
+  opacity: 1;
+}
+
+.pf-card-drag-handle:hover {
+  color: #6d28d9;
+  box-shadow: 0 2px 8px rgba(109,40,217,0.15);
+}
+
+.pf-card-drag-handle:active {
+  cursor: grabbing;
+}
+
+/* Card being dragged */
+.pf-card--dragging {
+  opacity: 0.4;
+  transform: scale(0.97);
+  box-shadow: 0 4px 20px rgba(109,40,217,0.18);
+  border-color: #a78bfa !important;
+}
+
+/* Drop target */
+.pf-card--drag-over {
+  border-color: #7c3aed !important;
+  box-shadow: 0 0 0 2px rgba(124,58,237,0.25), 0 8px 24px rgba(124,58,237,0.1);
+  transform: translateY(-4px);
+}
+
+.pf-card--drag-over::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 4px;
+  height: 100%;
+  background: linear-gradient(180deg, #7c3aed, #a78bfa);
+  border-radius: 14px 0 0 14px;
+}
+
+/* Keep position: relative on card so handle & before pseudo work */
+.pf-card {
+  position: relative;
+}
+
