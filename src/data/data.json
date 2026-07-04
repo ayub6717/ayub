@@ -309,14 +309,14 @@
             "type": "Backend"
           },
           {
-            "name": "Jest",
-            "icon": "🧪",
-            "type": "Testing"
-          },
-          {
             "name": "Azure DevOps",
             "icon": "☁️",
             "type": "CI/CD"
+          },
+          {
+            "name": "Jest",
+            "icon": "🧪",
+            "type": "Testing"
           }
         ],
         "lessons": [

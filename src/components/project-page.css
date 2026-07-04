@@ -570,6 +570,66 @@
   display: block;
 }
 
+/* ─── Tech Stack Drag & Drop (admin mode) ────────────────────── */
+.tech-stack-card {
+  position: relative;
+}
+
+.tech-stack-drag-handle {
+  position: absolute;
+  top: 6px;
+  right: 6px;
+  width: 22px;
+  height: 22px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  color: #cbd5e1;
+  cursor: grab;
+  opacity: 0;
+  transition: opacity 0.18s ease, color 0.18s ease;
+  line-height: 1;
+  border-radius: 4px;
+}
+
+.tech-stack-card:hover .tech-stack-drag-handle {
+  opacity: 1;
+}
+
+.tech-stack-drag-handle:hover {
+  color: #7c3aed;
+}
+
+.tech-stack-drag-handle:active {
+  cursor: grabbing;
+}
+
+.tech-stack-card--dragging {
+  opacity: 0.35;
+  transform: scale(0.95);
+  border-color: #a78bfa !important;
+  box-shadow: 0 4px 16px rgba(109,40,217,0.15);
+}
+
+.tech-stack-card--drag-over {
+  border-color: #7c3aed !important;
+  box-shadow: 0 0 0 2px rgba(124,58,237,0.2), 0 8px 24px rgba(124,58,237,0.08);
+  transform: translateY(-4px);
+}
+
+.tech-stack-card--drag-over::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 10%;
+  width: 80%;
+  height: 3px;
+  background: linear-gradient(90deg, #7c3aed, #a78bfa);
+  border-radius: 0 0 6px 6px;
+}
+
+
 /* Role Section */
 .role-grid {
   display: grid;

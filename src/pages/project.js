@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react"
+import React, { useEffect, useState, useRef } from "react"
 import { Link } from "gatsby"
 import {
   FaGithub,
@@ -236,7 +236,7 @@ function getProjectSections(project, category) {
 /* ─── Main Page Component ─────────────────────────────────────── */
 export default function ProjectPage({ location }) {
   const { isLoggedIn } = useAuth()
-  const { data } = useData()
+  const { data, updateProject } = useData()
   const [project, setProject] = useState(null)
   const [category, setCategory] = useState("")
   const [loading, setLoading] = useState(true)
@@ -305,6 +305,20 @@ export default function ProjectPage({ location }) {
     }
   }, [location, data, portfolios])
 
+  // ── Tech Stack drag-and-drop state (must be before early returns) ──
+  const [techStackList, setTechStackList] = useState([])
+  const techDragSrc = useRef(null)
+  const [techDraggingIdx, setTechDraggingIdx] = useState(null)
+  const [techOverIdx, setTechOverIdx] = useState(null)
+
+  // Keep local list in sync when project loads / reloads
+  useEffect(() => {
+    if (project) {
+      const { techStack } = getProjectSections(project, category)
+      setTechStackList(techStack)
+    }
+  }, [project])
+
   if (loading) return (
     <Layout noFooter><Navbar />
       <div style={{ minHeight: "60vh", display: "flex", alignItems: "center", justifyContent: "center" }}>
@@ -339,6 +353,39 @@ export default function ProjectPage({ location }) {
 
   // Parse tech chips from description
   const techChips = techStack.map(t => t.name)
+
+  // ── Tech Stack drag handlers ──────────────────────────────────────
+  const handleTechDragStart = (e, index) => {
+    techDragSrc.current = index
+    setTechDraggingIdx(index)
+    e.dataTransfer.effectAllowed = "move"
+    e.dataTransfer.setData("text/plain", String(index))
+  }
+  const handleTechDragOver = (e, index) => {
+    e.preventDefault()
+    e.dataTransfer.dropEffect = "move"
+    if (index !== techOverIdx) setTechOverIdx(index)
+  }
+  const handleTechDragLeave = () => setTechOverIdx(null)
+  const handleTechDrop = (e, dropIndex) => {
+    e.preventDefault()
+    const srcIndex = techDragSrc.current
+    if (srcIndex === null || srcIndex === dropIndex) {
+      setTechOverIdx(null); setTechDraggingIdx(null); return
+    }
+    const newList = [...techStackList]
+    const [moved] = newList.splice(srcIndex, 1)
+    newList.splice(dropIndex, 0, moved)
+    setTechStackList(newList)
+    updateProject(category, project.id, { techStack: newList })
+    setTechOverIdx(null); setTechDraggingIdx(null)
+    techDragSrc.current = null
+  }
+  const handleTechDragEnd = () => {
+    setTechOverIdx(null); setTechDraggingIdx(null)
+    techDragSrc.current = null
+  }
+  // ────────────────────────────────────────────────────────────────
 
   // Metadata
   const metaItems = [
@@ -545,17 +592,52 @@ export default function ProjectPage({ location }) {
 
           {/* 2. Tech Stack */}
           <div className="project-section">
-            <div className="section-header">
+            <div className="section-header" style={{ alignItems: "center", flexWrap: "wrap", gap: "8px" }}>
               <div className="section-icon-box">
                 <SectionIcon d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
               </div>
               <h2 className="section-title">Tech Stack</h2>
+              {isLoggedIn && (
+                <span style={{
+                  fontSize: "11px",
+                  color: "#9ca3af",
+                  display: "flex",
+                  alignItems: "center",
+                  gap: "4px",
+                  background: "#f9fafb",
+                  border: "1px dashed #d1d5db",
+                  borderRadius: "6px",
+                  padding: "3px 8px",
+                  marginLeft: "4px",
+                  whiteSpace: "nowrap",
+                }}>
+                  ⠿ Drag to reorder
+                </span>
+              )}
             </div>
             <div className="tech-stack-grid">
-              {techStack.map((t, i) => {
+              {techStackList.map((t, i) => {
                 const svgIcon = getTechIcon(t.name)
+                const isDragging = techDraggingIdx === i
+                const isOver = techOverIdx === i && techDraggingIdx !== i
                 return (
-                  <div key={i} className="tech-stack-card">
+                  <div
+                    key={t.name || i}
+                    className={[
+                      "tech-stack-card",
+                      isDragging ? "tech-stack-card--dragging" : "",
+                      isOver ? "tech-stack-card--drag-over" : "",
+                    ].filter(Boolean).join(" ")}
+                    draggable={isLoggedIn}
+                    onDragStart={isLoggedIn ? (e) => handleTechDragStart(e, i) : undefined}
+                    onDragOver={isLoggedIn ? (e) => handleTechDragOver(e, i) : undefined}
+                    onDragLeave={isLoggedIn ? handleTechDragLeave : undefined}
+                    onDrop={isLoggedIn ? (e) => handleTechDrop(e, i) : undefined}
+                    onDragEnd={isLoggedIn ? handleTechDragEnd : undefined}
+                  >
+                    {isLoggedIn && (
+                      <div className="tech-stack-drag-handle" title="Drag to reorder">⠿</div>
+                    )}
                     <span className="tech-stack-icon">
                       {svgIcon
                         ? <span style={{ width: 36, height: 36, display: "inline-flex", alignItems: "center", justifyContent: "center", overflow: "hidden", flexShrink: 0 }}>
