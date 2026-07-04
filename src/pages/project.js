@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useRef } from "react"
-import { Link } from "gatsby"
+import { Link, navigate } from "gatsby"
 import {
   FaGithub,
   FaExternalLinkAlt,
@@ -22,6 +22,7 @@ import { useData } from "../context/DataContext"
 import { resolveImage } from "../data/imageMap"
 import AdminBar from "../admin/AdminBar"
 import { SKILL_ICONS } from "../data/skillIcons"
+import { ProjectFormModal } from "../admin/FormModals"
 
 /* ─── Tech Icon Lookup ────────────────────────────────────────── */
 // Maps data.json techStack names → SKILL_ICONS keys
@@ -236,11 +237,12 @@ function getProjectSections(project, category) {
 /* ─── Main Page Component ─────────────────────────────────────── */
 export default function ProjectPage({ location }) {
   const { isLoggedIn } = useAuth()
-  const { data, updateProject } = useData()
+  const { data, updateProject, moveProject } = useData()
   const [project, setProject] = useState(null)
   const [category, setCategory] = useState("")
   const [loading, setLoading] = useState(true)
   const [activeImgIndex, setActiveImgIndex] = useState(0)
+  const [editingProject, setEditingProject] = useState(null)
 
   const portfolios = data?.portfolios || {}
 
@@ -391,7 +393,7 @@ export default function ProjectPage({ location }) {
   const metaItems = [
     { label: "Role", value: project.role || "Front-End Developer", icon: <FaBriefcase /> },
     { label: "Category", value: `${category} Project`, icon: <FaFolderOpen /> },
-    { label: "Timeline", value: project.timeline || "2–4 Weeks", icon: <FaCalendarAlt /> },
+    { label: "Timeline", value: project.timeline, icon: <FaCalendarAlt /> },
     { label: "Company", value: project.client, icon: <FaBuilding /> },
   ]
 
@@ -412,9 +414,34 @@ export default function ProjectPage({ location }) {
         </div>
 
         {/* ── HEADER: Project Name & Tag ───────────────────────── */}
-        <div className="project-header-section">
-          <span className="project-tag">{category} Project</span>
-          <h1 className="project-title">{project.name}</h1>
+        <div className="project-header-section" style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-end", flexWrap: "wrap", gap: "16px" }}>
+          <div>
+            <span className="project-tag">{category} Project</span>
+            <h1 className="project-title" style={{ margin: 0 }}>{project.name}</h1>
+          </div>
+          {isLoggedIn && (
+            <button
+              className="admin-edit-btn"
+              style={{
+                background: "linear-gradient(135deg, #6d28d9, #a78bfa)",
+                color: "#fff",
+                border: "none",
+                borderRadius: "8px",
+                padding: "8px 16px",
+                fontWeight: "600",
+                fontSize: "12px",
+                cursor: "pointer",
+                display: "flex",
+                alignItems: "center",
+                gap: "6px",
+                boxShadow: "0 4px 10px rgba(109, 40, 217, 0.15)",
+                transition: "all 0.2s ease"
+              }}
+              onClick={() => setEditingProject({ ...project, category })}
+            >
+              ✏️ Edit Project Details
+            </button>
+          )}
         </div>
 
         {/* ── GALLERY: Main Slider + 4 Thumbnails ──────────────── */}
@@ -767,6 +794,31 @@ export default function ProjectPage({ location }) {
             )}
           </div>
         </div>
+      )}
+      {editingProject && (
+        <ProjectFormModal
+          key={editingProject.id}
+          initial={editingProject}
+          categories={Object.keys(portfolios)}
+          onSave={(updatedProj) => {
+            const hasCategoryChanged = updatedProj.category !== category
+            if (hasCategoryChanged) {
+              moveProject(category, updatedProj.category, project.id, updatedProj)
+            } else {
+              updateProject(category, project.id, updatedProj)
+            }
+
+            const nextName = updatedProj.name
+            const nextCat = updatedProj.category
+            setEditingProject(null)
+
+            // Redirect if name or category changed, otherwise the state update of `project` will auto-refresh the page content
+            if (nextName !== project.name || nextCat !== category) {
+              navigate(`/project?name=${encodeURIComponent(nextName)}&category=${encodeURIComponent(nextCat)}`)
+            }
+          }}
+          onClose={() => setEditingProject(null)}
+        />
       )}
     </Layout>
   )

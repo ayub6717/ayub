@@ -38,7 +38,7 @@ const About = () => {
                 rel="noopener noreferrer"
               >
                 {" "}
-                Get Resume
+                View Resume
               </a>
               <Button clickEvent link="#skill" ml="15px" title="My Skills" />
             </div>
