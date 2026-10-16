@@ -27,7 +27,7 @@ function Heros() {
           />
         </div>
         {/* text col - RIGHT */}
-        <div className="px-6 md:px-10 lg:px-12 xl:px-16 intro mt-[100px] md:mt-[150px] lg:mt-[160px] xl:mt-[200px] mb-0 md:mb-[60px] lg:-mb-0 flex-1 relative z-10 text-center lg:text-left" data-aos="fade-down">
+        <div className="px-6 md:px-10 lg:px-12 xl:px-16 lg:pr-24 xl:pr-28 intro mt-[100px] md:mt-[150px] lg:mt-[160px] xl:mt-[200px] mb-0 md:mb-[60px] lg:-mb-0 flex-1 relative z-10 text-center lg:text-left" data-aos="fade-down">
           {isLoggedIn && (
             <div className="admin-section-toolbar" style={{ marginBottom: "15px" }}>
               <button className="admin-edit-btn" onClick={() => setShowEdit(true)}>
@@ -36,10 +36,10 @@ function Heros() {
             </div>
           )}
           <div>
-            <p className="text-[14px] md:text-[16px] lg:text-[18px] 7xl:text-[24px] font-bold text-[#a16c8d] uppercase tracking-widest mb-1 md:mb-2">{hero.greeting}</p>
-            <h1 className="text-[48px] md:text-[68px] lg:text-[80px] 7xl:text-[100px] font-black text-[#2c2c2c] leading-tight tracking-tight">{hero.name}</h1>
-            <p className="text-[20px] md:text-[24px] lg:text-[28px] 7xl:text-[36px] text-slate-800 mt-[10px] md:mt-[15px] font-extrabold">{hero.title}</p>
-            <div className="mt-3 flex items-center flex-wrap gap-1.5 text-slate-500 font-medium text-[13px] md:text-[14px] 7xl:text-[18px] justify-center lg:justify-start">
+            <p className="text-[14px] md:text-[16px] lg:text-[18px] 7xl:text-[24px] font-bold text-[#a16c8d] uppercase tracking-widest mb-3 md:mb-4">{hero.greeting}</p>
+            <h1 className="text-[48px] md:text-[68px] lg:text-[80px] 7xl:text-[100px] font-black text-[#2c2c2c] leading-[1.08] tracking-tight">{hero.name}</h1>
+            <p className="text-[20px] md:text-[24px] lg:text-[28px] 7xl:text-[36px] text-slate-800 mt-4 md:mt-5 lg:mt-6 font-extrabold">{hero.title}</p>
+            <div className="mt-5 md:mt-6 flex items-center flex-wrap gap-1.5 text-slate-500 font-medium text-[13px] md:text-[14px] 7xl:text-[18px] justify-center lg:justify-start">
               <span className="inline-block w-2 h-2 rounded-full bg-[#a16c8d] opacity-50 mr-1"></span>
               {(hero.tags || []).map((tag, i) => (
                 <React.Fragment key={i}>
@@ -49,7 +49,7 @@ function Heros() {
               ))}
             </div>
 
-            <p className="mt-6 text-slate-600 text-[14px] md:text-[15px] lg:text-[16px] 7xl:text-[20px] leading-relaxed max-w-[500px] mx-auto lg:mx-0">
+            <p className="mt-7 md:mt-8 text-slate-600 text-[14px] md:text-[15px] lg:text-[16px] 7xl:text-[20px] leading-relaxed max-w-[500px] mx-auto lg:mx-0">
               I build scalable, responsive, and high-performance web applications using React, TypeScript, Next.js, and modern frontend technologies.
             </p>
 
