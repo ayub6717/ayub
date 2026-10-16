@@ -36,7 +36,7 @@
   "scripts": {
     "predeploy": "npm run build",
     "deploy": "NODE_OPTIONS=--openssl-legacy-provider gatsby build && gh-pages -d public -b master",
-    "build": "NODE_OPTIONS=--openssl-legacy-provider gatsby build",
+    "build": "gatsby build",
     "develop": "NODE_OPTIONS=--openssl-legacy-provider gatsby develop",
     "dev": "NODE_OPTIONS=--openssl-legacy-provider gatsby develop",
     "format": "prettier --write \"**/*.{js,jsx,json,md}\"",
