@@ -8,10 +8,6 @@ export default {
     fontFamily: {
       Lato: '"Lato", sans-serif"',
     },
-    container: {
-      center: true,
-      padding: "4rem",
-    },
     extend: {
       colors: {
         dark_primary: "#06223F",
