@@ -1,5 +1,6 @@
 import { defineConfig, transformWithEsbuild } from "vite"
 import react from "@vitejs/plugin-react"
+import crypto from "node:crypto"
 import fs from "node:fs"
 import path from "node:path"
 
@@ -30,6 +31,25 @@ export default defineConfig({
           req.on("end", () => {
             try {
               const dataPath = path.join(__dirname, "src/data/data.json")
+              // Keep base64 uploads out of data.json (it gets bundled into the JS): store them as files in src/data/image
+              const imageDir = path.join(__dirname, "src/data/image")
+              const extByMime: Record<string, string> = { png: "png", jpeg: "jpg", jpg: "jpg", webp: "webp", gif: "gif", "svg+xml": "svg" }
+              const externalize = (value: unknown): unknown => {
+                if (typeof value === "string") {
+                  const m = /^data:image\/([a-z0-9.+-]+);base64,/i.exec(value)
+                  if (!m || !extByMime[m[1].toLowerCase()]) return value
+                  const buf = Buffer.from(value.slice(m[0].length), "base64")
+                  const name = `upload-${crypto.createHash("sha1").update(buf).digest("hex").slice(0, 10)}.${extByMime[m[1].toLowerCase()]}`
+                  fs.writeFileSync(path.join(imageDir, name), buf)
+                  return name
+                }
+                if (Array.isArray(value)) return value.map(externalize)
+                if (value && typeof value === "object") {
+                  return Object.fromEntries(Object.entries(value).map(([k, v]) => [k, externalize(v)]))
+                }
+                return value
+              }
+              body = JSON.stringify(externalize(JSON.parse(body)))
               fs.writeFileSync(dataPath, body, "utf8")
               res.setHeader("Content-Type", "application/json")
               res.end(JSON.stringify({ success: true }))
