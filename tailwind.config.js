@@ -1,8 +1,8 @@
 /** @type {import('tailwindcss').Config} */
-module.exports = {
+export default {
   content: [
-    "./src/pages/**/*.{js,jsx,ts,tsx}",
-    "./src/components/**/*.{js,jsx,ts,tsx}",
+    "./index.html",
+    "./src/**/*.{js,jsx,ts,tsx}",
   ],
   theme: {
     fontFamily: {
@@ -33,7 +33,7 @@ module.exports = {
         "7xl": "1600px",
         "8xl": "1680px",
         "9xl": "1920px",
-    },
+      },
       backgroundImage: {
         primaryLinear: "linear-gradient(180deg, #bfabadbd 0.48%, #bfabad70 100%);",
       },

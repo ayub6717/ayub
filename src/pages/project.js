@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useRef } from "react"
-import { Link, navigate } from "gatsby"
+import { Link, useNavigate, useLocation } from "react-router-dom"
 import {
   FaGithub,
   FaExternalLinkAlt,
@@ -235,7 +235,9 @@ function getProjectSections(project, category) {
 }
 
 /* ─── Main Page Component ─────────────────────────────────────── */
-export default function ProjectPage({ location }) {
+export default function ProjectPage() {
+  const navigate = useNavigate()
+  const location = useLocation()
   const { isLoggedIn } = useAuth()
   const { data, updateProject, moveProject } = useData()
   const [project, setProject] = useState(null)

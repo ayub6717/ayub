@@ -9,7 +9,7 @@ import {
 
 import "./title.css"
 
-export const Title = ({ title, social, side, height }) => {
+export const Title = ({ title, social, side = "left", height = "160px" }) => {
   return (
     <div
       data-aos="fade-in"
@@ -70,7 +70,3 @@ export const Title = ({ title, social, side, height }) => {
   )
 }
 
-Title.defaultProps = {
-  side: "left",
-  height: "160px",
-}

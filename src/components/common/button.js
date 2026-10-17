@@ -3,15 +3,15 @@ import React from "react"
 import "./button.css"
 
 const Button = ({
-  title,
-  link,
-  target,
+  title = "Button",
+  link = "https://ayub6717.netlify.app/",
+  target = "",
   clickEvent,
   onMouseOver,
   onMouseOut,
-  color,
-  bgColor,
-  borderColor,
+  color = "#2c2c2c",
+  bgColor = "transparent",
+  borderColor = "#06223F",
   mt,
   mb,
   ml,
@@ -50,19 +50,6 @@ const Button = ({
       {title}
     </a>
   )
-}
-
-Button.defaultProps = {
-  title: "Button",
-  link: "https://ayub6717.netlify.app/",
-  target: "",
-  marginTop: 0,
-  marginBottom: 0,
-  marginLeft: 0,
-  marginRight: 0,
-  color: "#2c2c2c",
-  bgColor: "transparent",
-  borderColor: "#06223F",
 }
 
 export { Button }

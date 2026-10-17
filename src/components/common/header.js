@@ -1,5 +1,4 @@
-import { Link } from "gatsby"
-import PropTypes from "prop-types"
+import { Link } from "react-router-dom"
 import React, { useRef, useState } from "react"
 import { FaBars } from "react-icons/fa"
 
@@ -8,7 +7,7 @@ import { Logo } from "./logo"
 
 import "./header.css"
 
-const Header = () => {
+const Header = ({ siteTitle = "" }) => {
   const [mobileNav, setMobileNav] = useState(false)
   const headerEl = useRef()
   if (typeof window !== `undefined`) {
@@ -116,14 +115,6 @@ const Header = () => {
       </Container>
     </header>
   )
-}
-
-Header.propTypes = {
-  siteTitle: PropTypes.string,
-}
-
-Header.defaultProps = {
-  siteTitle: ``,
 }
 
 export { Header }

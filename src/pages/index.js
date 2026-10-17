@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { Link } from "gatsby";
+import { Link } from "react-router-dom";
 import Aos from "aos";
 import "aos/dist/aos.css";
 import {
@@ -17,7 +17,7 @@ import Navbar from "../components/Navbar";
 import { useAuth } from "../context/AuthContext";
 import AdminBar from "../admin/AdminBar";
 
-const IndexPage = ({ location }) => {
+const IndexPage = () => {
   const { isLoggedIn } = useAuth();
 
   useEffect(() => {
@@ -36,7 +36,7 @@ const IndexPage = ({ location }) => {
         <About />
         <Experience />
         <Skill />
-        <Portfolio location={location} />
+        <Portfolio />
         <LoveToDo />
         <Education />
         <Contact />

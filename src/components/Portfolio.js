@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from "react"
-import { navigate } from "gatsby"
+import { useNavigate, useLocation } from "react-router-dom"
 import {
   FaGithub,
   FaExternalLinkAlt,
@@ -27,7 +27,9 @@ const CodecanyonIcon = () => (
   </svg>
 )
 
-const Portfolio = ({ location }) => {
+const Portfolio = () => {
+  const navigate = useNavigate()
+  const location = useLocation()
   const { isLoggedIn } = useAuth()
   const { data, addProject, updateProject, moveProject, deleteProject, reorderProjects } = useData()
 

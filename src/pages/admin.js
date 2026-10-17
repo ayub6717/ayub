@@ -1,9 +1,10 @@
 import React, { useEffect } from "react"
-import { navigate } from "gatsby"
+import { useNavigate } from "react-router-dom"
 import { useAuth } from "../context/AuthContext"
 import LoginModal from "../admin/LoginModal"
 
 export default function AdminPage() {
+  const navigate = useNavigate()
   const { isLoggedIn } = useAuth()
 
   useEffect(() => {
