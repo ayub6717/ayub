@@ -23,15 +23,19 @@ const Experience = () => {
     <div id="experience">
       <Container>
         <Title title="Experience" />
-        <div className="md:pl-24">
+        <div className="md:pl-24 min-[1536px]:pl-0">
           {isLoggedIn && (
             <button className="admin-add-floating" onClick={() => setShowAddModal(true)}>
               ➕ Add Experience
             </button>
           )}
 
-          {experiences.map((exp) => (
-            <div key={exp.id} className="mt-11 relative" style={{ borderLeft: isLoggedIn ? "2px dashed #6d28d9" : "none", paddingLeft: isLoggedIn ? "15px" : "0" }}>
+          {experiences.map((exp, index) => (
+            <div
+              key={exp.id}
+              className={`relative ${index === 0 ? "mt-11" : "mt-11 pt-11 border-t border-[#1b1b1b1a]"}`}
+              style={{ borderLeft: isLoggedIn ? "2px dashed #6d28d9" : "none", paddingLeft: isLoggedIn ? "15px" : "0" }}
+            >
               {isLoggedIn && (
                 <div className="admin-entry-actions" style={{ marginBottom: "8px" }}>
                   <button className="admin-edit-btn sm" onClick={() => setEditingExp(exp)}>
@@ -42,8 +46,8 @@ const Experience = () => {
                   </button>
                 </div>
               )}
-              <h3>{exp.title}</h3>
-              <h4 className="mt-3 text-[#2c2c2c]">
+              <h3 className="text-[20px] md:text-[22px] font-bold text-[#1b1b1b]">{exp.title}</h3>
+              <h4 className="mt-2 text-[17px] font-bold text-[#2c2c2c]">
                 Company: {exp.company}
               </h4>
               <p className="mt-1 text-[#1b1b1bee] text-[16px]">
