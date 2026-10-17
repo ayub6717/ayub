@@ -49,9 +49,9 @@ function Heros() {
             </div>
           )}
           <div>
-            <p className="text-[14px] md:text-[16px] lg:text-[18px] 7xl:text-[24px] font-bold text-[#a16c8d] uppercase tracking-widest mb-3 md:mb-4">{hero.greeting}</p>
-            <h1 className="text-[48px] md:text-[68px] lg:text-[80px] 7xl:text-[100px] font-black text-[#2c2c2c] leading-[1.08] tracking-tight">{hero.name}</h1>
-            <p className="text-[20px] md:text-[24px] lg:text-[28px] 7xl:text-[36px] text-slate-800 mt-4 md:mt-5 lg:mt-6 font-extrabold">
+            <p className="text-[12px] md:text-[13px] lg:text-[14px] font-bold text-[#a16c8d] uppercase tracking-widest mb-3 md:mb-4">{hero.greeting}</p>
+            <h1 className="text-[38px] md:text-[54px] lg:text-[64px] font-black text-[#2c2c2c] leading-[1.08] tracking-tight">{hero.name}</h1>
+            <p className="text-[16px] md:text-[19px] lg:text-[22px] text-slate-800 mt-4 md:mt-5 lg:mt-6 font-extrabold">
               {typedTitle}<span className="animate-pulse"></span>
             </p>
             <div className="mt-5 md:mt-6 flex items-center flex-wrap gap-1.5 text-slate-500 font-medium text-[13px] md:text-[14px] 7xl:text-[18px] justify-center lg:justify-start">
@@ -64,9 +64,11 @@ function Heros() {
               ))}
             </div>
 
-            <p className="mt-7 md:mt-8 text-slate-600 text-[14px] md:text-[15px] lg:text-[16px] 7xl:text-[20px] leading-relaxed max-w-[500px] mx-auto lg:mx-0">
-              I build scalable, responsive, and high-performance web applications using React, TypeScript, Next.js, and modern frontend technologies.
-            </p>
+            {hero.bio && (
+              <p className="mt-7 md:mt-8 text-slate-600 text-[14px] md:text-[15px] lg:text-[16px] 7xl:text-[20px] leading-relaxed max-w-[500px] mx-auto lg:mx-0">
+                {hero.bio}
+              </p>
+            )}
 
             <div className="mt-8 flex items-center gap-4 flex-wrap justify-center lg:justify-start">
               <a
@@ -95,14 +97,14 @@ function Heros() {
 
           <div className="flex flex-row gap-6 md:gap-10 mt-10 justify-center lg:justify-start items-center flex-wrap">
             <div className="flex items-center gap-3">
-              <span className="text-[36px] md:text-[44px] lg:text-[48px] 7xl:text-[55px] font-black text-[#a16c8d] leading-none">{hero.yearsExp}</span>
+              <span className="text-[30px] md:text-[36px] lg:text-[42px] font-black text-[#a16c8d] leading-none">{hero.yearsExp}</span>
               <div className="w-[1.5px] h-7 bg-slate-300"></div>
-              <p className="text-[12px] md:text-[13px] lg:text-[14px] 7xl:text-[18px] text-slate-500 font-bold leading-tight max-w-[110px]">Years of Professional Experience</p>
+              <p className="text-[11px] md:text-[12px] lg:text-[13px] text-slate-500 font-bold leading-tight max-w-[110px]">Years of Professional Experience</p>
             </div>
             <div className="flex items-center gap-3">
-              <span className="text-[36px] md:text-[44px] lg:text-[48px] 7xl:text-[55px] font-black text-[#a16c8d] leading-none">{hero.projects}</span>
+              <span className="text-[30px] md:text-[36px] lg:text-[42px] font-black text-[#a16c8d] leading-none">{hero.projects}</span>
               <div className="w-[1.5px] h-7 bg-slate-300"></div>
-              <p className="text-[12px] md:text-[13px] lg:text-[14px] 7xl:text-[18px] text-slate-500 font-bold leading-tight max-w-[110px]">Projects Delivered</p>
+              <p className="text-[11px] md:text-[12px] lg:text-[13px] text-slate-500 font-bold leading-tight max-w-[110px]">Projects Delivered</p>
             </div>
           </div>
 

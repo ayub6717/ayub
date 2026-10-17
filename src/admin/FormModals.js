@@ -934,6 +934,7 @@ export function HeroFormModal({ initial = {}, onSave, onClose }) {
     name: initial.name || "",
     title: initial.title || "",
     tags: (initial.tags || []).join(", "),
+    bio: initial.bio || "",
     yearsExp: initial.yearsExp || "",
     projects: initial.projects || "",
     resumeUrl: initial.resumeUrl || "",
@@ -978,6 +979,10 @@ export function HeroFormModal({ initial = {}, onSave, onClose }) {
       <div className="admin-form-group">
         <label className="admin-form-label">Tags (comma separated)</label>
         <input className="admin-form-input" value={form.tags} onChange={e => set("tags", e.target.value)} placeholder="Web Developer, Programmer" />
+      </div>
+      <div className="admin-form-group">
+        <label className="admin-form-label">Bio / Short Description</label>
+        <textarea className="admin-form-textarea" rows={3} value={form.bio} onChange={e => set("bio", e.target.value)} placeholder="I build scalable, responsive web applications..." />
       </div>
       <div className="admin-form-row">
         <div className="admin-form-group">
