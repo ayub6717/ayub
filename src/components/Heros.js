@@ -42,7 +42,7 @@ function Heros() {
             <div className="mt-5 md:mt-6 flex items-center flex-wrap gap-1.5 text-slate-500 font-medium text-[13px] md:text-[14px] 7xl:text-[18px] justify-center lg:justify-start">
               <span className="inline-block w-2 h-2 rounded-full bg-[#a16c8d] opacity-50 mr-1"></span>
               {(hero.tags || []).map((tag, i) => (
-                <React.Fragment key={i}>
+                <React.Fragment key={tag || i}>
                   {i > 0 && <span className="mx-1 text-[#a16c8d]/50">•</span>}
                   <span>{tag}</span>
                 </React.Fragment>

@@ -6,7 +6,7 @@ export const Container = ({ children, padding }) => {
   return (
     <div
       style={{ padding }}
-      className="section-container"
+      className="layout-wrap"
     >
       {children}
     </div>

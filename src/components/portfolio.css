@@ -33,16 +33,16 @@
 }
 
 .portfolio-nav li:hover {
-  background-color: #c08aab;
-  border-color: #c08aab;
+  background-color: #7e5270;
+  border-color: #7e5270;
   color: #fff;
 }
 
 .portfolio-nav li.active {
-  background-color: #a16c8d;
-  border-color: #a16c8d;
+  background-color: #7e5270;
+  border-color: #7e5270;
   color: #fff;
-  box-shadow: 0 4px 14px rgba(161, 108, 141, 0.35);
+  box-shadow: 0 4px 14px rgba(126, 82, 112, 0.35);
 }
 
 /* ─── Grid ──────────────────────────────────────────────────────── */
@@ -54,6 +54,7 @@
 
 /* ─── Card ──────────────────────────────────────────────────────── */
 .pf-card {
+  position: relative;
   background: #fff;
   border-radius: 14px;
   overflow: hidden;
@@ -110,7 +111,7 @@
 
 .pf-overlay-btn {
   background: #fff;
-  color: #a16c8d;
+  color: #6b3d5e;
   font-size: 13px;
   font-weight: 700;
   padding: 9px 20px;
@@ -185,7 +186,7 @@
 }
 
 .pf-icon-link:hover {
-  background: #a16c8d;
+  background: #7e5270;
   color: #fff;
 }
 
@@ -218,7 +219,7 @@
   border: 1px solid #e2e8f0;
   border-radius: 6px;
   font-size: 16px;
-  color: #9ca3af;
+  color: #6b7280;
   cursor: grab;
   opacity: 0;
   transition: opacity 0.2s ease, color 0.2s ease, box-shadow 0.2s ease;
@@ -240,16 +241,16 @@
 }
 
 /* Card being dragged */
-.pf-card--dragging {
+.pf-card.pf-card--dragging {
   opacity: 0.4;
   transform: scale(0.97);
   box-shadow: 0 4px 20px rgba(109,40,217,0.18);
-  border-color: #a78bfa !important;
+  border-color: #a78bfa;
 }
 
 /* Drop target */
-.pf-card--drag-over {
-  border-color: #7c3aed !important;
+.pf-card.pf-card--drag-over {
+  border-color: #7c3aed;
   box-shadow: 0 0 0 2px rgba(124,58,237,0.25), 0 8px 24px rgba(124,58,237,0.1);
   transform: translateY(-4px);
 }
@@ -265,8 +266,4 @@
   border-radius: 14px 0 0 14px;
 }
 
-/* Keep position: relative on card so handle & before pseudo work */
-.pf-card {
-  position: relative;
-}
 
