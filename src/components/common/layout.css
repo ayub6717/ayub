@@ -1,12 +1,5 @@
 @import url("https://fonts.googleapis.com/css?family=Lato:300,400,900&display=swap");
 
-::-moz-selection {
-  background: #1d293a;
-}
-
-::selection {
-  background: #1d293a;
-}
 
 html {
   font-family: sans-serif;
