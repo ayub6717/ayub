@@ -5,15 +5,11 @@ function SkillLogo() {
         <>
             {/* Background panel - LEFT, behind image */}
             <div
-                data-aos="slide-right"
-                data-aos-delay="1200"
                 className="absolute h-full w-[44%] xl:w-[42%] top-0 left-0 bg-primaryLinear bottom-0 -z-10 hidden lg:block"
             />
 
             {/* Tech stack icons - RIGHT side column */}
             <div
-                data-aos="slide-left"
-                data-aos-delay="1200"
                 className="absolute top-[18%] right-[50px] xl:right-[60px] gap-8 flex-col z-10 hidden lg:flex"
             >
                 <svg className='7xl:h-[60px] 7xl:w-[60px] h-[30px] w-[30px]' fill="#3178c6" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">

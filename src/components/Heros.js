@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import profile from "../assets/images/Hero/person.png";
 import SkillLogo from './SkillLogo';
 import { useAuth } from "../context/AuthContext"
@@ -13,12 +13,25 @@ function Heros() {
 
   const hero = data?.hero || {}
 
+  const [typedTitle, setTypedTitle] = useState('')
+  useEffect(() => {
+    const title = hero.title || ''
+    setTypedTitle('')
+    let i = 0
+    const interval = setInterval(() => {
+      i++
+      setTypedTitle(title.slice(0, i))
+      if (i >= title.length) clearInterval(interval)
+    }, 60)
+    return () => clearInterval(interval)
+  }, [hero.title])
+
   return (
     <section id="home" className="bg-[#a16c8d0f] overflow-hidden relative">
       <div className="lg:min-h-screen relative flex md:flex-row flex-col">
         <SkillLogo />
         {/* image col - LEFT */}
-        <div className="hidden lg:flex lg:w-[44%] xl:w-[42%] shrink-0 self-stretch">
+        <div className="hidden lg:flex lg:w-[44%] xl:w-[42%] shrink-0 self-stretch relative z-0">
           <img
             src={resolveImage(hero.image) || profile}
             data-aos="fade-in"
@@ -27,7 +40,7 @@ function Heros() {
           />
         </div>
         {/* text col - RIGHT */}
-        <div className="px-6 md:px-10 lg:px-12 xl:px-16 lg:pr-24 xl:pr-28 intro mt-[100px] md:mt-[150px] lg:mt-[160px] xl:mt-[200px] mb-0 md:mb-[60px] lg:-mb-0 flex-1 relative z-10 text-center lg:text-left" data-aos="fade-down">
+        <div className="px-6 md:px-10 lg:px-12 xl:px-16 lg:pr-24 xl:pr-28 intro mt-[100px] md:mt-[150px] lg:mt-[160px] xl:mt-[200px] mb-0 md:mb-[60px] lg:-mb-0 flex-1 relative z-10 text-center lg:text-left">
           {isLoggedIn && (
             <div className="admin-section-toolbar" style={{ marginBottom: "15px" }}>
               <button className="admin-edit-btn" onClick={() => setShowEdit(true)}>
@@ -38,7 +51,9 @@ function Heros() {
           <div>
             <p className="text-[14px] md:text-[16px] lg:text-[18px] 7xl:text-[24px] font-bold text-[#a16c8d] uppercase tracking-widest mb-3 md:mb-4">{hero.greeting}</p>
             <h1 className="text-[48px] md:text-[68px] lg:text-[80px] 7xl:text-[100px] font-black text-[#2c2c2c] leading-[1.08] tracking-tight">{hero.name}</h1>
-            <p className="text-[20px] md:text-[24px] lg:text-[28px] 7xl:text-[36px] text-slate-800 mt-4 md:mt-5 lg:mt-6 font-extrabold">{hero.title}</p>
+            <p className="text-[20px] md:text-[24px] lg:text-[28px] 7xl:text-[36px] text-slate-800 mt-4 md:mt-5 lg:mt-6 font-extrabold">
+              {typedTitle}<span className="animate-pulse"></span>
+            </p>
             <div className="mt-5 md:mt-6 flex items-center flex-wrap gap-1.5 text-slate-500 font-medium text-[13px] md:text-[14px] 7xl:text-[18px] justify-center lg:justify-start">
               <span className="inline-block w-2 h-2 rounded-full bg-[#a16c8d] opacity-50 mr-1"></span>
               {(hero.tags || []).map((tag, i) => (
@@ -78,7 +93,7 @@ function Heros() {
             </div>
           </div>
 
-          <div className="flex flex-row gap-6 md:gap-10 mt-10 justify-center lg:justify-start items-center flex-wrap" data-aos="fade-up">
+          <div className="flex flex-row gap-6 md:gap-10 mt-10 justify-center lg:justify-start items-center flex-wrap">
             <div className="flex items-center gap-3">
               <span className="text-[36px] md:text-[44px] lg:text-[48px] 7xl:text-[55px] font-black text-[#a16c8d] leading-none">{hero.yearsExp}</span>
               <div className="w-[1.5px] h-7 bg-slate-300"></div>
@@ -92,7 +107,7 @@ function Heros() {
           </div>
 
           {/* Social links row */}
-          <div className="mt-8 flex items-center gap-1 justify-center lg:justify-start" data-aos="fade-up">
+          <div className="mt-8 flex items-center gap-1 justify-center lg:justify-start">
             <span className="text-[11px] text-slate-400 font-semibold uppercase tracking-widest mr-3">Find me on</span>
             {[
               { href: "https://github.com/ayub6717", label: "GitHub", icon: <svg aria-hidden="true" viewBox="0 0 496 512" className="w-4 h-4" fill="currentColor"><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8z"/></svg> },
