@@ -75,19 +75,19 @@
       "id": "edu1",
       "degree": "Bachelor of Science in Computer Science & Engineering",
       "institute": "Daffodil International University",
-      "session": "2016 - 2020"
+      "session": "2020"
     },
     {
       "id": "edu2",
       "degree": "Higher Secondary Certificate (HSC)",
-      "institute": "Dr.Azhar udddin degree college",
-      "session": "2013 - 2014"
+      "institute": "Dr. Azhar Uddin Degree College",
+      "session": "2015"
     },
     {
       "id": "edu3",
       "degree": "Secondary School Certificate (SSC)",
-      "institute": "Lalmohan Gov’t High School",
-      "session": "2011 - 2012"
+      "institute": "Lalmohan Government High School",
+      "session": "2013"
     }
   ],
   "educationImage": "",

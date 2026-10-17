@@ -22,11 +22,18 @@ function Navbar() {
         {nav.map((item, i) => (
           <a key={i}
             href={item.link}
-            onClick={() => setActive(i)}
-            className={`text-xl p-2.5 rounded-full sm:cursor-pointer 
+            onClick={(e) => {
+              e.preventDefault()
+              setActive(i)
+              document.querySelector(item.link)?.scrollIntoView({ behavior: "smooth" })
+            }}
+            className={`relative group text-xl p-2.5 rounded-full sm:cursor-pointer
      ${i === active && "bg-dark_primary text-white"} `}
           >
             {createElement(item.icon)}
+            <span className="absolute -top-11 left-1/2 -translate-x-1/2 bg-[#1d293a]/85 text-white text-[11px] font-medium px-3 py-1.5 rounded-lg whitespace-nowrap opacity-0 group-hover:opacity-100 pointer-events-none transition-opacity duration-200 shadow-sm">
+              {item.label}
+            </span>
           </a>
         ))}
       </nav>

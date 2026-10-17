@@ -27,8 +27,8 @@ const Education = () => {
       <Container>
         <Title title="Education" />
         <div className="flex flex-wrap">
-          <div className="flex flex-wrap items-center w-full">
-            <div className="lg:w-1/2 md:w-1/2">
+          <div className="flex flex-wrap items-center w-full gap-8">
+            <div className="lg:w-[46%] md:w-[46%]">
               {isLoggedIn && (
                 <button className="admin-add-floating" onClick={() => setShowAddModal(true)} style={{ marginBottom: "20px" }}>
                   ➕ Add Education
@@ -69,17 +69,19 @@ const Education = () => {
                           </button>
                         </div>
                       )}
-                      <p className="leading-relaxed">
-                        Title of awarded qualification: {edu.degree} <br />
-                        Institute : {edu.institute} <br />
-                        Session: {edu.session}
-                      </p>
+                      <div className="leading-relaxed space-y-1">
+                        <p className="font-semibold text-[#1d293a]">{edu.degree}</p>
+                        <p className="text-slate-500 text-[15px]">{edu.institute}</p>
+                        <p className="text-[#a16c8d] text-[14px] font-medium">
+                          {edu.id === "edu1" ? "Year of Graduation" : "Year of Passing"}: {edu.session}
+                        </p>
+                      </div>
                     </div>
                   </div>
                 )
               })}
             </div>
-            <div className="lg:w-1/2 md:w-1/2" style={{ position: "relative", aspectRatio: "4/3", minHeight: "200px" }}>
+            <div className="lg:w-[46%] md:w-[46%] flex-1" style={{ position: "relative", aspectRatio: "4/3", minHeight: "200px" }}>
               <img
                 src={sideImage}
                 alt="Education"
