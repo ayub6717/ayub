@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { useState, useEffect, useRef } from "react"
 import { Container, Title } from "./common"
 import { useAuth } from "../context/AuthContext"
 import { useData } from "../context/DataContext"
@@ -34,6 +34,23 @@ const Skill = () => {
   const [selectedSkill, setSelectedSkill] = useState(skillsName[0] || "Web")
   const [editingSkill, setEditingSkill] = useState(null)
   const [showAddSkill, setShowAddSkill] = useState(false)
+  const [animKey, setAnimKey] = useState(0)
+  const [inView, setInView] = useState(false)
+  const gridRef = useRef(null)
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => { if (entry.isIntersecting) setInView(true) },
+      { threshold: 0.1 }
+    )
+    if (gridRef.current) observer.observe(gridRef.current)
+    return () => observer.disconnect()
+  }, [])
+
+  const handleTabChange = (name) => {
+    setSelectedSkill(name)
+    setAnimKey(k => k + 1)
+  }
 
   const selectedSkills = skills[selectedSkill] || []
 
@@ -68,7 +85,7 @@ const Skill = () => {
             {skillsName.map(name => (
               <button
                 key={name}
-                onClick={() => setSelectedSkill(name)}
+                onClick={() => handleTabChange(name)}
                 className={`skill-tab-btn ${name === selectedSkill ? "active" : ""}`}
               >
                 {name}
@@ -89,12 +106,16 @@ const Skill = () => {
         </div>
 
         {/* ── Skills Grid ── */}
-        <div className="skill-grid">
+        <div className="skill-grid" ref={gridRef}>
           {selectedSkills.map(({ name, percent }, idx) => {
             const level = getLevel(percent)
             const IconEl = SKILL_ICONS[name]
             return (
-              <div key={`${name}-${idx}`} className="skill-card">
+              <div
+                key={`${animKey}-${name}-${idx}`}
+                className={`skill-card${inView ? " drop-in" : ""}`}
+                style={inView ? { animationDelay: `${idx * 0.1}s` } : {}}
+              >
                 {isLoggedIn && (
                   <div className="skill-card-admin">
                     <button className="admin-edit-btn sm" onClick={() => setEditingSkill({ category: selectedSkill, name, percent })}>✏️</button>
