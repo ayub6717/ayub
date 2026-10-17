@@ -5,10 +5,7 @@
 }
 
 .portfolios {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding-left: 100px;
-  padding-right: 25px;
+  /* Container/layout-wrap already handles centering and padding */
 }
 
 /* ─── Filter Tabs ───────────────────────────────────────────────── */
@@ -196,7 +193,6 @@
 }
 
 @media (max-width: 991px) {
-  .portfolios { padding-left: 0; }
   .portfolio-nav { justify-content: center; }
 }
 
