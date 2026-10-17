@@ -1,18 +1,20 @@
 import React, {useState, createElement} from "react";
 import { content } from "../Content";
-import { HiMenuAlt2 } from "react-icons/hi";
+import { HiOutlineMenu } from "react-icons/hi";
+import { useAuth } from "../context/AuthContext";
 
 function Navbar() {
     const { nav } = content;
     const [showMenu, setShowMenu] = useState(false);
     const [active, setActive] = useState(0);
+    const { isLoggedIn } = useAuth();
   return (
     <div className="w-full flex justify-center">
       <div
-        className="sm:cursor-pointer fixed top-10 left-10 z-[999] rounded-lg bg-white/40 p-2"
+        className={`sm:cursor-pointer fixed ${isLoggedIn ? "top-[56px]" : "top-7"} left-[38px] z-[999] rounded-xl bg-[#f4e9ee] p-[10px] text-[#6f3c61] transition-colors hover:bg-[#ecdce5]`}
         onClick={() => setShowMenu(!showMenu)}
       >
-        <HiMenuAlt2 size={34} />
+        <HiOutlineMenu size={24} />
       </div>
       <nav
         className={`fixed  z-[999] flex items-center sm:gap-5 bg-slate-200/60 px-2 sm:px-6 py-3 backdrop-blur-md rounded-full text-dark_primary duration-300 ${
