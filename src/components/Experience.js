@@ -23,7 +23,7 @@ const Experience = () => {
     <div id="experience">
       <Container>
         <Title title="Experience" />
-        <div className="md:pl-24 min-[1536px]:pl-0">
+        <div>
           {isLoggedIn && (
             <button className="admin-add-floating" onClick={() => setShowAddModal(true)}>
               ➕ Add Experience

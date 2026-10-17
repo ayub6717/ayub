@@ -13,7 +13,7 @@ const LoveToDo = () => {
   return (
     <div id="love-todo" className="love-to-do-area">
       <Container>
-        <Title side="right" title="Love To Do" />
+        <Title title="Love To Do" />
         <div className="love-to-do">
           <div className="stickpad">
             <img alt="" src={writtingblog} />

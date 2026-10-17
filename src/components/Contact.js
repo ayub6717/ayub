@@ -21,7 +21,7 @@ const Contact = () => {
   return (
     <div id="contact" className="contact-area">
       <Container>
-        <Title side="right" title="Contact" />
+        <Title title="Contact" />
         {isLoggedIn && (
           <div className="admin-section-toolbar" style={{ justifyContent: "flex-end", marginBottom: "20px" }}>
             <button className="admin-edit-btn" onClick={() => setShowEdit(true)}>

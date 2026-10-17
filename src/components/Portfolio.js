@@ -5,7 +5,7 @@ import {
   FaExternalLinkAlt,
 } from "react-icons/fa"
 
-import { Container } from "./common"
+import { Container, Title } from "./common"
 import "./portfolio.css"
 import PortfolioAction from "./PortfolioAction"
 import { useAuth } from "../context/AuthContext"
@@ -116,9 +116,7 @@ const Portfolio = () => {
   return (
     <div id="portfolio" className="portfolio-area">
       <Container>
-        <div className="title left" style={{ height: "160px" }}>
-          <p>Portfolio</p>
-        </div>
+        <Title title="Portfolio" />
 
         <div className="portfolios">
           {/* ── Category Tabs ── */}

@@ -1,112 +1,80 @@
+@keyframes line-grow {
+  from { width: 0; }
+  to   { width: 100%; }
+}
+
 .title {
-  position: absolute;
-  display: flex;
+  margin-bottom: 48px;
+}
+
+.title-inner {
+  display: inline-flex;
   flex-direction: column;
-  align-items: center;
-}
-
-.title.left {
-  justify-content: flex-end;
-}
-
-.title.left.social {
-  justify-content: space-between;
-}
-
-.title.left {
-  left: 35px;
-}
-
-.title.right {
-  right: 35px;
-}
-
-.title:after {
-  content: "";
-  position: absolute;
-  height: 100%;
-  width: 2px;
-  margin: 15px 0;
-  background: #2c2c2c;
-  z-index: -1;
-}
-
-.title ul {
-  padding: 5px;
-  background-color: #111a28;
-}
-
-.title ul li {
-  margin-bottom: 10px;
-}
-
-.title ul li a {
-  color: rgba(255, 255, 255, 0.85);
 }
 
 .title p {
-  padding: 5px 10px;
-  font-weight: 900;
+  font-size: clamp(16px, 2.5vw, 24px);
+  font-weight: 800;
   text-transform: uppercase;
-  background-color: #1d293a;
-  transform-origin: 50%;
-  color: rgba(255, 255, 255, 0.85);
-  border-radius: 4px;
+  color: #1d293a;
+  letter-spacing: 1px;
+  line-height: 1.2;
+  margin: 0;
 }
 
-.title.left p {
-  transform: rotate(-90deg);
+.title-line {
+  height: 3px;
+  width: 0;
+  background: #a16c8d;
+  border-radius: 2px;
+  margin-top: 8px;
 }
 
-.title.title.right p {
-  transform: rotate(90deg);
+.title-line.animate {
+  animation: line-grow 0.8s cubic-bezier(0.22, 1, 0.36, 1) forwards;
 }
 
-@media only screen and (max-width: 1199px) {
-  .title.left {
-    left: 0;
-  }
+/* Social links */
+.title ul {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 16px;
+  padding: 0;
+  list-style: none;
+}
 
-  .title.right {
-    right: 0;
-  }
+.title ul li a {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: 1px solid rgba(29, 41, 58, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #555;
+  transition: color 0.2s, border-color 0.2s;
+}
+
+.title ul li a:hover {
+  color: #a16c8d;
+  border-color: #a16c8d;
 }
 
 @media only screen and (max-width: 768px) {
   .title {
-    position: relative;
-    height: initial !important;
-    padding-bottom: 50px;
-    flex-direction: column-reverse;
+    margin-bottom: 32px;
+    align-items: center;
+    text-align: center;
   }
 
-  .title.left p,
-  .title.title.right p {
-    transform: rotate(0);
-  }
-
-  .title:after {
-    top: 0;
-    height: 2px;
-    width: 260px;
-  }
-
-  .title ul {
-    display: flex;
-    margin-top: 15px;
-  }
-
-  .title ul li {
-    margin: 0 15px;
+  .title p {
+    font-size: clamp(18px, 5vw, 22px);
   }
 }
 
 @media only screen and (max-width: 481px) {
-  .title:after {
-    width: 180px;
-  }
-
   .title {
-    padding-bottom: 25px;
+    margin-bottom: 24px;
   }
 }

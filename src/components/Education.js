@@ -26,7 +26,7 @@ const Education = () => {
     <div id="education">
       <Container>
         <Title title="Education" />
-        <div className="md:pl-24 flex flex-wrap">
+        <div className="flex flex-wrap">
           <div className="flex flex-wrap items-center w-full">
             <div className="lg:w-1/2 md:w-1/2">
               {isLoggedIn && (

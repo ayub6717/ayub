@@ -17,7 +17,7 @@ const About = () => {
   return (
     <div id="about" className="about-area">
       <Container>
-        <Title side="right" title="About Me" />
+        <Title title="About Me" />
         {isLoggedIn && (
           <div className="admin-section-toolbar" style={{ justifyContent: "flex-end" }}>
             <button className="admin-edit-btn" onClick={() => setShowEdit(true)}>

@@ -70,14 +70,8 @@ const Skill = () => {
 
   return (
     <div id="skill" className="skill-area">
-      <Title title="My Skills" />
       <div className="skill-container">
-        {/* ── Section Header ── */}
-        <div className="skill-section-header">
-          <div className="skill-title-badge">MY SKILLS</div>
-          <h2 className="skill-section-title">Technical Expertise</h2>
-          <p className="skill-section-sub">Technologies I work with professionally</p>
-        </div>
+        <Title title="Technical Expertise" />
 
         {/* ── Category Tabs ── */}
         <div className="skill-tabs-row">
