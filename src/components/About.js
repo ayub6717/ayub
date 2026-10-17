@@ -25,22 +25,21 @@ const About = () => {
             </button>
           </div>
         )}
-        <div data-aos="slide-right" className="about">
+        <div className="about">
           <div className="about-details">
             <p style={{ whiteSpace: "pre-line" }}>
               {about.bio}
             </p>
             <div className="about-action">
               <a
-                className="bg-[#a16c8d] text-white px-4 py-3 rounded"
+                className="about-resume-btn"
                 href={about.resumeUrl}
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                {" "}
                 View Resume
               </a>
-              <Button clickEvent link="#skill" ml="15px" title="My Skills" />
+              <Button clickEvent link="#skill" title="My Skills" />
             </div>
           </div>
           <div className="about-image">
