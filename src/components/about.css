@@ -1,87 +1,95 @@
 .about-area {
   position: relative;
+  overflow: hidden;
+  background: #fff;
 }
 
-.about {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 56px;
-  font-size: 17px;
+.about-area > .layout-wrap {
+  position: relative;
+  z-index: 1;
 }
 
 .about-details {
-  flex: 1;
-  min-width: 280px;
+  max-width: 760px;
 }
 
 .about-details p {
-  line-height: 1.9;
-  color: #444;
-  font-size: 16px;
+  margin: 0 0 28px;
+  line-height: 1.85;
+  color: #1d293a;
+  font-size: 17px;
+  white-space: pre-line;
 }
 
 .about-action {
   display: flex;
   align-items: center;
   flex-wrap: wrap;
-  gap: 14px;
-  margin-top: 32px;
+  gap: 16px;
+  margin-top: 36px;
 }
 
-.about-resume-btn {
-  display: inline-block;
-  background: #8f5a7b;
-  color: #fff;
-  padding: 10px 26px;
-  border-radius: 6px;
-  font-size: 14px;
-  font-weight: 700;
-  letter-spacing: 0.3px;
-  transition: background 0.2s, transform 0.15s;
-  text-decoration: none;
-}
-
-.about-resume-btn:hover {
-  background: #8f5a7b;
-  transform: translateY(-2px);
-  color: #fff;
-}
-
-.about-image {
-  flex: 0 0 auto;
-  display: flex;
+.about-btn {
+  display: inline-flex;
   align-items: center;
   justify-content: center;
+  gap: 8px;
+  height: 46px;
+  padding: 0 26px;
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: 700;
+  text-decoration: none;
+  transition: background 0.25s, color 0.25s, transform 0.15s;
 }
 
-
-.about-image img {
-  width: 300px;
-  height: 300px;
-  object-fit: cover;
-  border-radius: 12px;
-  display: block;
-  box-shadow: 0 8px 28px rgba(0,0,0,0.12);
+.about-btn-primary {
+  background: #8d597b;
+  color: #fff;
 }
 
-@media only screen and (max-width: 768px) {
-  .about {
-    text-align: center;
-    flex-direction: column-reverse;
-    gap: 32px;
+.about-btn-primary:hover {
+  background: #7a4868;
+  color: #fff;
+  transform: translateY(-2px);
+}
+
+.about-btn-outline {
+  border: 1.5px solid #10172a;
+  color: #10172a;
+}
+
+.about-btn-outline:hover {
+  background: #10172a;
+  color: #fff;
+}
+
+.about-art {
+  position: absolute;
+  top: 50%;
+  right: 0;
+  width: clamp(300px, 27vw, 452px);
+  height: auto;
+  transform: translateY(-50%);
+  pointer-events: none;
+}
+
+@media only screen and (max-width: 1099px) {
+  .about-art {
+    display: none;
   }
 
   .about-details {
-    width: 100%;
+    max-width: none;
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  .about-details p {
+    font-size: 16px;
   }
 
   .about-action {
     justify-content: center;
-  }
-
-  .about-image img {
-    width: 220px;
-    height: 220px;
   }
 }
