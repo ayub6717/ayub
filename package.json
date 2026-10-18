@@ -7,6 +7,7 @@
   "author": "Md. Ayub Shamim <ayub.devs@gmail.com>",
   "dependencies": {
     "aos": "^2.3.4",
+    "heic2any": "^0.0.4",
     "prop-types": "^15.8.1",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",

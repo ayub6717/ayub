@@ -1,11 +1,14 @@
 import React, { useState } from "react"
 import "./admin.css"
 import { resolveImage } from "../data/imageMap"
+import { readImageFile } from "./readImageFile"
 import { SKILL_ICONS, PRESET_SKILLS } from "../data/skillIcons"
 
 /**
  * Generic modal wrapper with title, close button, and scrollable body.
  */
+const onImageError = () => alert("Could not read this image. Try a JPG or PNG instead.")
+
 export function AdminModal({ title, onClose, children, size = "" }) {
   return (
     <div className="admin-modal-overlay" onClick={onClose}>
@@ -88,11 +91,7 @@ export function EducationFormModal({ initial = {}, onSave, onClose }) {
 
   const handleFileChange = (e) => {
     const file = e.target.files[0]
-    if (file) {
-      const reader = new FileReader()
-      reader.onloadend = () => set("image", reader.result)
-      reader.readAsDataURL(file)
-    }
+    if (file) readImageFile(file).then(url => set("image", url)).catch(onImageError)
   }
 
   return (
@@ -526,27 +525,14 @@ export function ProjectFormModal({ initial = {}, categories, onSave, onClose }) 
 
   const handleMainFileChange = (e) => {
     const file = e.target.files[0]
-    if (file) {
-      const reader = new FileReader()
-      reader.onloadend = () => {
-        set("image", reader.result)
-      }
-      reader.readAsDataURL(file)
-    }
+    if (file) readImageFile(file).then(url => set("image", url)).catch(onImageError)
   }
 
   const handleSliderFilesChange = (e) => {
     const files = Array.from(e.target.files)
-    const promises = files.map(file => {
-      return new Promise((resolve) => {
-        const reader = new FileReader()
-        reader.onloadend = () => resolve(reader.result)
-        reader.readAsDataURL(file)
-      })
-    })
-    Promise.all(promises).then(base64Images => {
+    Promise.all(files.map(readImageFile)).then(base64Images => {
       set("images", [...(form.images || []), ...base64Images])
-    })
+    }).catch(onImageError)
   }
 
   const handleSave = () => {
@@ -951,13 +937,7 @@ export function HeroFormModal({ initial = {}, onSave, onClose }) {
 
   const handleFileChange = (e) => {
     const file = e.target.files[0]
-    if (file) {
-      const reader = new FileReader()
-      reader.onloadend = () => {
-        set("image", reader.result)
-      }
-      reader.readAsDataURL(file)
-    }
+    if (file) readImageFile(file).then(url => set("image", url)).catch(onImageError)
   }
 
   return (
@@ -1031,13 +1011,7 @@ export function AboutFormModal({ initial = {}, onSave, onClose }) {
 
   const handleFileChange = (e) => {
     const file = e.target.files[0]
-    if (file) {
-      const reader = new FileReader()
-      reader.onloadend = () => {
-        set("image", reader.result)
-      }
-      reader.readAsDataURL(file)
-    }
+    if (file) readImageFile(file).then(url => set("image", url)).catch(onImageError)
   }
 
   return (

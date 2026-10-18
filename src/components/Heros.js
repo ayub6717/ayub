@@ -35,7 +35,6 @@ function Heros() {
   const [showEdit, setShowEdit] = useState(false)
 
   const hero = data?.hero || {}
-  const hasCustomImage = Boolean(hero.image)
   const photo = resolveImage(hero.image) || profile
   const tagList = (hero.tags || [])
     .flatMap((t) => t.split("•"))
@@ -79,20 +78,13 @@ function Heros() {
             className="absolute inset-0 rounded-[32px]"
             style={{ background: "radial-gradient(ellipse 95% 60% at 4% 5%, #f6eded 0%, #e5d6da 100%)" }}
           />
-          {hasCustomImage ? (
-            <img
-              src={photo}
-              alt={hero.name || "Profile"}
-              className="absolute inset-0 h-full w-full rounded-[32px] object-cover object-top"
-            />
-          ) : (
-            <img
-              src={photo}
-              alt={hero.name || "Profile"}
-              className="absolute bottom-0 max-w-none select-none"
-              style={{ height: "111.5%", left: "-45%" }}
-            />
-          )}
+          {/* cut-out portrait that pops out of the card; same layout for the default and uploaded image */}
+          <img
+            src={photo}
+            alt={hero.name || "Profile"}
+            className="absolute bottom-0 max-w-none select-none"
+            style={{ height: "111.5%", left: "56.9%", transform: "translateX(-50%)" }}
+          />
         </div>
       </div>
 
