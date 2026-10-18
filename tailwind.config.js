@@ -6,7 +6,7 @@ export default {
   ],
   theme: {
     fontFamily: {
-      Lato: '"Lato", sans-serif"',
+      sans: ['"Montserrat"', "sans-serif"],
     },
     extend: {
       colors: {

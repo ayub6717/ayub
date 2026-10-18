@@ -18,11 +18,11 @@ const SOCIALS = [
 function Stat({ value, label }) {
   return (
     <div className="flex items-center gap-3 lg:gap-[1.6vw]">
-      <span className="text-[32px] font-extrabold leading-none tracking-[-0.03em] text-[#774667] md:text-[40px] lg:text-[clamp(38px,3.1vw,60px)]">
+      <span className="text-[32px] font-extrabold leading-none tracking-[-0.03em] text-[#774667] md:text-[40px] lg:text-[clamp(38px,3.1vw,52px)]">
         {value}
       </span>
       <span className="h-8 w-[1.5px] bg-[#d3cbd0] lg:h-[2vw]" />
-      <p className="max-w-[100px] text-left text-[12px] font-medium leading-[1.3] text-[#56607a] lg:max-w-[max(92px,6.2vw)] lg:text-[clamp(11.5px,0.85vw,16px)]">
+      <p className="max-w-[100px] text-left text-[12px] font-medium leading-[1.3] text-[#56607a] lg:max-w-[max(92px,6.2vw)] lg:text-[clamp(11.5px,0.85vw,14px)]">
         {label}
       </p>
     </div>
@@ -59,7 +59,6 @@ function Heros() {
     <section
       id="home"
       className="relative flex flex-col overflow-hidden bg-[#f9f6f3] pb-14 pt-[110px] md:pb-[70px] md:pt-[130px] lg:min-h-screen lg:flex-row lg:items-center lg:pb-[7vh] lg:pt-[11.4vh]"
-      style={{ fontFamily: "'Montserrat', 'Lato', sans-serif" }}
     >
       {/* soft background circles */}
       <div aria-hidden="true" className="pointer-events-none absolute left-[-18.4vw] top-[64vh] hidden h-[33.3vw] w-[33.3vw] rounded-full bg-[#f4eced] lg:block" />
@@ -100,7 +99,7 @@ function Heros() {
 
         {/* greeting */}
         <div className="flex items-center justify-center gap-4 lg:justify-start lg:gap-[1.8vw]">
-          <p className="text-[12px] font-bold uppercase tracking-[0.14em] text-[#6f3a5e] md:text-[13px] lg:text-[clamp(12px,0.97vw,18px)]">
+          <p className="text-[12px] font-bold uppercase tracking-[0.14em] text-[#6f3a5e] md:text-[13px] lg:text-[clamp(12px,0.97vw,15px)]">
             {hero.greeting}
           </p>
           <span className="relative block h-[5px] w-[34px] lg:w-[3vw]">
@@ -111,12 +110,12 @@ function Heros() {
         </div>
 
         {/* name */}
-        <h1 className="mt-3 text-[48px] font-extrabold leading-[1.05] tracking-[-0.03em] text-[#0f172a] md:text-[64px] lg:mt-[0.67vw] lg:text-[clamp(60px,5.55vw,112px)]">
+        <h1 className="mt-3 text-[48px] font-extrabold leading-[1.05] tracking-[-0.03em] text-[#0f172a] md:text-[64px] lg:mt-[0.67vw] lg:text-[clamp(60px,5.55vw,88px)]">
           {hero.name}
         </h1>
 
         {/* typed title */}
-        <p className="mt-3 text-[18px] font-semibold text-[#111a2e] md:text-[22px] lg:mt-[0.8vw] lg:text-[clamp(18px,1.95vw,36px)]">
+        <p className="mt-3 text-[18px] font-semibold text-[#111a2e] md:text-[22px] lg:mt-[0.8vw] lg:text-[clamp(18px,1.95vw,28px)]">
           {typedTitle}
           {isTyping && <span className="animate-pulse">|</span>}
         </p>
@@ -124,7 +123,7 @@ function Heros() {
         {/* tags */}
         {tagList.length > 0 && (
           <div className="mt-5 flex justify-center lg:mt-[1.15vw] lg:justify-start">
-            <div className="inline-flex flex-wrap items-center justify-center gap-x-3 gap-y-1 rounded-lg leading-[1.2] bg-[#f4eced] px-4 py-2 text-[13px] font-medium text-[#4a5470] lg:gap-x-[1.1vw] lg:px-[1vw] lg:py-[0.53vw] lg:text-[clamp(13px,0.963vw,19px)]">
+            <div className="inline-flex flex-wrap items-center justify-center gap-x-3 gap-y-1 rounded-lg leading-[1.2] bg-[#f4eced] px-4 py-2 text-[13px] font-medium text-[#4a5470] lg:gap-x-[1.1vw] lg:px-[1vw] lg:py-[0.53vw] lg:text-[clamp(13px,0.963vw,16px)]">
               {tagList.map((tag, i) => (
                 <React.Fragment key={`${tag}-${i}`}>
                   {i > 0 && <span aria-hidden="true" className="h-[5px] w-[5px] rounded-full bg-[#b3a4ae]" />}
@@ -137,7 +136,7 @@ function Heros() {
 
         {/* bio */}
         {hero.bio && (
-          <p className="mx-auto mt-6 max-w-[520px] text-[15px] leading-[1.6] text-[#414b66] lg:mx-0 lg:mt-[1.6vw] lg:max-w-[max(420px,34.7vw)] lg:text-[clamp(14.5px,1.2vw,23px)]">
+          <p className="mx-auto mt-6 max-w-[520px] text-[15px] leading-[1.6] text-[#414b66] lg:mx-0 lg:mt-[1.6vw] lg:max-w-[max(420px,34.7vw)] lg:text-[clamp(14.5px,1.2vw,19px)]">
             {hero.bio}
           </p>
         )}
@@ -145,7 +144,7 @@ function Heros() {
         {/* buttons */}
         <div className="mt-7 flex flex-wrap items-center justify-center gap-4 lg:mt-[1.6vw] lg:justify-start lg:gap-[1.85vw]">
           <a
-            className="inline-flex h-[46px] items-center justify-center gap-2 rounded-[14px] bg-[#8d597b] px-6 text-[14px] font-semibold text-white transition-colors duration-300 hover:bg-[#7a4868] lg:h-[clamp(46px,3.1vw,60px)] lg:px-[1.4vw] lg:text-[clamp(14px,1.02vw,20px)]"
+            className="inline-flex h-[46px] items-center justify-center gap-2 rounded-[14px] bg-[#8d597b] px-6 text-[14px] font-semibold text-white transition-colors duration-300 hover:bg-[#7a4868] lg:h-[clamp(46px,3.1vw,52px)] lg:px-[1.4vw] lg:text-[clamp(14px,1.02vw,16px)]"
             target="_blank"
             rel="noopener noreferrer"
             href={hero.resumeUrl}
@@ -153,7 +152,7 @@ function Heros() {
             View Resume <FiArrowRight className="text-[1.05em]" />
           </a>
           <a
-            className="inline-flex h-[46px] items-center justify-center rounded-[14px] border-[1.5px] border-[#10172a] px-6 text-[14px] font-semibold text-[#10172a] transition-colors duration-300 hover:bg-[#10172a] hover:text-white lg:h-[clamp(46px,3.1vw,60px)] lg:px-[1.4vw] lg:text-[clamp(14px,1.02vw,20px)]"
+            className="inline-flex h-[46px] items-center justify-center rounded-[14px] border-[1.5px] border-[#10172a] px-6 text-[14px] font-semibold text-[#10172a] transition-colors duration-300 hover:bg-[#10172a] hover:text-white lg:h-[clamp(46px,3.1vw,52px)] lg:px-[1.4vw] lg:text-[clamp(14px,1.02vw,16px)]"
             href="#contact"
             onClick={(e) => {
               e.preventDefault()
@@ -175,7 +174,7 @@ function Heros() {
 
         {/* social links */}
         <div className="mt-8 flex items-center justify-center gap-2 lg:mt-[2.05vw] lg:justify-start lg:gap-[0.55vw]">
-          <span className="mr-2 text-[11px] font-semibold uppercase tracking-[0.15em] text-[#676b85] lg:mr-[0.6vw] lg:text-[clamp(10.5px,0.72vw,15px)]">
+          <span className="mr-2 text-[11px] font-semibold uppercase tracking-[0.15em] text-[#676b85] lg:mr-[0.6vw] lg:text-[clamp(10.5px,0.72vw,12.5px)]">
             Find me on
           </span>
           {SOCIALS.map(({ href, label, icon }) => (
@@ -185,7 +184,7 @@ function Heros() {
               target="_blank"
               rel="noopener noreferrer"
               aria-label={label}
-              className="flex h-9 w-9 items-center justify-center rounded-full border border-[#e7e1e4] bg-white text-[#4b5068] shadow-[0_2px_8px_rgba(80,40,70,0.05)] transition-all duration-300 hover:border-[#8d597b] hover:text-[#8d597b] lg:h-[clamp(36px,2.63vw,50px)] lg:w-[clamp(36px,2.63vw,50px)]"
+              className="flex h-9 w-9 items-center justify-center rounded-full border border-[#e7e1e4] bg-white text-[#4b5068] shadow-[0_2px_8px_rgba(80,40,70,0.05)] transition-all duration-300 hover:border-[#8d597b] hover:text-[#8d597b] lg:h-[clamp(36px,2.63vw,42px)] lg:w-[clamp(36px,2.63vw,42px)]"
             >
               {icon}
             </a>
