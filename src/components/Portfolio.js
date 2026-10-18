@@ -116,7 +116,7 @@ const Portfolio = () => {
   return (
     <div id="portfolio" className="portfolio-area">
       <Container>
-        <Title title="Portfolio" />
+        <Title title="Projects" />
 
         <div className="portfolios">
           {/* ── Category Tabs ── */}

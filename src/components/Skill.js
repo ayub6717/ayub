@@ -71,7 +71,7 @@ const Skill = () => {
   return (
     <div id="skill" className="skill-area">
       <div className="skill-container">
-        <Title title="Technical Expertise" />
+        <Title title="Skills" />
 
         {/* ── Category Tabs ── */}
         <div className="skill-tabs-row">

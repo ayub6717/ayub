@@ -411,7 +411,7 @@ export default function ProjectPage() {
         {/* Back Button */}
         <div className="project-detail-nav">
           <Link to={`/?category=${encodeURIComponent(category)}#portfolio`} className="project-back-btn">
-            <FaArrowLeft size={11} /> Back to Portfolio
+            <FaArrowLeft size={11} /> Back to Projects
           </Link>
         </div>
 
