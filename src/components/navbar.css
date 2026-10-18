@@ -1,0 +1,165 @@
+/* ── Desktop: links on the right, lined up with the skill-logo column ─────── */
+.site-nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 999;
+  height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  /* skill logos sit at right: 5.2vw; the link's own 8px padding adds to this */
+  padding-right: calc(5.2vw + 14px);
+  background: transparent;
+  border-bottom: 1px solid transparent;
+  transition: height 0.25s, background 0.25s, border-color 0.25s;
+}
+
+.site-nav.with-admin-bar {
+  top: 44px;
+}
+
+.site-nav.scrolled {
+  height: 64px;
+  background: rgba(249, 246, 243, 0.86);
+  border-bottom-color: #eadfe4;
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+}
+
+.site-nav-toggle {
+  display: none;
+}
+
+.site-nav-list {
+  display: flex;
+  align-items: center;
+  gap: 42px;
+}
+
+.site-nav-link {
+  position: relative;
+  padding: 8px;
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 1;
+  color: #2a3350;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: color 0.2s;
+}
+
+.site-nav-link:hover {
+  color: #8d597b;
+}
+
+.site-nav-link::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -6px;
+  height: 2px;
+  border-radius: 2px;
+  background: #8d597b;
+  transform: scaleX(0);
+  transition: transform 0.25s;
+}
+
+.site-nav-link.active {
+  color: #7a4868;
+  font-weight: 700;
+}
+
+.site-nav-link.active::after {
+  transform: scaleX(1);
+}
+
+/* ── Tablet / phone: hamburger button with a dropdown panel ──────────────── */
+@media only screen and (max-width: 1023px) {
+  .site-nav,
+  .site-nav.scrolled {
+    height: 64px;
+    padding: 0 38px;
+    justify-content: flex-start;
+    background: transparent;
+    border-bottom-color: transparent;
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+    pointer-events: none; /* only the button and the open panel take clicks */
+  }
+
+  .site-nav-toggle {
+    pointer-events: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+    border: 0;
+    border-radius: 12px;
+    background: #f4e9ee;
+    color: #6f3c61;
+    cursor: pointer;
+    transition: background 0.2s;
+  }
+
+  .site-nav-toggle:hover {
+    background: #ecdce5;
+  }
+
+  .site-nav-list {
+    position: absolute;
+    top: calc(100% - 4px);
+    left: 38px;
+    min-width: 220px;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 2px;
+    padding: 8px;
+    background: #fff;
+    border: 1px solid #eadfe4;
+    border-radius: 16px;
+    box-shadow: 0 12px 32px rgba(60, 30, 50, 0.14);
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-8px);
+    transition: opacity 0.2s, transform 0.2s, visibility 0.2s;
+  }
+
+  .site-nav-list.open {
+    pointer-events: auto;
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+  }
+
+  .site-nav-link {
+    padding: 12px 14px;
+    border-radius: 10px;
+    font-size: 15px;
+  }
+
+  .site-nav-link:hover {
+    background: #f9f3f6;
+  }
+
+  .site-nav-link::after {
+    display: none;
+  }
+
+  .site-nav-link.active {
+    background: #f4e9ee;
+  }
+}
+
+@media only screen and (max-width: 767px) {
+  .site-nav,
+  .site-nav.scrolled {
+    padding: 0 16px;
+  }
+
+  .site-nav-list {
+    left: 16px;
+  }
+}

@@ -4,6 +4,7 @@
   min-height: 100vh;
   color: #1a1d27;
   font-family: 'Montserrat', sans-serif;
+  padding-top: 64px; /* clear the fixed top nav */
   padding-bottom: 100px;
 }
 

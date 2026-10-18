@@ -13,21 +13,33 @@ export const Title = ({ title, social }) => {
   const innerRef = useRef(null)
   const lineRef = useRef(null)
 
+  // Draw the underline as soon as the title scrolls into view. The one exception is a
+  // nav-triggered smooth scroll (see Navbar): titles fly past, so wait until it lands.
   useEffect(() => {
     const trigger = innerRef.current
     const line = lineRef.current
     if (!trigger || !line) return
+    const root = document.documentElement
+    let visible = false
+    const stop = () => {
+      observer.disconnect()
+      window.removeEventListener("nav-scroll-end", play)
+    }
+    const play = () => {
+      if (!visible || root.dataset.navScrolling) return
+      line.classList.add("animate")
+      stop()
+    }
     const observer = new IntersectionObserver(
       ([entry]) => {
-        if (entry.isIntersecting) {
-          line.classList.add("animate")
-          observer.disconnect()
-        }
+        visible = entry.isIntersecting
+        play()
       },
-      { threshold: 0.5 }
+      { threshold: 0.2 }
     )
     observer.observe(trigger)
-    return () => observer.disconnect()
+    window.addEventListener("nav-scroll-end", play)
+    return stop
   }, [])
 
   return (
