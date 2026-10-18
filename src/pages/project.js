@@ -764,14 +764,6 @@ export default function ProjectPage() {
           </div>
         </div>
       </div>
-      {!isLoggedIn && (
-        <div className="admin-login-hint">
-          <Link to="/admin" className="admin-login-trigger" title="Admin Login">
-            🔐
-          </Link>
-        </div>
-      )}
-
       {isLightboxOpen && projectImages[activeImgIndex] && (
         <div className="project-lightbox" onClick={() => setIsLightboxOpen(false)}>
           <div className="lightbox-content" onClick={(e) => e.stopPropagation()}>

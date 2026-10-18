@@ -1,5 +1,4 @@
 import React, { useEffect } from "react";
-import { Link } from "react-router-dom";
 import Aos from "aos";
 import "aos/dist/aos.css";
 import {
@@ -40,14 +39,6 @@ const IndexPage = () => {
         <LoveToDo />
         <Education />
         <Contact />
-
-        {!isLoggedIn && (
-          <div className="admin-login-hint">
-            <Link to="/admin" className="admin-login-trigger" title="Admin Login">
-              🔐
-            </Link>
-          </div>
-        )}
     </div>
   );
 };
