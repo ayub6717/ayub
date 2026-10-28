@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useRef } from "react"
-import { Link, useNavigate, useLocation } from "react-router-dom"
+import { Link, useNavigate, useLocation, useParams } from "react-router-dom"
 import {
   FaGithub,
   FaExternalLinkAlt,
@@ -20,6 +20,7 @@ import "../components/project-page.css"
 import { useAuth } from "../context/AuthContext"
 import { useData } from "../context/DataContext"
 import { resolveImage } from "../data/imageMap"
+import { slugify, projectPath } from "../utils/slug"
 import AdminBar from "../admin/AdminBar"
 import { SKILL_ICONS } from "../data/skillIcons"
 import { ProjectFormModal } from "../admin/FormModals"
@@ -238,6 +239,7 @@ function getProjectSections(project, category) {
 export default function ProjectPage() {
   const navigate = useNavigate()
   const location = useLocation()
+  const { slug } = useParams()
   const { isLoggedIn } = useAuth()
   const { data, updateProject, moveProject } = useData()
   const [project, setProject] = useState(null)
@@ -285,25 +287,29 @@ export default function ProjectPage() {
 
   useEffect(() => {
     if (typeof window !== "undefined" && data) {
+      // New style: /project/<slug>. Legacy: /project?name=...&category=...
       const params = new URLSearchParams(window.location.search)
       const nameParam = params.get("name")
       const categoryParam = params.get("category")
-      if (nameParam) {
+      const wanted = slug || slugify(nameParam || "")
+      if (wanted) {
         let foundProj = null, foundCat = ""
         // Prefer category from URL param if provided
         if (categoryParam && portfolios[categoryParam]) {
-          const match = portfolios[categoryParam].filter(Boolean).find(p => p.name === nameParam)
+          const match = portfolios[categoryParam].filter(Boolean).find(p => slugify(p.name) === wanted)
           if (match) { foundProj = match; foundCat = categoryParam }
         }
         // Fallback: search all categories
         if (!foundProj) {
           for (const [catName, list] of Object.entries(portfolios)) {
-            const match = list.filter(Boolean).find(p => p.name === nameParam)
+            const match = list.filter(Boolean).find(p => slugify(p.name) === wanted)
             if (match) { foundProj = match; foundCat = catName; break }
           }
         }
         setProject(foundProj)
         setCategory(foundCat)
+        // Old query-string link -> clean URL
+        if (!slug && foundProj) navigate(projectPath(foundProj.name), { replace: true })
       }
       setLoading(false)
     }
@@ -808,7 +814,7 @@ export default function ProjectPage() {
 
             // Redirect if name or category changed, otherwise the state update of `project` will auto-refresh the page content
             if (nextName !== project.name || nextCat !== category) {
-              navigate(`/project?name=${encodeURIComponent(nextName)}&category=${encodeURIComponent(nextCat)}`)
+              navigate(projectPath(nextName))
             }
           }}
           onClose={() => setEditingProject(null)}

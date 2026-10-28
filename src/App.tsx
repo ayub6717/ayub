@@ -10,6 +10,7 @@ export default function App() {
     <Routes>
       <Route path="/" element={<IndexPage />} />
       <Route path="/project" element={<ProjectPage />} />
+      <Route path="/project/:slug" element={<ProjectPage />} />
       <Route path="/admin" element={<AdminPage />} />
       <Route path="*" element={<NotFoundPage />} />
     </Routes>

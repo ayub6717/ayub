@@ -3,6 +3,7 @@ import react from "@vitejs/plugin-react"
 import crypto from "node:crypto"
 import fs from "node:fs"
 import path from "node:path"
+import { slugify } from "./src/utils/slug.js"
 
 export default defineConfig({
   optimizeDeps: {
@@ -21,6 +22,22 @@ export default defineConfig({
       },
     },
     react(),
+    {
+      // Emits project-meta.json (slug -> name/description) for the /project edge function
+      name: "project-meta-json",
+      generateBundle() {
+        const data = JSON.parse(fs.readFileSync(path.join(__dirname, "src/data/data.json"), "utf8"))
+        const meta: Record<string, { name: string; description: string }> = {}
+        for (const list of Object.values<any[]>(data.portfolios || {})) {
+          for (const p of list) {
+            if (!p?.name) continue
+            const slug = slugify(p.name)
+            if (!meta[slug]) meta[slug] = { name: p.name, description: String(p.description || "") }
+          }
+        }
+        this.emitFile({ type: "asset", fileName: "project-meta.json", source: JSON.stringify(meta) })
+      },
+    },
     {
       name: "save-data-api",
       configureServer(server) {

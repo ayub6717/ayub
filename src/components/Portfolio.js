@@ -10,6 +10,7 @@ import { useAuth } from "../context/AuthContext"
 import { useData } from "../context/DataContext"
 import { ProjectFormModal } from "../admin/FormModals"
 import { resolveImage } from "../data/imageMap"
+import { projectPath } from "../utils/slug"
 
 const CodecanyonIcon = () => (
   <svg
@@ -285,7 +286,7 @@ const Portfolio = () => {
   }
 
   const handleCardClick = (name) => {
-    navigate(`/project?name=${encodeURIComponent(name)}&category=${encodeURIComponent(selectedCategory)}`)
+    navigate(projectPath(name))
   }
 
   const handleAddSave = (newProj) => {
