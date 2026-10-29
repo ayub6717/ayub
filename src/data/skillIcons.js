@@ -413,6 +413,63 @@ export const SKILL_ICONS = {
   )
 }
 
+/* ── Labels used by the Skills section (aliases + a few new icons) ── */
+SKILL_ICONS["React.js"] = SKILL_ICONS["React Js"]
+SKILL_ICONS["Next.js"] = SKILL_ICONS["Next Js"]
+SKILL_ICONS["JavaScript (ES6+)"] = SKILL_ICONS["JavaScript"]
+SKILL_ICONS["Redux (Toolkit)"] = SKILL_ICONS["Redux"]
+SKILL_ICONS["Context API"] = SKILL_ICONS["React Js"]
+SKILL_ICONS["Azure DevOps"] = SKILL_ICONS["Azure"]
+SKILL_ICONS["Git & GitHub"] = SKILL_ICONS["Git, Github"]
+SKILL_ICONS["VS Code"] = SKILL_ICONS["Visual Studio Code"]
+SKILL_ICONS["React Native (Expo)"] = SKILL_ICONS["React Native"]
+SKILL_ICONS["Data Structures"] = SKILL_ICONS["Data Structure"]
+
+SKILL_ICONS["Vite"] = (
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 410 404">
+    <defs>
+      <linearGradient id="skill-vite-a" x1="-.8%" x2="57.6%" y1="-1%" y2="71.4%">
+        <stop offset="0" stopColor="#41d1ff" />
+        <stop offset="1" stopColor="#bd34fe" />
+      </linearGradient>
+      <linearGradient id="skill-vite-b" x1="43.4%" x2="50.3%" y1="2.2%" y2="89.2%">
+        <stop offset="0" stopColor="#ffea83" />
+        <stop offset=".08" stopColor="#ffdd35" />
+        <stop offset="1" stopColor="#ffa800" />
+      </linearGradient>
+    </defs>
+    <path fill="url(#skill-vite-a)" d="M399.64 59.52 215.64 388.55c-3.8 6.79-13.55 6.88-17.47.17L9.96 59.55C5.67 52.2 11.94 43.3 20.3 44.8l184.2 32.93c1.17.21 2.37.2 3.54-.01l180.35-32.88c8.32-1.52 14.63 7.3 11.25 14.68z" />
+    <path fill="url(#skill-vite-b)" d="M292.97 1.57 156.8 28.26a3.15 3.15 0 0 0-2.56 2.9l-8.37 141.47a3.15 3.15 0 0 0 3.85 3.28l37.9-8.75a3.15 3.15 0 0 1 3.8 3.7l-11.26 55.16a3.15 3.15 0 0 0 3.99 3.65l23.4-7.1a3.15 3.15 0 0 1 4 3.65l-17.9 86.62c-1.12 5.42 6.1 8.38 9.1 3.73l2-3.1L331.5 98.5a3.15 3.15 0 0 0-3.4-4.67l-39.1 7.55a3.15 3.15 0 0 1-3.65-3.9l25.5-88.2a3.15 3.15 0 0 0-3.88-3.7z" />
+  </svg>
+)
+
+SKILL_ICONS["Webpack"] = (
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128">
+    <path fill="#8ed6fb" d="M64 4 14 32.5v63L64 124l50-28.5v-63z" />
+    <path fill="#1c78c0" d="M64 4 14 32.5 64 61l50-28.5z" opacity=".35" />
+    <path fill="#fff" d="m64 18 36.5 20.8L64 59.6 27.5 38.8z" />
+    <path fill="#2b3a42" d="M64 64.2 100.5 43v42.6L64 106.5z" opacity=".25" />
+    <path fill="#1c78c0" d="M64 64.2 27.5 43v42.6L64 106.5z" />
+    <path fill="#8ed6fb" d="m64 64.2 36.5-21.2v42.6L64 106.5z" />
+  </svg>
+)
+
+SKILL_ICONS["REST APIs"] = (
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none" stroke="#a16c8d" strokeWidth="4.5" strokeLinecap="round" strokeLinejoin="round">
+    <path d="M22 14c-6 0-8 3-8 8v5c0 3-2 5-5 5 3 0 5 2 5 5v5c0 5 2 8 8 8" />
+    <path d="M42 14c6 0 8 3 8 8v5c0 3 2 5 5 5-3 0-5 2-5 5v5c0 5-2 8-8 8" />
+    <path d="M26 28h12m-4-4 4 4-4 4M38 38H26m4-4-4 4 4 4" strokeWidth="3.5" stroke="#6d4a61" />
+  </svg>
+)
+
+SKILL_ICONS["CI/CD"] = (
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none" strokeWidth="5" strokeLinecap="round" strokeLinejoin="round">
+    <path stroke="#a16c8d" d="M32 32c-5-7-9-10-14-10a10 10 0 1 0 0 20c5 0 9-3 14-10" />
+    <path stroke="#6d4a61" d="M32 32c5-7 9-10 14-10a10 10 0 1 1 0 20c-5 0-9-3-14-10" />
+    <path stroke="#6d4a61" d="m42 17 5 5-5 5" strokeWidth="4" />
+  </svg>
+)
+
 export const PRESET_SKILLS = [
   { name: "HTML", emoji: "🌐" },
   { name: "CSS", emoji: "🎨" },

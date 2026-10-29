@@ -3,8 +3,8 @@ import PropTypes from "prop-types"
 import { Helmet } from "react-helmet-async"
 
 const siteMetadata = {
-  title: "Front End Developer",
-  description: "My personal portfolio website",
+  title: "Senior Software Engineer (Frontend)",
+  description: "React.js, Next.js and TypeScript projects, including enterprise and e-commerce applications.",
   author: "@Ayub",
 }
 

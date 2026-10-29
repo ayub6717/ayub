@@ -1,9 +1,13 @@
 import React, { useState } from "react"
+import { FiMail, FiMapPin, FiLinkedin, FiGithub } from "react-icons/fi"
 import { Container, Title, Button } from "./common"
 import "./contact.css"
 import { useAuth } from "../context/AuthContext"
 import { useData } from "../context/DataContext"
 import { ContactFormModal } from "../admin/FormModals"
+
+const LINKEDIN_URL = "https://www.linkedin.com/in/ayub6717/"
+const GITHUB_URL = "https://github.com/ayub6717" // same profile as the Hero "Find me on" icons
 
 const Contact = () => {
   const { isLoggedIn } = useAuth()
@@ -11,12 +15,19 @@ const Contact = () => {
   const [showEdit, setShowEdit] = useState(false)
 
   const contact = data?.contact || {
-    text: "I am interested in working with any company that thinks my skill will be helpful for them. If you are looking for someone like me, please let me know. Or you can just 'say hi' to me.",
+    text: "Feel free to get in touch for professional enquiries, collaboration, or to discuss frontend engineering. I'm happy to connect with fellow engineers and engineering leaders.",
     email: "ayub.devs@gmail.com",
     skype: "https://join.skype.com/invite/YMlpuNDTBf2g",
     twitter: "@ayub6717",
-    address: "Nikunja-2, Khilkhet, Dhaka, Bangladesh"
+    address: "Dhaka, Bangladesh"
   }
+
+  const details = [
+    { label: "Email", value: contact.email, href: `mailto:${contact.email}`, icon: FiMail },
+    { label: "Location", value: contact.address, icon: FiMapPin },
+    { label: "LinkedIn", value: "linkedin.com/in/ayub6717", href: LINKEDIN_URL, icon: FiLinkedin, external: true },
+    { label: "GitHub", value: "github.com/ayub6717", href: GITHUB_URL, icon: FiGithub, external: true },
+  ]
 
   return (
     <div id="contact" className="contact-area">
@@ -47,28 +58,23 @@ const Contact = () => {
           </div>
           <div className="contact-details">
             <ul>
-              <li>
-                <h5>Email</h5>
-                <p>
-                  {contact.email} <span>(Recommended)</span>
-                </p>
-              </li>
-              {/* <li>
-                <h5>Skype</h5>
-                <p>
-                  {contact.skype} <span>(Always Available)</span>
-                </p>
-              </li>
-              <li>
-                <h5>Social</h5>
-                <p>
-                  Twitter - {contact.twitter} <span>(Slow response)</span>
-                </p>
-              </li> */}
-              <li>
-                <h5>Address</h5>
-                <p>{contact.address}</p>
-              </li>
+              {details.map(({ label, value, href, icon: Icon, external }) => (
+                <li key={label}>
+                  <span className="contact-icon" aria-hidden="true">
+                    <Icon />
+                  </span>
+                  <div className="contact-info">
+                    <h5>{label}</h5>
+                    {href ? (
+                      <a href={href} {...(external ? { target: "_blank", rel: "noopener noreferrer" } : {})}>
+                        {value}
+                      </a>
+                    ) : (
+                      <p>{value}</p>
+                    )}
+                  </div>
+                </li>
+              ))}
             </ul>
           </div>
         </div>

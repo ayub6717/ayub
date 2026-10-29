@@ -50,11 +50,8 @@ const Experience = () => {
               <h4 className="mt-2 text-[17px] font-bold text-[#2c2c2c]">
                 Company: {exp.company}
               </h4>
-              <p className="mt-1 text-[#1b1b1bee] text-[16px]">
-                Address: {exp.address}
-              </p>
-              <p className="text-[#1b1b1bc7] text-[15px]">
-                Status: {exp.period}.
+              <p className="mt-1 text-[#1b1b1bc7] text-[15px]">
+                Duration: {exp.period}
               </p>
 
               <p className="mt-4 text-[17px]" style={{ whiteSpace: "pre-line" }}>
@@ -63,7 +60,6 @@ const Experience = () => {
 
               {exp.responsibilities && exp.responsibilities.length > 0 && (
                 <div className="mt-6">
-                  <p className="text-[17px] font-medium mb-3">My tasks include:</p>
                   <ul className="list-none pl-0 text-[17px]">
                     {exp.responsibilities.map((resp, index) => (
                       <li key={index} className="mt-2 flex items-start">

@@ -164,28 +164,26 @@ function Heros() {
         {/* divider */}
         <div className="mx-auto mt-8 h-px w-full max-w-[520px] bg-[#e2dfe1] lg:mx-0 lg:mt-[1.9vw] lg:w-[36vw] lg:max-w-full" />
 
-        {/* stats */}
-        <div className="mt-7 flex flex-wrap items-center justify-center gap-x-8 gap-y-5 lg:mt-[1.36vw] lg:justify-start lg:gap-x-[5vw]">
+        {/* stat + social links */}
+        <div className="mt-7 flex flex-wrap items-center justify-center gap-x-8 gap-y-6 lg:mt-[1.36vw] lg:justify-start lg:gap-x-[2.4vw]">
           <Stat value={hero.yearsExp} label="Years of Professional Experience" />
-          <Stat value={hero.projects} label="Projects Delivered" />
-        </div>
-
-        {/* social links */}
-        <div className="mt-8 flex items-center justify-center gap-2 lg:mt-[2.05vw] lg:justify-start lg:gap-[0.55vw]">
-          <span className="mr-2 text-[11px] font-semibold uppercase tracking-[0.15em] text-[#676b85] lg:mr-[0.6vw] lg:text-[clamp(10.5px,0.72vw,12.5px)]">
-            Find me on
-          </span>
-          {SOCIALS.map(({ href, label, icon }) => (
-            <a
-              key={label}
-              href={href}
-              {...(href.startsWith("http") ? { target: "_blank", rel: "noopener noreferrer" } : {})}
-              aria-label={label}
-              className="flex h-9 w-9 items-center justify-center rounded-full border border-[#e7e1e4] bg-white text-[#4b5068] shadow-[0_2px_8px_rgba(80,40,70,0.05)] transition-all duration-300 hover:border-[#8d597b] hover:text-[#8d597b] lg:h-[clamp(36px,2.63vw,42px)] lg:w-[clamp(36px,2.63vw,42px)]"
-            >
-              {icon}
-            </a>
-          ))}
+          <span aria-hidden="true" className="hidden h-10 w-px bg-[#e2dfe1] sm:block lg:h-[2.6vw]" />
+          <div className="flex items-center justify-center gap-2 lg:gap-[0.55vw]">
+            <span className="mr-2 text-[11px] font-semibold uppercase tracking-[0.15em] text-[#676b85] lg:mr-[0.6vw] lg:text-[clamp(10.5px,0.72vw,12.5px)]">
+              Find me on
+            </span>
+            {SOCIALS.map(({ href, label, icon }) => (
+              <a
+                key={label}
+                href={href}
+                {...(href.startsWith("http") ? { target: "_blank", rel: "noopener noreferrer" } : {})}
+                aria-label={label}
+                className="flex h-9 w-9 items-center justify-center rounded-full border border-[#e7e1e4] bg-white text-[#4b5068] shadow-[0_2px_8px_rgba(80,40,70,0.05)] transition-all duration-300 hover:border-[#8d597b] hover:text-[#8d597b] lg:h-[clamp(36px,2.63vw,42px)] lg:w-[clamp(36px,2.63vw,42px)]"
+              >
+                {icon}
+              </a>
+            ))}
+          </div>
         </div>
       </div>
 
