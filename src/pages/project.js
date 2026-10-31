@@ -74,6 +74,7 @@ const TECH_NAME_ALIAS = {
   "bootstrap 5": "Bootstrap",
   // Others
   "redux toolkit": "Redux",
+  "rtk query": "Redux",
   ".net": ".NET",
   "c#": "C++",
   "rest api": "Postman",
@@ -461,7 +462,7 @@ export default function ProjectPage() {
               <span className="project-browser-dot yellow" />
               <span className="project-browser-dot green" />
               <span className="project-browser-address">
-                {project.demo || project.source || "https://example.com"}
+                {project.demo || project.source || (project.showDemo2InBar && project.demo2) || "https://example.com"}
               </span>
             </div>
             <div
@@ -540,7 +541,7 @@ export default function ProjectPage() {
             )}
             {project.demo2 && (
               <a href={project.demo2} target="_blank" rel="noopener noreferrer" className="project-btn outline">
-                <CodecanyonIcon /> Codecanyon
+                <CodecanyonIcon /> {project.demo2Label || "Codecanyon"}
               </a>
             )}
             {project.source && (
