@@ -470,6 +470,21 @@ SKILL_ICONS["CI/CD"] = (
   </svg>
 )
 
+SKILL_ICONS["Axios"] = (
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+    <rect width="64" height="64" rx="14" fill="#5a29e4" />
+    <path d="M18 47 32 16l14 31" fill="none" stroke="#fff" strokeWidth="6" strokeLinecap="round" strokeLinejoin="round" />
+    <path d="M24 38h16" fill="none" stroke="#fff" strokeWidth="5" strokeLinecap="round" />
+  </svg>
+)
+
+SKILL_ICONS["Konva"] = (
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+    <rect width="64" height="64" rx="14" fill="#0d83cd" />
+    <path d="M22 16v32M42 16 25 32l17 16" fill="none" stroke="#fff" strokeWidth="6" strokeLinecap="round" strokeLinejoin="round" />
+  </svg>
+)
+
 export const PRESET_SKILLS = [
   { name: "HTML", emoji: "🌐" },
   { name: "CSS", emoji: "🎨" },
