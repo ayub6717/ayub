@@ -6,7 +6,7 @@ import { Button } from "./common"
 const PortfolioAction = () => {
   let showMoreTimeOut
   let moreTimeOut
-  const [title, setTitle] = useState("More")
+  const [title, setTitle] = useState("More on GitHub")
   const handleMouseOver = () => {
     clearTimeout(moreTimeOut)
     showMoreTimeOut = setTimeout(() => {
@@ -16,7 +16,7 @@ const PortfolioAction = () => {
   const handleOnMouseOut = () => {
     clearTimeout(showMoreTimeOut)
     moreTimeOut = setTimeout(() => {
-      setTitle("More")
+      setTitle("More on GitHub")
     }, 2000)
   }
   const handleClick = e => {
