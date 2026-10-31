@@ -20,7 +20,7 @@ import "../components/project-page.css"
 import { useAuth } from "../context/AuthContext"
 import { useData } from "../context/DataContext"
 import { resolveImage } from "../data/imageMap"
-import { slugify, projectPath } from "../utils/slug"
+import { slugify, getSlug, projectPath } from "../utils/slug"
 import AdminBar from "../admin/AdminBar"
 import { SKILL_ICONS } from "../data/skillIcons"
 import { ProjectFormModal } from "../admin/FormModals"
@@ -296,20 +296,20 @@ export default function ProjectPage() {
         let foundProj = null, foundCat = ""
         // Prefer category from URL param if provided
         if (categoryParam && portfolios[categoryParam]) {
-          const match = portfolios[categoryParam].filter(Boolean).find(p => slugify(p.name) === wanted)
+          const match = portfolios[categoryParam].filter(Boolean).find(p => getSlug(p) === wanted)
           if (match) { foundProj = match; foundCat = categoryParam }
         }
         // Fallback: search all categories
         if (!foundProj) {
           for (const [catName, list] of Object.entries(portfolios)) {
-            const match = list.filter(Boolean).find(p => slugify(p.name) === wanted)
+            const match = list.filter(Boolean).find(p => getSlug(p) === wanted)
             if (match) { foundProj = match; foundCat = catName; break }
           }
         }
         setProject(foundProj)
         setCategory(foundCat)
         // Old query-string link -> clean URL
-        if (!slug && foundProj) navigate(projectPath(foundProj.name), { replace: true })
+        if (!slug && foundProj) navigate(projectPath(foundProj), { replace: true })
       }
       setLoading(false)
     }
@@ -530,7 +530,7 @@ export default function ProjectPage() {
           <div className="project-action-buttons">
             {project.demo && (
               <a href={project.demo} target="_blank" rel="noopener noreferrer" className="project-btn solid">
-                <FaExternalLinkAlt size={11} /> Live Demo
+                <FaExternalLinkAlt size={11} /> {project.demoLabel || "Live Demo"}
               </a>
             )}
             {project.demo3 && (
@@ -613,7 +613,7 @@ export default function ProjectPage() {
               <div className="section-icon-box">
                 <SectionIcon d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
               </div>
-              <h2 className="section-title">Features</h2>
+              <h2 className="section-title">{project.featuresTitle || "Features"}</h2>
             </div>
             <div className="features-checklist">
               {defaultFeatures.map((f, i) => (
@@ -814,7 +814,7 @@ export default function ProjectPage() {
 
             // Redirect if name or category changed, otherwise the state update of `project` will auto-refresh the page content
             if (nextName !== project.name || nextCat !== category) {
-              navigate(projectPath(nextName))
+              navigate(projectPath({ ...project, ...updatedProj }))
             }
           }}
           onClose={() => setEditingProject(null)}

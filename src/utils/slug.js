@@ -9,4 +9,8 @@ export function slugify(name = "") {
     .replace(/^-+|-+$/g, "")
 }
 
-export const projectPath = (name) => `/project/${slugify(name)}`
+// A project may pin its URL with an explicit `slug` (so renaming it doesn't break shared links)
+export const getSlug = (project) => project.slug || slugify(project.name)
+
+export const projectPath = (project) =>
+  `/project/${typeof project === "string" ? slugify(project) : getSlug(project)}`

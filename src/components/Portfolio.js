@@ -149,7 +149,7 @@ const ProjectCard = ({
   // Clicks on links, buttons and the drag handle must not open the project
   const handleCardClick = (e) => {
     if (isDragging || e.target.closest("a, button, .pf-card-drag-handle")) return
-    onOpen(portfolio.name)
+    onOpen(portfolio)
   }
 
   return (
@@ -169,11 +169,11 @@ const ProjectCard = ({
       <div className="pf-card-body">
         <span className="pf-card-category">{category} Project</span>
         <h4 className="pf-card-name">
-          <button type="button" className="pf-card-name-btn" onClick={() => onOpen(portfolio.name)}>
+          <button type="button" className="pf-card-name-btn" onClick={() => onOpen(portfolio)}>
             {portfolio.name}
           </button>
         </h4>
-        <p className="pf-card-desc">{portfolio.description}</p>
+        <p className="pf-card-desc">{portfolio.summary || portfolio.description}</p>
 
         <ProjectLinks portfolio={portfolio} />
       </div>
@@ -285,8 +285,8 @@ const Portfolio = () => {
     setSelectedCategory(name)
   }
 
-  const handleCardClick = (name) => {
-    navigate(projectPath(name))
+  const handleCardClick = (project) => {
+    navigate(projectPath(project))
   }
 
   const handleAddSave = (newProj) => {

@@ -3,7 +3,7 @@ import react from "@vitejs/plugin-react"
 import crypto from "node:crypto"
 import fs from "node:fs"
 import path from "node:path"
-import { slugify } from "./src/utils/slug.js"
+import { getSlug } from "./src/utils/slug.js"
 
 export default defineConfig({
   optimizeDeps: {
@@ -31,8 +31,8 @@ export default defineConfig({
         for (const list of Object.values<any[]>(data.portfolios || {})) {
           for (const p of list) {
             if (!p?.name) continue
-            const slug = slugify(p.name)
-            if (!meta[slug]) meta[slug] = { name: p.name, description: String(p.description || "") }
+            const slug = getSlug(p)
+            if (!meta[slug]) meta[slug] = { name: p.name, description: String(p.summary || p.description || "") }
           }
         }
         this.emitFile({ type: "asset", fileName: "project-meta.json", source: JSON.stringify(meta) })
