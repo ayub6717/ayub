@@ -11,6 +11,7 @@ import { useData } from "../context/DataContext"
 import { ProjectFormModal } from "../admin/FormModals"
 import { resolveImage } from "../data/imageMap"
 import { projectPath } from "../utils/slug"
+import { getVisiblePortfolios } from "../utils/projects"
 
 const CodecanyonIcon = () => (
   <svg
@@ -210,8 +211,10 @@ const Portfolio = () => {
   const { isLoggedIn } = useAuth()
   const { data, addProject, updateProject, moveProject, deleteProject, reorderProjects } = useData()
 
-  const portfolios = useMemo(() => data?.portfolios || {}, [data])
+  // Hidden projects and empty tabs (e.g. "Others") are filtered out; projects are sorted by their "order" field
+  const portfolios = useMemo(() => getVisiblePortfolios(data?.portfolios), [data])
   const portfoliosName = useMemo(() => Object.keys(portfolios), [portfolios])
+  const allCategories = useMemo(() => Object.keys(data?.portfolios || {}), [data])
   const [selectedCategory, setSelectedCategory] = useState(portfoliosName[0] || "Web")
 
   // Read category from URL when coming back from project page
@@ -255,7 +258,7 @@ const Portfolio = () => {
       setDraggingIndex(null)
       return
     }
-    const list = [...(portfolios[selectedCategory] || []).filter(Boolean)]
+    const list = [...(portfolios[selectedCategory] || [])]
     const [moved] = list.splice(srcIndex, 1)
     list.splice(dropIndex, 0, moved)
     reorderProjects(selectedCategory, list)
@@ -279,7 +282,7 @@ const Portfolio = () => {
     end: handleDragEnd,
   }
 
-  const currentList = (portfolios[selectedCategory] || []).filter(Boolean)
+  const currentList = portfolios[selectedCategory] || []
 
   const handleCategoryChange = (name) => {
     setSelectedCategory(name)
@@ -379,7 +382,7 @@ const Portfolio = () => {
       {/* Add Project Modal */}
       {showAddProject && (
         <ProjectFormModal
-          categories={portfoliosName}
+          categories={allCategories}
           onSave={handleAddSave}
           onClose={() => setShowAddProject(false)}
         />
@@ -390,7 +393,7 @@ const Portfolio = () => {
         <ProjectFormModal
           key={editingProject.id}
           initial={editingProject}
-          categories={portfoliosName}
+          categories={allCategories}
           onSave={handleEditSave}
           onClose={() => setEditingProject(null)}
         />

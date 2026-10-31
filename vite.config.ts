@@ -30,7 +30,7 @@ export default defineConfig({
         const meta: Record<string, { name: string; description: string }> = {}
         for (const list of Object.values<any[]>(data.portfolios || {})) {
           for (const p of list) {
-            if (!p?.name) continue
+            if (!p?.name || p.hidden) continue // hidden projects get no share metadata
             const slug = getSlug(p)
             if (!meta[slug]) meta[slug] = { name: p.name, description: String(p.summary || p.description || "") }
           }

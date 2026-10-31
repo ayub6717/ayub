@@ -26,15 +26,22 @@ export default async (request: Request, context: { next: () => Promise<Response>
   const slug = pathSlug || slugify(url.searchParams.get("name") || "")
   if (!slug) return response
 
-  let meta: Meta = {}
+  let meta: Meta | null = null
   try {
     const res = await fetch(new URL("/project-meta.json", url.origin))
     if (res.ok) meta = await res.json()
   } catch {
-    // fall through with an empty map
+    // metadata unavailable: serve the page untouched
   }
+  if (!meta) return response
+
+  // Unknown or hidden project: still serve the app (it renders its "Not Found" page) but with a real 404 status
   const project = meta[slug]
-  if (!project) return response
+  if (!project) {
+    const headers = new Headers(response.headers)
+    headers.delete("content-length")
+    return new Response(await response.text(), { status: 404, headers })
+  }
 
   const title = escapeHtml(`${project.name} | Ayub Shamim`)
   const description = escapeHtml(truncate(project.description))

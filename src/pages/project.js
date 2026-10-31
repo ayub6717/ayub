@@ -21,6 +21,7 @@ import { useAuth } from "../context/AuthContext"
 import { useData } from "../context/DataContext"
 import { resolveImage } from "../data/imageMap"
 import { slugify, getSlug, projectPath } from "../utils/slug"
+import { getVisiblePortfolios } from "../utils/projects"
 import AdminBar from "../admin/AdminBar"
 import { SKILL_ICONS } from "../data/skillIcons"
 import { ProjectFormModal } from "../admin/FormModals"
@@ -293,17 +294,19 @@ export default function ProjectPage() {
       const nameParam = params.get("name")
       const categoryParam = params.get("category")
       const wanted = slug || slugify(nameParam || "")
+      // Hidden projects are not looked up at all, so their URL falls through to "Not Found"
+      const visible = getVisiblePortfolios(portfolios)
       if (wanted) {
         let foundProj = null, foundCat = ""
         // Prefer category from URL param if provided
-        if (categoryParam && portfolios[categoryParam]) {
-          const match = portfolios[categoryParam].filter(Boolean).find(p => getSlug(p) === wanted)
+        if (categoryParam && visible[categoryParam]) {
+          const match = visible[categoryParam].find(p => getSlug(p) === wanted)
           if (match) { foundProj = match; foundCat = categoryParam }
         }
         // Fallback: search all categories
         if (!foundProj) {
-          for (const [catName, list] of Object.entries(portfolios)) {
-            const match = list.filter(Boolean).find(p => getSlug(p) === wanted)
+          for (const [catName, list] of Object.entries(visible)) {
+            const match = list.find(p => getSlug(p) === wanted)
             if (match) { foundProj = match; foundCat = catName; break }
           }
         }

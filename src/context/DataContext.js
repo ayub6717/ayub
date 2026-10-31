@@ -2,6 +2,7 @@ import React, { createContext, useContext, useState } from "react"
 
 // ─── Initial Data ────────────────────────────────────────────────────────────
 import initialData from "../data/data.json"
+import { orderBeforeFirst } from "../utils/projects"
 
 
 // ─── Context ─────────────────────────────────────────────────────────────────
@@ -142,9 +143,10 @@ export function DataProvider({ children }) {
 
   // ── Portfolios ────────────────────────────────────────────────────────────
   const addProject = (category, project) => {
-    const newProject = { ...project, id: generateId() }
-    // New project goes to the BEGINNING of the list
-    const catProjects = [newProject, ...(data.portfolios[category] || [])]
+    const existing = data.portfolios[category] || []
+    // New project goes to the BEGINNING of the list (order field sorts the tab)
+    const newProject = { ...project, id: generateId(), order: orderBeforeFirst(existing) }
+    const catProjects = [newProject, ...existing]
     persist({ ...data, portfolios: { ...data.portfolios, [category]: catProjects } })
   }
   const updateProject = (category, id, updates) => {
@@ -155,7 +157,8 @@ export function DataProvider({ children }) {
     // Remove from old category
     const fromList = (data.portfolios[fromCategory] || []).filter(p => p.id !== id)
     // Add to new category (at beginning), keep same id
-    const toList = [{ ...updatedProject, id }, ...(data.portfolios[toCategory] || [])]
+    const toExisting = data.portfolios[toCategory] || []
+    const toList = [{ ...updatedProject, id, order: orderBeforeFirst(toExisting) }, ...toExisting]
     persist({
       ...data,
       portfolios: {
@@ -169,8 +172,14 @@ export function DataProvider({ children }) {
     const catProjects = data.portfolios[category].filter(p => p.id !== id)
     persist({ ...data, portfolios: { ...data.portfolios, [category]: catProjects } })
   }
+  // newList = the VISIBLE projects of the tab in their new order. Only their "order" values change;
+  // hidden projects (not part of newList) stay in the data untouched.
   const reorderProjects = (category, newList) => {
-    persist({ ...data, portfolios: { ...data.portfolios, [category]: newList } })
+    const orderById = new Map(newList.map((p, i) => [p.id, (i + 1) * 10]))
+    const catProjects = (data.portfolios[category] || []).map(p =>
+      orderById.has(p.id) ? { ...p, order: orderById.get(p.id) } : p
+    )
+    persist({ ...data, portfolios: { ...data.portfolios, [category]: catProjects } })
   }
 
 
